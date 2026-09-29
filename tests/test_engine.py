@@ -155,3 +155,10 @@ def test_results_are_deterministic() -> None:
     a = [h.chunk.path for h in eng.search("same words", k=10, now=NOW)]
     b = [h.chunk.path for h in eng.search("same words", k=10, now=NOW)]
     assert a == b == sorted(a)
+
+
+def test_repeated_key_in_one_file_same_date_is_a_list() -> None:
+    eng = engine_from_texts({"a.md": "# Book notes\n\n- On focus: short loops\n- On focus: fewer tabs\n"})
+    assert eng.conflicts == []
+    eng = engine_from_texts({"a.md": "# 2026-01-01\n\n- Wifi: a\n\n# 2026-02-01\n\n- Wifi: b\n"})
+    assert len(eng.conflicts) == 1 and eng.conflicts[0].resolved

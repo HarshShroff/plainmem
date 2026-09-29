@@ -142,6 +142,9 @@ class Engine:
         for key, items in by_key.items():
             if len({a.value for _, a in items}) < 2:
                 continue
+            # The same key repeated in one file on one date is a list ("On focus: ..."), not a change.
+            if len({self.chunks[i].path for i, _ in items}) == 1 and len({self.dates[i] for i, _ in items}) == 1:
+                continue
             dated = [(self.dates[i] or date.min, i, a) for i, a in items]
             dated.sort(key=lambda t: (t[0], t[1]))
             newest_date, winner, _ = dated[-1]

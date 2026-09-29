@@ -22,6 +22,9 @@ a dated heading are not qualified: name the thing you are talking about.
 Values are compared after dropping everything from the first ", ", ";" or
 " - ", so trailing commentary does not create a false conflict.
 
+The same key repeated with different values inside one file on one date is
+read as a list, not a conflict.
+
 When one key has several values, the chunk with the newest effective date wins
 and the others are marked SUPERSEDED. Equal dates are reported as unresolved.
 """
