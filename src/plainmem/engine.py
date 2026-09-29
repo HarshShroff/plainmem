@@ -204,19 +204,32 @@ class Engine:
         return [self._hit(i, scored.get(i, 0.0), now, fresh=True) for i in order[:k]]
 
     def _promote(self, order: list[int], qset: set[str], k: int) -> list[int]:
-        """Put the newest version of a fact directly above any superseded version in the top k."""
+        """Group each fact with its history: the newest version first, superseded versions right below it.
+
+        Only applies when the conflicting key shares a word with the query, so an unrelated
+        hit is never displaced by a correction about something else.
+        """
         window = order[: max(k * 3, k + 5)]
+        in_window = set(window)
         out: list[int] = []
         placed: set[int] = set()
+
+        def put(i: int) -> None:
+            if i in placed:
+                return
+            out.append(i)
+            placed.add(i)
+            for j, key in self.supersedes.get(i, []):
+                if j in in_window and set(key.split()) & qset:
+                    put(j)
+
         for i in window:
             if i in placed:
                 continue
             for j, key in self.superseded_by.get(i, []):
-                if j not in placed and set(key.split()) & qset:
-                    out.append(j)
-                    placed.add(j)
-            out.append(i)
-            placed.add(i)
+                if set(key.split()) & qset:
+                    put(j)
+            put(i)
         return out + [i for i in order if i not in placed]
 
     def stale(self, now: date | None = None) -> list[Hit]:
