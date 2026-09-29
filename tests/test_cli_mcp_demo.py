@@ -146,3 +146,16 @@ def test_demo_sample_queries_cover_types(base) -> None:
 def test_demo_badges() -> None:
     assert "#6e40c9" in logic.badge_html("SUPERSEDED")
     assert "&lt;b&gt;" in logic.badge_html("<b>")
+
+
+def test_mcp_server_registers_tools(notes: Path) -> None:
+    pytest.importorskip("mcp")
+    import asyncio
+
+    from plainmem.mcp_server import build_server
+
+    server = build_server(Memory(notes))
+    names = sorted(t.name for t in asyncio.run(server.list_tools()))
+    assert names == ["add", "search", "stale"]
+    content = asyncio.run(server.call_tool("search", {"query": "zebra"}))
+    assert "no_match" in str(content)

@@ -33,12 +33,15 @@ def tool_stale(mem: Memory) -> dict[str, Any]:
 
 
 def build_server(mem: Memory) -> Any:
-    try:
-        from mcp.server.fastmcp import FastMCP
-    except ImportError as e:  # pragma: no cover - depends on optional install
-        raise SystemExit("plainmem-mcp needs the MCP SDK: pip install 'plainmem[mcp]'") from e
+    try:  # MCP SDK 2.x renamed FastMCP to MCPServer; accept either.
+        from mcp.server.mcpserver import MCPServer as Server
+    except ImportError:
+        try:
+            from mcp.server.fastmcp import FastMCP as Server
+        except ImportError as e:  # pragma: no cover - depends on optional install
+            raise SystemExit("plainmem-mcp needs the MCP SDK: pip install 'plainmem[mcp]'") from e
 
-    server = FastMCP("plainmem")
+    server = Server("plainmem")
 
     @server.tool()
     def search(query: str, k: int = 5) -> dict[str, Any]:
