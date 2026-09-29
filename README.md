@@ -46,7 +46,27 @@ resp.no_match, resp.searched_at, resp.index_version
 [(h.chunk.cite, h.status, h.must_reverify) for h in resp.hits]
 ```
 
-To wire it into Claude Code, Codex or any MCP client, see [examples/AGENTS-snippet.md](examples/AGENTS-snippet.md). The MCP server (`plainmem-mcp`) needs `pip install "plainmem[mcp]"`; the core never imports it.
+### Wiring it into Claude Code or Codex
+
+Paste this into `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex) and change the path:
+
+```markdown
+## Long-term memory
+
+Notes live as Markdown in `~/notes`. They are the source of truth; `~/notes/.plainmem/` is a cache.
+
+- Before answering from memory, search: `plainmem --root ~/notes search --json "<question>"`.
+- Cite what you use as `path:line` from the `cite` field.
+- A result with `status: SUPERSEDED` has been replaced. Use the entry listed in `superseded_by`.
+- A result with `must_reverify: true` is a price, status or availability older than the window.
+  Say the note exists and how old it is. Do not state the value as current without checking.
+- You may not say "there is no record of X" unless you ran the search in this session and the
+  JSON had `no_match: true`. Quote `searched_at` and `index_version` if asked.
+- To remember something: `plainmem --root ~/notes add "<fact>"`. Write facts in the
+  `Thing key: value` or `The thing is now value` shape so later changes are detected.
+```
+
+MCP setup for Claude Code (`claude mcp add`) and Codex (`config.toml`) is in [examples/AGENTS-snippet.md](examples/AGENTS-snippet.md). The MCP server (`plainmem-mcp`) needs `pip install "plainmem[mcp]"`; the core never imports it.
 
 ## Design
 
