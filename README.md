@@ -2,7 +2,7 @@
 
 Agents that keep notes across sessions tend to fail in two quiet ways: they repeat a fact that stopped being true months ago, and they say "I have no record of that" without having looked. plainmem is a small, dependency-free memory layer over plain Markdown files that ranks what it finds, tells you how old each fact is, notices when a newer note contradicts an older one, and returns proof that a search actually ran.
 
-Live demo: TODO add URL after deploy
+Live demo: https://plainmem.streamlit.app/
 
 ```
 $ plainmem --root examples/notes --now 2026-09-29 search -k 3 who is the orion project lead
