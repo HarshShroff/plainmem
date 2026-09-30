@@ -89,6 +89,11 @@ with st.form("add", clear_on_submit=True):
 if notes:
     for path, md in notes.items():
         st.code(f"{path}\n{md}", language="markdown")
+    last = list(notes.values())[-1]
+    last_text = last.strip().splitlines()[-1].lstrip("- ").strip()
+    st.markdown("**Searching your latest note, so you don't have to scroll up**")
+    for r in run_query(engine, last_text, "full", k=3):
+        st.markdown(row_html(r), unsafe_allow_html=True)
     conflicts = visitor_conflicts(engine)
     if conflicts:
         st.markdown("**Conflicts your notes created or resolved**")
