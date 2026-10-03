@@ -2,11 +2,19 @@
   "name": "plainmem",
   "version": "0.1.1",
   "description": "Markdown-first long-term memory for agents: cited search, freshness and supersession awareness.",
-  "author": { "name": "Harsh Shroff", "url": "https://github.com/HarshShroff" },
+  "author": {
+    "name": "Harsh Shroff",
+    "url": "https://github.com/HarshShroff"
+  },
   "homepage": "https://github.com/HarshShroff/plainmem",
   "repository": "https://github.com/HarshShroff/plainmem",
   "license": "MIT",
-  "keywords": ["memory", "markdown", "mcp", "agents"],
+  "keywords": [
+    "memory",
+    "markdown",
+    "mcp",
+    "agents"
+  ],
   "userConfig": {
     "notes_dir": {
       "type": "directory",
@@ -14,5 +22,6 @@
       "description": "Folder of Markdown notes plainmem searches and appends to.",
       "default": "~/notes"
     }
-  }
+  },
+  "icon": "./.claude-plugin/icon.png"
 }
