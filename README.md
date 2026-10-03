@@ -291,9 +291,13 @@ Some wins exist by construction: contradictory questions are only solvable throu
 
 ## Supersession experiment
 
-Branch `implicit-supersession`, experimental. Code and data are in `bench/supersession/` (README, `results.md`, `dev-rounds.md`). It asks whether consolidation can link updates that don't repeat the key without linking notes that only look similar.
+Experimental, on its own branch, run twice. Code and data are in `bench/supersession/`. Run 1's files are in `bench/supersession/run1/`; run 2's are `results.md` and `dev-rounds-v2.md`. It asks whether consolidation can link updates that don't repeat the key without linking notes that only look similar.
 
 The data has 300 generated cases, each one fact plus one later note: explicit updates (A), implicit updates naming the old value (B), implicit updates without it (C), event-based updates (D), similar-looking unrelated notes (E), ambiguous notes (F), and questions about an attribute that was never recorded (G). The 30% held-out split was frozen before anything ran, and a third of it uses wording reserved for held-out only. There are four arms. A is current plainmem. B is a **simulated** writing agent: one model call that sees only the skill file, the note and the `candidates` output, and passes `supersedes` or nothing. C is the JSON classifier alone. D is B, with C asked only when the agent passed nothing. Every model call was `claude -p --model haiku`, and every verdict went through the same validator.
+
+### Run 1 (seed 2026; files in `bench/supersession/run1/`)
+
+Run 1 had a generator labelling bug, found after its held-out run; see `bench/supersession/run1/README.md`.
 
 The criterion was pre-registered before the held-out run: the implicit (B to D) stale rate falls to half of A's or less, and false supersession is at most 1% of unrelated and ambiguous notes.
 
@@ -334,7 +338,58 @@ Failures, held-out:
 - A read-path problem surfaced. Once a `vendor` fact is superseded and demoted, `explain` for "What is X's vendor?" can pick the sibling key `backup vendor`, because they tie on shared words. The tag is right but the answer is wrong. This is the same tie as the temporal benchmark's distractor failure, and it is not fixed here.
 - G questions (attribute never recorded): `explain` never abstained in any arm. It answers another fact about the same entity. Consolidation can't fix that.
 
-Cost: 1,377 model calls across the whole experiment (smoke test, two dev rounds, held-out, temporal), well under the 1,500 cap. A held-out run made 193 calls at a median of 6.2 s each through `claude -p`. Candidate lookup on the write path takes about 15 ms. The read path is unchanged and makes no model calls. `results.md` lists every number, and `--cache-only` reproduces it from `llm_cache.json` without calling a model.
+Cost: 1,377 model calls across run 1 (smoke test, two dev rounds, held-out, temporal), well under the 1,500 cap. A held-out run made 193 calls at a median of 6.2 s each through `claude -p`. Candidate lookup on the write path takes about 15 ms. The read path is unchanged and makes no model calls. `results.md` lists every number, and `--cache-only` reproduces it from `llm_cache.json` without calling a model.
+
+### Run 2 (seed 4127)
+
+What changed since run 1, all before the run-2 held-out run:
+
+- Generator. The false tag that failed run 1 came from a labelling bug: "{E} keeps backups in {new}." was labelled must-not-supersede, but any entity can hold a `Backup region` fact, which that note updates. It was replaced with "{E} hosts its status page in {new}.", and "{E} exports a nightly dump to {new}." (arguably a `Replica database` update) with "{E} wrote a {new} connector for a customer.". No case was deleted. Generation now fails if a must-not-supersede note touches an existing fact key of its entity, using plainmem's key tokenisation (`audit_templates`, `check_cases`, with tests). With the old template it flags exactly the run-1 note.
+- Fresh data. New seed (4127), case ids t0001..t0300, a new frozen 30% held-out split in `split_v2.json`, and a new pre-registration (`bench/supersession/README.md`), all committed before any model call. Run 1's cache was not reused.
+- Classifier prompt and skill rule, from dev failures only (two dev rounds, `dev-rounds-v2.md`). Three rules were added. A note can name a fact by what its holder does ("pages go to X", "purchases need X's approval"). A note that states who holds a role now supersedes even without naming the old value. A key with a qualifier the note doesn't use (backup, replica, staging) is not the target. Candidate retrieval and the validator are unchanged.
+
+Pre-registered bar, the same as run 1 with the threshold fixed in advance: implicit stale (B to D) at most half of A's (A is 1.0, so at most 0.50), and 0 false tags on the 38 held-out unrelated and ambiguous notes.
+
+Held-out (90 cases: 52 true updates, 38 unrelated or ambiguous), run once:
+
+| arm | precision | recall | false supersession | wrong-target tags | abstention rate | stale (A-D) | implicit stale (B-D) | bar |
+|---|---|---|---|---|---|---|---|---|
+| A current plainmem | n/a | 0.000 | 0.000 | 0 | n/a | 1.000 | 1.000 | |
+| B agent (simulated) | 0.980 | 0.942 | 0.026 (1 of 38) | 0 | 0.000 | 0.058 | 0.073 | fail |
+| C classifier | 1.000 | 0.942 | 0.000 (0 of 38) | 0 | 0.256 | 0.058 | 0.073 | pass |
+| D agent, then classifier | 0.981 | 1.000 | 0.026 (1 of 38) | 0 | 0.244 | 0.000 | 0.000 | fail |
+
+Abstention 2x2 (same layout as run 1):
+
+| arm | detected | wrong target | abstained | rejected | | rejected | abstained | falsely tagged |
+|---|---|---|---|---|---|---|---|---|
+| B agent (simulated) | 49 | 0 | 0 | 3 | | 37 | 0 | 1 |
+| C classifier | 49 | 0 | 0 | 3 | | 15 | 23 | 0 |
+| D agent, then classifier | 52 | 0 | 0 | 0 | | 15 | 22 | 1 |
+
+The 36 temporal adversarial cases, run 2 next to run 1 (stale of 36 / tags on 25 noise lines / all 300 held-out current acc):
+
+| arm | run 1 | run 2 |
+|---|---|---|
+| A current plainmem | 36 / 0 / 0.763 | 36 / 0 / 0.763 |
+| B agent (simulated) | 5 / 0 / 0.895 | 4 / 0 / 0.899 |
+| C classifier | 12 / 0 / 0.868 | 4 / 0 / 0.899 |
+| D agent, then classifier | 3 / 0 / 0.904 | 1 / 0 / 0.912 |
+
+All tags on the 36 had the right target in both runs.
+
+**Against the run-2 pre-registered bar, C passes, and B and D fail.** B and D fail on the same note: "Bram Garside has been running QuillPeak lately." (ambiguous, seen wording) was filed by the simulated agent as the new `Project lead`. The skill rule says notes like that are not replacements, and the agent tagged it anyway. It made the same mistake on dev.
+
+Failures and limits, run 2:
+
+- Zero of 38 is a small sample. The one-sided 95% upper bound on C's false-supersession rate is still about 8%, so "at most 1%" is the pre-registered bar, not a demonstrated rate.
+- C's misses (3 of 52) are "BrambleGate data lives in DynamoDB." and "MeridianField gets its supplies from Ellison Freight.", which C called `contradicts` (no tag is written for that), and one event-based note where the classifier returned a key that wasn't in the candidate list, so the validator rejected it. C abstained (`insufficient`) on 23 of 38 negatives and on none of the true updates.
+- Wrong-target tags went from 2 (run 1, B and D) to 0 in every arm. On dev, "pipelines live on CircleCI now" still went to `CD provider` in C, so the sibling problem is reduced, not solved.
+- The new prompt rules were written by someone who knew the benchmark's attribute list, which is the main overfitting risk. Partial checks: on the 31 reserved-wording held-out cases C had 0 false tags and recall 0.895, and C's stale count on the independent temporal 36 fell from 12 to 4.
+- Read path, unchanged and still open. (1) For "What is X's vendor?", `explain` can answer from `backup vendor` even when the right key was tagged. That accounts for most of the "wrong" outcomes in `results.md` (C current acc 0.886). A tie-break that prefers keys with fewer extra words fixed it on dev, but it lowered plainmem+hybrid current acc on `bench/temporal` (heldout n=1,000: 0.820 to 0.794), so it was reverted (commits 52cd451, 17f1a64). (2) G questions: `explain` never abstains when the attribute was never recorded (0 of 11 in every arm).
+- Cost: 1,395 model calls for run 2 (dev round 1: 525, dev round 2: 532, held-out: 216, temporal: 122), at a median of 6.8 s per call. `--cache-only` reproduces every run-2 number with 0 calls.
+
+Should the classifier alone (C) be the default? On this data, yes, if consolidation is turned on at all. It is the only arm that met the bar, it had perfect precision and no wrong-target tags, and its recall matched the agent's (0.942). The tradeoff is recall: D also caught the 3 updates C missed (implicit stale 0.000 against 0.073), but it adds whatever the agent tags on its own, and that was the false tag here. The cost is one model call (about 7 s) per `add` that has candidates. C stays opt-in, behind a `complete()` function the core never imports.
 
 ## Retrieval benchmark
 

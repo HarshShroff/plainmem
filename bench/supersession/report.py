@@ -12,7 +12,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 
-HEAD = """# Supersession benchmark results
+HEAD = """# Supersession benchmark results, run 2
+
+Run 1 (seed 2026, generator labelling bug) is archived in `run1/`; see `run1/README.md`.
 
 Reproduce (no model calls, replies come from `llm_cache.json`):
 
@@ -22,7 +24,8 @@ python bench/supersession/temporal_rerun.py --cache-only
 python bench/supersession/report.py
 ```
 
-Held-out split, 90 of 300 cases (31 with reserved wording), seed 2026, run once after dev tuning.
+Held-out split, 90 of 300 cases (31 with reserved wording), seed 4127, ids t0001..t0300, frozen in
+`split_v2.json` before any model call, run once after dev tuning (`dev-rounds-v2.md`).
 Arm B is a simulated writing agent (one model call that sees the skill file, the note and the
 `candidates` output), not a measurement of a real agent. All model calls: `claude -p --model haiku`.
 Pre-registered bar (README.md): implicit stale at most half of arm A's, and false supersession at most
@@ -47,7 +50,7 @@ def main() -> None:
     md = [HEAD, "## Pre-registered criterion, held-out", "", *verdict, "",
           (HERE / "results-heldout.md").read_text().strip(), "",
           (HERE / "results-temporal36.md").read_text().strip(), "",
-          f"Model calls over the whole experiment (dev rounds, held-out, temporal, smoke test): {calls} "
+          f"Model calls over the whole experiment (run 2: dev rounds, held-out, temporal): {calls} "
           "(`llm_calls.jsonl`).", ""]  # fmt: skip
     (HERE / "results.md").write_text("\n".join(md))
     out = {"heldout": held, "temporal36": temporal, "llm_calls_total": calls}

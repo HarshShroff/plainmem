@@ -77,3 +77,7 @@ Written and committed with `split_v2.json`, before any run-2 model call.
 - Missing either part is a fail for that arm, not a partial success.
 - Default recommendation rule, fixed now: classifier-only (C) is recommended as the default only if C meets the bar. Among arms that meet it, prefer fewer wrong tags (false + wrong-target), then lower implicit stale. If no arm meets it, no consolidation arm is recommended as a default.
 - Tuning (prompt wording, validator, candidate retrieval) uses the dev split only, logged in `dev-rounds-v2.md`. Held-out is run once, after the configuration is frozen. Total model calls, dev included, are capped at about 1,500 and reported.
+
+## Run 2 outcome (added after the held-out run)
+
+Held-out was run once, on the configuration frozen in commit a0e7f70. **C (classifier alone) meets the bar**: implicit stale 1.000 -> 0.073, 0 false tags out of 38, precision 1.000, recall 0.942, no wrong-target tags. **B and D fail**: each wrote 1 false tag, the same ambiguous note ("Bram Garside has been running QuillPeak lately.", filed by the simulated agent as `Project lead`), although D had implicit stale 0.000 and recall 1.000. Temporal 36 stale counts: A 36, B 4, C 4, D 1, with no tags on the 25 noise lines. Full tables: `results.md` (cache-only outputs, so `--cache-only` reproduces them byte for byte); dev history: `dev-rounds-v2.md`. Model calls for run 2: 1,395 (`llm_calls.jsonl`).

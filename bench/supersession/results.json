@@ -1,0 +1,6422 @@
+{
+ "heldout": {
+  "split": "heldout",
+  "seed": 4127,
+  "n_cases": 300,
+  "n": 90,
+  "arms": {
+   "baseline": {
+    "label": "A current plainmem",
+    "overall": {
+     "n": 90,
+     "tags_written": 0,
+     "precision": null,
+     "recall": 0.0,
+     "false_supersession": 0.0,
+     "false_tags": 0,
+     "wrong_target": 0,
+     "abstention_rate": null,
+     "stale_rate": 1.0,
+     "implicit_stale": 1.0,
+     "current_acc": 0.342,
+     "g_abstained": 0.0,
+     "g_answered_with_note": 0,
+     "overridden": 0
+    },
+    "two_by_two": {
+     "supersession": {
+      "detected": 0,
+      "wrong_target": 0,
+      "abstained": 0,
+      "rejected": 52
+     },
+     "unrelated_or_ambiguous": {
+      "rejected": 38,
+      "abstained": 0,
+      "falsely_tagged": 0
+     }
+    },
+    "by_category": {
+     "A": {
+      "n": 11,
+      "tags_written": 0,
+      "precision": null,
+      "recall": 0.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": 1.0,
+      "implicit_stale": null,
+      "current_acc": 0.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "B": {
+      "n": 14,
+      "tags_written": 0,
+      "precision": null,
+      "recall": 0.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": 1.0,
+      "implicit_stale": 1.0,
+      "current_acc": 0.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "C": {
+      "n": 14,
+      "tags_written": 0,
+      "precision": null,
+      "recall": 0.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": 1.0,
+      "implicit_stale": 1.0,
+      "current_acc": 0.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "D": {
+      "n": 13,
+      "tags_written": 0,
+      "precision": null,
+      "recall": 0.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": 1.0,
+      "implicit_stale": 1.0,
+      "current_acc": 0.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "E": {
+      "n": 14,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": 1.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "F": {
+      "n": 13,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": 1.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "G": {
+      "n": 11,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": null,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     }
+    },
+    "by_wording": {
+     "reserved": {
+      "n": 31,
+      "tags_written": 0,
+      "precision": null,
+      "recall": 0.0,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": 1.0,
+      "implicit_stale": 1.0,
+      "current_acc": 0.321,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "seen": {
+      "n": 59,
+      "tags_written": 0,
+      "precision": null,
+      "recall": 0.0,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": null,
+      "stale_rate": 1.0,
+      "implicit_stale": 1.0,
+      "current_acc": 0.353,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     }
+    },
+    "relations": {
+     "supersedes -> None": 52,
+     "unrelated -> None": 25,
+     "insufficient -> None": 13
+    },
+    "outcomes": {
+     "C:stale": 14,
+     "E:correct": 14,
+     "B:stale": 14,
+     "D:stale": 13,
+     "G:answered_other": 11,
+     "F:correct": 13,
+     "A:stale": 11
+    },
+    "failed_checks": {},
+    "decided_by": {},
+    "gold_in_candidates": 0.0,
+    "candidates_ms_median": null,
+    "seconds": 18.8,
+    "failures": [
+     {
+      "id": "t0002",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Hana Dunmore",
+      "cite": "projects/onyxyard.md:8",
+      "note": "Yusuf Corvane carries the OnyxYard pager now.",
+      "question": "Who is OnyxYard's on-call engineer?",
+      "gold_target": "OnyxYard on-call engineer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0010",
+      "category": "B",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "TeamCity",
+      "cite": "projects/quillhub.md:10",
+      "note": "QuillHub switched from TeamCity to GitLab CI for its pipelines.",
+      "question": "What is the QuillHub CI provider?",
+      "gold_target": "QuillHub CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0014",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Postgres 16",
+      "cite": "projects/yarrowridge.md:8",
+      "note": "Postgres 16 kept falling over, so YarrowRidge was moved onto MySQL 8.",
+      "question": "What is YarrowRidge's primary database?",
+      "gold_target": "YarrowRidge primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0016",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "Noor Quell",
+      "cite": "projects/cinderpeak.md:11",
+      "note": "Ines Dellamore shadowed an DriftwoodField incident.",
+      "question": "Who is DriftwoodField's on-call engineer?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0022",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Lucia Quenby",
+      "cite": "projects/juniperpeak.md:9",
+      "note": "Lucia Quenby handed JuniperPeak over to Leda Zell.",
+      "question": "Who is the JuniperPeak project lead?",
+      "gold_target": "JuniperPeak project lead",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0024",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "eu-west-1",
+      "cite": "projects/cedarbay.md:9",
+      "note": "CedarBay ran a load test in eu-west-2.",
+      "question": "What is CedarBay's deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0029",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "Wes Eastwick",
+      "cite": "projects/cinderpeak.md:10",
+      "note": "Nadia Dellamore left comments on an FjordPeak wireframe.",
+      "question": "Who is the FjordPeak design reviewer?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0034",
+      "category": "A",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Azure Pipelines",
+      "cite": "projects/driftwoodhub.md:12",
+      "note": "DriftwoodHub CI provider update: TeamCity replaces Azure Pipelines.",
+      "question": "What is the DriftwoodHub CI provider?",
+      "gold_target": "DriftwoodHub CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0035",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "ca-central-1",
+      "cite": "projects/quillforge.md:11",
+      "note": "Ca-central-1 got too expensive, so QuillForge traffic is in us-east-2.",
+      "question": "What is the QuillForge deploy region?",
+      "gold_target": "QuillForge deploy region",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0036",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "us-west-2",
+      "cite": "projects/mistralbay.md:10",
+      "note": "MistralBay lives in us-east-1.",
+      "question": "What is MistralBay's deploy region?",
+      "gold_target": "MistralBay deploy region",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0041",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Calloway Partners",
+      "cite": "projects/cinderbay.md:9",
+      "note": "CinderBay switched suppliers from Calloway Partners to Ellison Industries.",
+      "question": "What is CinderBay's vendor?",
+      "gold_target": "CinderBay vendor",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0042",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Buildkite",
+      "cite": "projects/wharfhub.md:11",
+      "note": "Once the Buildkite contract lapsed, WharfHub pipelines moved to CircleCI.",
+      "question": "What is WharfHub's CI provider?",
+      "gold_target": "WharfHub CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0045",
+      "category": "D",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "eu-west-1",
+      "cite": "projects/quillgate.md:10",
+      "note": "The eu-west-1 capacity crunch pushed QuillGate over to us-west-2 for good.",
+      "question": "What is the QuillGate deploy region?",
+      "gold_target": "QuillGate deploy region",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0046",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Rosalind Eastwick",
+      "cite": "projects/quarrygate.md:8",
+      "note": "Callum Haverill is who gets woken up when QuarryGate breaks.",
+      "question": "Who is QuarryGate's on-call engineer?",
+      "gold_target": "QuarryGate on-call engineer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0054",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Dunmere Logistics",
+      "cite": "projects/meridianfield.md:9",
+      "note": "MeridianField gets its supplies from Ellison Freight.",
+      "question": "What is MeridianField's vendor?",
+      "gold_target": "MeridianField vendor",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0055",
+      "category": "D",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Fenna Jarrow",
+      "cite": "projects/thistlepoint.md:8",
+      "note": "The ThistlePoint rotation was rebuilt after Fenna Jarrow left and Anders Ashgrove holds it.",
+      "question": "Who is the ThistlePoint on-call engineer?",
+      "gold_target": "ThistlePoint on-call engineer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0063",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Wes Orsolo",
+      "cite": "projects/dogwoodyard.md:11",
+      "note": "Hana Haverill took the pager from Wes Orsolo for DogwoodYard.",
+      "question": "Who is DogwoodYard's on-call engineer?",
+      "gold_target": "DogwoodYard on-call engineer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0066",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "CockroachDB",
+      "cite": "projects/cedarlabs.md:10",
+      "note": "CedarLabs stores its records in ScyllaDB from now on.",
+      "question": "What is the CedarLabs primary database?",
+      "gold_target": "CedarLabs primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0071",
+      "category": "A",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Talia Wexley",
+      "cite": "projects/cinderyard.md:12",
+      "note": "CinderYard project lead update: Birgit Lindqvist replaces Talia Wexley.",
+      "question": "Who is CinderYard's project lead?",
+      "gold_target": "CinderYard project lead",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0076",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Ines Everley",
+      "cite": "projects/meridianridge.md:8",
+      "note": "The MeridianRidge design reviewer changed from Ines Everley to Joaquin Quenby.",
+      "question": "Who is MeridianRidge's design reviewer?",
+      "gold_target": "MeridianRidge design reviewer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0077",
+      "category": "D",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Dunmere Freight",
+      "cite": "projects/lodestarbay.md:7",
+      "note": "Dunmere Freight went bankrupt in the spring; LodestarBay orders from Hollis Systems.",
+      "question": "What is LodestarBay's vendor?",
+      "gold_target": "LodestarBay vendor",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0079",
+      "category": "A",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Postgres 16",
+      "cite": "projects/quarrylabs.md:12",
+      "note": "QuarryLabs primary database update: CockroachDB replaces Postgres 16.",
+      "question": "What is the QuarryLabs primary database?",
+      "gold_target": "QuarryLabs primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0092",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "Yara Fenwick",
+      "cite": "projects/harborridge.md:9",
+      "note": "Hana Ashgrove asked about ZephyrGate costs.",
+      "question": "Who is ZephyrGate's budget owner?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0093",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "MySQL 8",
+      "cite": "projects/asterworks.md:12",
+      "note": "MySQL 8 is no longer the AsterWorks primary database. Postgres 16 is.",
+      "question": "What is the AsterWorks primary database?",
+      "gold_target": "AsterWorks primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0096",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "ClickHouse",
+      "cite": "projects/kelppeak.md:8",
+      "note": "KelpPeak stores its records in Postgres 16 from now on.",
+      "question": "What is the KelpPeak primary database?",
+      "gold_target": "KelpPeak primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0105",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "TeamCity",
+      "cite": "projects/heronstack.md:9",
+      "note": "Once the TeamCity contract lapsed, HeronStack pipelines moved to GitHub Actions.",
+      "question": "What is the HeronStack CI provider?",
+      "gold_target": "HeronStack CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0112",
+      "category": "B",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "MySQL 8",
+      "cite": "projects/emberbay.md:7",
+      "note": "EmberBay replaced MySQL 8 with Postgres 16 for its records.",
+      "question": "What is EmberBay's primary database?",
+      "gold_target": "EmberBay primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0119",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Priya Quell",
+      "cite": "projects/quillpoint.md:9",
+      "note": "Finance reshuffled after Priya Quell moved teams; QuillPoint spend approvals sit with Soren Thorncombe.",
+      "question": "Who is the QuillPoint budget owner?",
+      "gold_target": "QuillPoint budget owner",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0125",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "Yara Fenwick",
+      "cite": "projects/harborridge.md:9",
+      "note": "Hana Pellow reviewed the EmberYard budget.",
+      "question": "Who is EmberYard's budget owner?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0133",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "us-west-2",
+      "cite": "projects/heronlabs.md:11",
+      "note": "HeronLabs moved off us-west-2 onto us-east-1.",
+      "question": "What is HeronLabs's deploy region?",
+      "gold_target": "HeronLabs deploy region",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0147",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Nadia Quell",
+      "cite": "projects/orionpeak.md:9",
+      "note": "Nadia Quell is no longer the OrionPeak project lead. Xiomara Ambrose is.",
+      "question": "Who is OrionPeak's project lead?",
+      "gold_target": "OrionPeak project lead",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0149",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Postgres 16",
+      "cite": "projects/bramblegate.md:9",
+      "note": "BrambleGate data lives in DynamoDB.",
+      "question": "What is the BrambleGate primary database?",
+      "gold_target": "BrambleGate primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0150",
+      "category": "A",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Dunmere Systems",
+      "cite": "projects/obsidianstack.md:10",
+      "note": "ObsidianStack vendor update: Hollis Partners replaces Dunmere Systems.",
+      "question": "What is ObsidianStack's vendor?",
+      "gold_target": "ObsidianStack vendor",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0156",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Ezra Eastwick",
+      "cite": "projects/jetstreambay.md:7",
+      "note": "Juno Blackwood took over mockup reviews from Ezra Eastwick on JetstreamBay.",
+      "question": "Who is the JetstreamBay design reviewer?",
+      "gold_target": "JetstreamBay design reviewer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0157",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "Noor Quell",
+      "cite": "projects/cinderpeak.md:11",
+      "note": "Rafael Kestner wrote the TundraStack runbook.",
+      "question": "Who is TundraStack's on-call engineer?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0158",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "Wes Eastwick",
+      "cite": "projects/cinderpeak.md:10",
+      "note": "Nadia Kestner shared a mockup for NimbusWorks.",
+      "question": "Who is the NimbusWorks design reviewer?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0163",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Jenkins",
+      "cite": "projects/basaltpeak.md:7",
+      "note": "Once the Jenkins contract lapsed, BasaltPeak pipelines moved to GitLab CI.",
+      "question": "What is BasaltPeak's CI provider?",
+      "gold_target": "BasaltPeak CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0168",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "MongoDB 7",
+      "cite": "projects/rivuletpoint.md:9",
+      "note": "RivuletPoint benchmarked ScyllaDB for a report.",
+      "question": "What is the RivuletPoint primary database?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0170",
+      "category": "B",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Noor Carrow",
+      "cite": "projects/harborforge.md:9",
+      "note": "Kaspar Gundry replaced Noor Carrow at the helm of HarborForge.",
+      "question": "Who is HarborForge's project lead?",
+      "gold_target": "HarborForge project lead",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0171",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Lucia Marrow",
+      "cite": "projects/basaltworks.md:10",
+      "note": "Theo Quenby is running BasaltWorks from now on.",
+      "question": "Who is the BasaltWorks project lead?",
+      "gold_target": "BasaltWorks project lead",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0172",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Noor Corvane",
+      "cite": "projects/gossamerhub.md:7",
+      "note": "After the reorg Noor Corvane moved to another org and Tomasz Marrow owns GossamerHub.",
+      "question": "Who is GossamerHub's project lead?",
+      "gold_target": "GossamerHub project lead",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0174",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "us-east-1",
+      "cite": "projects/brambleyard.md:9",
+      "note": "BrambleYard hosts its status page in ap-southeast-2.",
+      "question": "What is the BrambleYard deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0192",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "GitLab CI",
+      "cite": "projects/marigoldlabs.md:8",
+      "note": "MarigoldLabs dropped GitLab CI for CircleCI.",
+      "question": "What is the MarigoldLabs CI provider?",
+      "gold_target": "MarigoldLabs CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0197",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Soren Orsolo",
+      "cite": "projects/isthmusyard.md:7",
+      "note": "Soren Orsolo is no longer the IsthmusYard project lead. Cosmo Everley is.",
+      "question": "Who is the IsthmusYard project lead?",
+      "gold_target": "IsthmusYard project lead",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0202",
+      "category": "A",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "us-west-2",
+      "cite": "projects/willowpoint.md:10",
+      "note": "WillowPoint deploy region update: eu-west-2 replaces us-west-2.",
+      "question": "What is WillowPoint's deploy region?",
+      "gold_target": "WillowPoint deploy region",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0205",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Theo Dunmore",
+      "cite": "projects/dogwoodridge.md:7",
+      "note": "Theo Dunmore handed DogwoodRidge spend approval to Noor Quell.",
+      "question": "Who is DogwoodRidge's budget owner?",
+      "gold_target": "DogwoodRidge budget owner",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0210",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Brightwater Freight",
+      "cite": "projects/onyxgate.md:10",
+      "note": "The OnyxGate vendor changed from Brightwater Freight to Calloway Logistics.",
+      "question": "What is OnyxGate's vendor?",
+      "gold_target": "OnyxGate vendor",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0211",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Jenkins",
+      "cite": "projects/tundraworks.md:7",
+      "note": "TundraWorks pipelines live on TeamCity now.",
+      "question": "What is the TundraWorks CI provider?",
+      "gold_target": "TundraWorks CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0216",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Priya Holloway",
+      "cite": "projects/alderworks.md:7",
+      "note": "Imani Marrow took the pager from Priya Holloway for AlderWorks.",
+      "question": "Who is the AlderWorks on-call engineer?",
+      "gold_target": "AlderWorks on-call engineer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0221",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Jenkins",
+      "cite": "projects/sablepeak.md:11",
+      "note": "Jenkins kept timing out, so SablePeak builds run on GitLab CI.",
+      "question": "What is SablePeak's CI provider?",
+      "gold_target": "SablePeak CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0227",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Fenna Lindqvist",
+      "cite": "projects/quarrypeak.md:9",
+      "note": "Fenna Lindqvist burned out on nights; Vesna Vantongeren owns the QuarryPeak pager now.",
+      "question": "Who is the QuarryPeak on-call engineer?",
+      "gold_target": "QuarryPeak on-call engineer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0230",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Yara Haverill",
+      "cite": "projects/alderyard.md:10",
+      "note": "AlderYard purchases need Theo Fenwick's approval from now on.",
+      "question": "Who is AlderYard's budget owner?",
+      "gold_target": "AlderYard budget owner",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0240",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "CircleCI",
+      "cite": "projects/vireoridge.md:8",
+      "note": "VireoRidge builds moved from CircleCI to Azure Pipelines.",
+      "question": "What is the VireoRidge CI provider?",
+      "gold_target": "VireoRidge CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0252",
+      "category": "B",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "TeamCity",
+      "cite": "projects/vireogate.md:7",
+      "note": "VireoGate switched from TeamCity to Azure Pipelines for its pipelines.",
+      "question": "What is VireoGate's CI provider?",
+      "gold_target": "VireoGate CI provider",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0256",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "MongoDB 7",
+      "cite": "projects/gossamerfield.md:7",
+      "note": "GossamerField data lives in CockroachDB.",
+      "question": "What is the GossamerField primary database?",
+      "gold_target": "GossamerField primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0258",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "ap-southeast-2",
+      "cite": "projects/thistleridge.md:11",
+      "note": "ThistleRidge added a read replica in ap-south-1.",
+      "question": "What is the ThistleRidge deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0272",
+      "category": "B",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Fairhaven Systems",
+      "cite": "projects/juniperpoint.md:12",
+      "note": "JuniperPoint stopped buying from Fairhaven Systems and buys from Northwind Industries.",
+      "question": "What is JuniperPoint's vendor?",
+      "gold_target": "JuniperPoint vendor",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0275",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "MongoDB 7",
+      "cite": "projects/junipergate.md:9",
+      "note": "JuniperGate runs on MySQL 8 these days.",
+      "question": "What is the JuniperGate primary database?",
+      "gold_target": "JuniperGate primary database",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0277",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Saskia Ambrose",
+      "cite": "projects/atlasyard.md:9",
+      "note": "Birgit Gundry is who gets woken up when AtlasYard breaks.",
+      "question": "Who is the AtlasYard on-call engineer?",
+      "gold_target": "AtlasYard on-call engineer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0279",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Dunmere Systems",
+      "cite": "projects/thistlepeak.md:10",
+      "note": "The ThistlePeak vendor changed from Dunmere Systems to Kellmark Partners.",
+      "question": "What is the ThistlePeak vendor?",
+      "gold_target": "ThistlePeak vendor",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0282",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "Talia Fenwick",
+      "cite": "projects/pinnaclepeak.md:8",
+      "note": "Talia Fenwick stepped back from design work; PinnaclePeak mockups go through Zeno Wexley.",
+      "question": "Who is the PinnaclePeak design reviewer?",
+      "gold_target": "PinnaclePeak design reviewer",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0287",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "answered_other",
+      "answer": "CircleCI",
+      "cite": "projects/kestrelworks.md:9",
+      "note": "Azure Pipelines sent KestrelWorks a sales pitch.",
+      "question": "What is the KestrelWorks CI provider?",
+      "gold_target": null,
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     },
+     {
+      "id": "t0289",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": null,
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": null,
+      "outcome": "stale",
+      "answer": "us-west-2",
+      "cite": "projects/atlasbay.md:7",
+      "note": "AtlasBay now runs out of sa-east-1.",
+      "question": "What is the AtlasBay deploy region?",
+      "gold_target": "AtlasBay deploy region",
+      "record": {
+       "relation": null,
+       "target": null,
+       "wrote": null,
+       "failed_check": null
+      }
+     }
+    ]
+   },
+   "agent": {
+    "label": "B agent-declared (simulated)",
+    "overall": {
+     "n": 90,
+     "tags_written": 50,
+     "precision": 0.98,
+     "recall": 0.942,
+     "false_supersession": 0.026,
+     "false_tags": 1,
+     "wrong_target": 0,
+     "abstention_rate": 0.0,
+     "stale_rate": 0.058,
+     "implicit_stale": 0.073,
+     "current_acc": 0.861,
+     "g_abstained": 0.0,
+     "g_answered_with_note": 0,
+     "overridden": 1
+    },
+    "two_by_two": {
+     "supersession": {
+      "detected": 49,
+      "wrong_target": 0,
+      "abstained": 0,
+      "rejected": 3
+     },
+     "unrelated_or_ambiguous": {
+      "rejected": 37,
+      "abstained": 0,
+      "falsely_tagged": 1
+     }
+    },
+    "by_category": {
+     "A": {
+      "n": 11,
+      "tags_written": 11,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": null,
+      "current_acc": 0.727,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "B": {
+      "n": 14,
+      "tags_written": 14,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": 0.0,
+      "current_acc": 0.857,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "C": {
+      "n": 14,
+      "tags_written": 11,
+      "precision": 1.0,
+      "recall": 0.786,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.214,
+      "implicit_stale": 0.214,
+      "current_acc": 0.714,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "D": {
+      "n": 13,
+      "tags_written": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": 0.0,
+      "current_acc": 0.923,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "E": {
+      "n": 14,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": 1.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "F": {
+      "n": 13,
+      "tags_written": 1,
+      "precision": 0.0,
+      "recall": null,
+      "false_supersession": 0.077,
+      "false_tags": 1,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": 0.923,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 1
+     },
+     "G": {
+      "n": 11,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": null,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     }
+    },
+    "by_wording": {
+     "reserved": {
+      "n": 31,
+      "tags_written": 18,
+      "precision": 1.0,
+      "recall": 0.947,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.053,
+      "implicit_stale": 0.071,
+      "current_acc": 0.821,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "seen": {
+      "n": 59,
+      "tags_written": 32,
+      "precision": 0.969,
+      "recall": 0.939,
+      "false_supersession": 0.038,
+      "false_tags": 1,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.061,
+      "implicit_stale": 0.074,
+      "current_acc": 0.882,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 1
+     }
+    },
+    "relations": {
+     "supersedes -> supersedes": 49,
+     "unrelated -> unrelated": 25,
+     "insufficient -> unrelated": 12,
+     "supersedes -> unrelated": 3,
+     "insufficient -> supersedes": 1
+    },
+    "outcomes": {
+     "C:correct": 10,
+     "E:correct": 14,
+     "B:correct": 12,
+     "D:correct": 12,
+     "G:answered_other": 11,
+     "F:correct": 12,
+     "A:correct": 8,
+     "B:wrong": 2,
+     "C:wrong": 1,
+     "D:wrong": 1,
+     "C:stale": 3,
+     "A:wrong": 3,
+     "F:overridden": 1
+    },
+    "failed_checks": {},
+    "decided_by": {
+     "agent": 90
+    },
+    "gold_in_candidates": 1.0,
+    "candidates_ms_median": 14.6,
+    "seconds": 20.9,
+    "failures": [
+     {
+      "id": "t0016",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "Noor Quell",
+      "cite": "projects/cinderpeak.md:11",
+      "note": "Ines Dellamore shadowed an DriftwoodField incident.",
+      "question": "Who is DriftwoodField's on-call engineer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 4,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0024",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "eu-west-1",
+      "cite": "projects/cedarbay.md:9",
+      "note": "CedarBay ran a load test in eu-west-2.",
+      "question": "What is CedarBay's deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0029",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "Wes Eastwick",
+      "cite": "projects/cinderpeak.md:10",
+      "note": "Nadia Dellamore left comments on an FjordPeak wireframe.",
+      "question": "Who is the FjordPeak design reviewer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 6,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0041",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "CinderBay Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Northwind Networks",
+      "cite": "projects/cinderbay.md:8",
+      "note": "CinderBay switched suppliers from Calloway Partners to Ellison Industries.",
+      "question": "What is CinderBay's vendor?",
+      "gold_target": "CinderBay vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "CinderBay Vendor",
+       "wrote": "CinderBay Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "CinderBay Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0054",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "MeridianField Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Kellmark Freight",
+      "cite": "projects/meridianfield.md:8",
+      "note": "MeridianField gets its supplies from Ellison Freight.",
+      "question": "What is MeridianField's vendor?",
+      "gold_target": "MeridianField vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "MeridianField Vendor",
+       "wrote": "MeridianField Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "MeridianField Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0077",
+      "category": "D",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "LodestarBay Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Fairhaven Networks",
+      "cite": "projects/lodestarbay.md:10",
+      "note": "Dunmere Freight went bankrupt in the spring; LodestarBay orders from Hollis Systems.",
+      "question": "What is LodestarBay's vendor?",
+      "gold_target": "LodestarBay vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "LodestarBay Vendor",
+       "wrote": "LodestarBay Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "LodestarBay Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0092",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "Yara Fenwick",
+      "cite": "projects/harborridge.md:9",
+      "note": "Hana Ashgrove asked about ZephyrGate costs.",
+      "question": "Who is ZephyrGate's budget owner?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 5,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0096",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "stale",
+      "answer": "ClickHouse",
+      "cite": "projects/kelppeak.md:8",
+      "note": "KelpPeak stores its records in Postgres 16 from now on.",
+      "question": "What is the KelpPeak primary database?",
+      "gold_target": "KelpPeak primary database",
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0125",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "Yara Fenwick",
+      "cite": "projects/harborridge.md:9",
+      "note": "Hana Pellow reviewed the EmberYard budget.",
+      "question": "Who is EmberYard's budget owner?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 4,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0150",
+      "category": "A",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "ObsidianStack Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Hollis Systems",
+      "cite": "projects/obsidianstack.md:9",
+      "note": "ObsidianStack vendor update: Hollis Partners replaces Dunmere Systems.",
+      "question": "What is ObsidianStack's vendor?",
+      "gold_target": "ObsidianStack vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "ObsidianStack Vendor",
+       "wrote": "ObsidianStack Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "ObsidianStack Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0157",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "Noor Quell",
+      "cite": "projects/cinderpeak.md:11",
+      "note": "Rafael Kestner wrote the TundraStack runbook.",
+      "question": "Who is TundraStack's on-call engineer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 3,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0158",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "Wes Eastwick",
+      "cite": "projects/cinderpeak.md:10",
+      "note": "Nadia Kestner shared a mockup for NimbusWorks.",
+      "question": "Who is the NimbusWorks design reviewer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 7,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0168",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "MongoDB 7",
+      "cite": "projects/rivuletpoint.md:9",
+      "note": "RivuletPoint benchmarked ScyllaDB for a report.",
+      "question": "What is the RivuletPoint primary database?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0174",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "us-east-1",
+      "cite": "projects/brambleyard.md:9",
+      "note": "BrambleYard hosts its status page in ap-southeast-2.",
+      "question": "What is the BrambleYard deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0210",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "OnyxGate Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Dunmere Freight",
+      "cite": "projects/onyxgate.md:9",
+      "note": "The OnyxGate vendor changed from Brightwater Freight to Calloway Logistics.",
+      "question": "What is OnyxGate's vendor?",
+      "gold_target": "OnyxGate vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "OnyxGate Vendor",
+       "wrote": "OnyxGate Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "OnyxGate Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0211",
+      "category": "C",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "stale",
+      "answer": "Jenkins",
+      "cite": "projects/tundraworks.md:7",
+      "note": "TundraWorks pipelines live on TeamCity now.",
+      "question": "What is the TundraWorks CI provider?",
+      "gold_target": "TundraWorks CI provider",
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0256",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "stale",
+      "answer": "MongoDB 7",
+      "cite": "projects/gossamerfield.md:7",
+      "note": "GossamerField data lives in CockroachDB.",
+      "question": "What is the GossamerField primary database?",
+      "gold_target": "GossamerField primary database",
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0258",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "ap-southeast-2",
+      "cite": "projects/thistleridge.md:11",
+      "note": "ThistleRidge added a read replica in ap-south-1.",
+      "question": "What is the ThistleRidge deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0272",
+      "category": "B",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "JuniperPoint Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Dunmere Industries",
+      "cite": "projects/juniperpoint.md:10",
+      "note": "JuniperPoint stopped buying from Fairhaven Systems and buys from Northwind Industries.",
+      "question": "What is JuniperPoint's vendor?",
+      "gold_target": "JuniperPoint vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "JuniperPoint Vendor",
+       "wrote": "JuniperPoint Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "JuniperPoint Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0279",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "ThistlePeak Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Fairhaven Freight",
+      "cite": "projects/thistlepeak.md:12",
+      "note": "The ThistlePeak vendor changed from Dunmere Systems to Kellmark Partners.",
+      "question": "What is the ThistlePeak vendor?",
+      "gold_target": "ThistlePeak vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "ThistlePeak Vendor",
+       "wrote": "ThistlePeak Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "ThistlePeak Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0287",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "answered_other",
+      "answer": "CircleCI",
+      "cite": "projects/kestrelworks.md:9",
+      "note": "Azure Pipelines sent KestrelWorks a sales pitch.",
+      "question": "What is the KestrelWorks CI provider?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "agent passed nothing",
+        "declared": false
+       },
+       "reason": "agent passed nothing",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0299",
+      "category": "F",
+      "wording": "seen",
+      "gold": "insufficient",
+      "relation": "supersedes",
+      "wrote": "QuillPeak Project lead",
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "overridden",
+      "answer": "Bram Garside has been running QuillPeak lately",
+      "cite": "log.md:1200",
+      "note": "Bram Garside has been running QuillPeak lately.",
+      "question": "Who is the QuillPeak project lead?",
+      "gold_target": null,
+      "record": {
+       "relation": "supersedes",
+       "target": "QuillPeak Project lead",
+       "wrote": "QuillPeak Project lead",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "QuillPeak Project lead",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 5,
+       "gold_in_candidates": false
+      }
+     }
+    ]
+   },
+   "classifier": {
+    "label": "C classifier",
+    "overall": {
+     "n": 90,
+     "tags_written": 49,
+     "precision": 1.0,
+     "recall": 0.942,
+     "false_supersession": 0.0,
+     "false_tags": 0,
+     "wrong_target": 0,
+     "abstention_rate": 0.256,
+     "stale_rate": 0.058,
+     "implicit_stale": 0.073,
+     "current_acc": 0.886,
+     "g_abstained": 0.0,
+     "g_answered_with_note": 0,
+     "overridden": 0
+    },
+    "two_by_two": {
+     "supersession": {
+      "detected": 49,
+      "wrong_target": 0,
+      "abstained": 0,
+      "rejected": 3
+     },
+     "unrelated_or_ambiguous": {
+      "rejected": 15,
+      "abstained": 23,
+      "falsely_tagged": 0
+     }
+    },
+    "by_category": {
+     "A": {
+      "n": 11,
+      "tags_written": 11,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": null,
+      "current_acc": 0.727,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "B": {
+      "n": 14,
+      "tags_written": 14,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": 0.0,
+      "current_acc": 0.857,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "C": {
+      "n": 14,
+      "tags_written": 12,
+      "precision": 1.0,
+      "recall": 0.857,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.143,
+      "implicit_stale": 0.143,
+      "current_acc": 0.857,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "D": {
+      "n": 13,
+      "tags_written": 12,
+      "precision": 1.0,
+      "recall": 0.923,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.077,
+      "implicit_stale": 0.077,
+      "current_acc": 0.846,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "E": {
+      "n": 14,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.429,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": 1.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "F": {
+      "n": 13,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.923,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": 1.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "G": {
+      "n": 11,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.455,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": null,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     }
+    },
+    "by_wording": {
+     "reserved": {
+      "n": 31,
+      "tags_written": 17,
+      "precision": 1.0,
+      "recall": 0.895,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.29,
+      "stale_rate": 0.105,
+      "implicit_stale": 0.143,
+      "current_acc": 0.821,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "seen": {
+      "n": 59,
+      "tags_written": 32,
+      "precision": 1.0,
+      "recall": 0.97,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.237,
+      "stale_rate": 0.03,
+      "implicit_stale": 0.037,
+      "current_acc": 0.922,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     }
+    },
+    "relations": {
+     "supersedes -> supersedes": 49,
+     "unrelated -> insufficient": 11,
+     "insufficient -> insufficient": 12,
+     "unrelated -> unrelated": 14,
+     "supersedes -> contradicts": 2,
+     "insufficient -> unrelated": 1,
+     "supersedes -> unrelated": 1
+    },
+    "outcomes": {
+     "C:correct": 12,
+     "E:correct": 14,
+     "B:correct": 12,
+     "D:correct": 11,
+     "G:answered_other": 11,
+     "F:correct": 13,
+     "A:correct": 8,
+     "B:wrong": 2,
+     "C:stale": 2,
+     "D:wrong": 1,
+     "A:wrong": 3,
+     "D:stale": 1
+    },
+    "failed_checks": {
+     "target_in_candidates": 1
+    },
+    "decided_by": {
+     "classifier": 90
+    },
+    "gold_in_candidates": 1.0,
+    "candidates_ms_median": 14.59,
+    "seconds": 20.9,
+    "failures": [
+     {
+      "id": "t0016",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Noor Quell",
+      "cite": "projects/cinderpeak.md:11",
+      "note": "Ines Dellamore shadowed an DriftwoodField incident.",
+      "question": "Who is DriftwoodField's on-call engineer?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "Shadowing describes a learning activity, not current responsibility"
+       },
+       "reason": "Shadowing describes a learning activity, not current responsibility",
+       "n_candidates": 4,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0024",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "eu-west-1",
+      "cite": "projects/cedarbay.md:9",
+      "note": "CedarBay ran a load test in eu-west-2.",
+      "question": "What is CedarBay's deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "Running a load test is a temporary activity, not a permanent region change."
+       },
+       "reason": "Running a load test is a temporary activity, not a permanent region change.",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0029",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Wes Eastwick",
+      "cite": "projects/cinderpeak.md:10",
+      "note": "Nadia Dellamore left comments on an FjordPeak wireframe.",
+      "question": "Who is the FjordPeak design reviewer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note describes an action taken; no fact on file matches."
+       },
+       "reason": "Note describes an action taken; no fact on file matches.",
+       "n_candidates": 6,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0041",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "CinderBay Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "wrong",
+      "answer": "Northwind Networks",
+      "cite": "projects/cinderbay.md:8",
+      "note": "CinderBay switched suppliers from Calloway Partners to Ellison Industries.",
+      "question": "What is CinderBay's vendor?",
+      "gold_target": "CinderBay vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "CinderBay Vendor",
+       "wrote": "CinderBay Vendor",
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "CinderBay Vendor",
+        "reason": "Supplier changed from Calloway Partners to Ellison Industries."
+       },
+       "reason": "Supplier changed from Calloway Partners to Ellison Industries.",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0054",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "contradicts",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "stale",
+      "answer": "Dunmere Logistics",
+      "cite": "projects/meridianfield.md:9",
+      "note": "MeridianField gets its supplies from Ellison Freight.",
+      "question": "What is MeridianField's vendor?",
+      "gold_target": "MeridianField vendor",
+      "record": {
+       "relation": "contradicts",
+       "target": "MeridianField Vendor",
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "contradicts",
+        "target": "MeridianField Vendor",
+        "reason": "Note gives Ellison Freight; file shows Dunmere Logistics. No change stated."
+       },
+       "reason": "Note gives Ellison Freight; file shows Dunmere Logistics. No change stated.",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0077",
+      "category": "D",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "LodestarBay Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "wrong",
+      "answer": "Fairhaven Networks",
+      "cite": "projects/lodestarbay.md:10",
+      "note": "Dunmere Freight went bankrupt in the spring; LodestarBay orders from Hollis Systems.",
+      "question": "What is LodestarBay's vendor?",
+      "gold_target": "LodestarBay vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "LodestarBay Vendor",
+       "wrote": "LodestarBay Vendor",
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "LodestarBay Vendor",
+        "reason": "LodestarBay vendor changed from Dunmere Freight to Hollis Systems due to bankruptcy"
+       },
+       "reason": "LodestarBay vendor changed from Dunmere Freight to Hollis Systems due to bankruptcy",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0092",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Yara Fenwick",
+      "cite": "projects/harborridge.md:9",
+      "note": "Hana Ashgrove asked about ZephyrGate costs.",
+      "question": "Who is ZephyrGate's budget owner?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note reports an inquiry made, not a change to any fact on file."
+       },
+       "reason": "Note reports an inquiry made, not a change to any fact on file.",
+       "n_candidates": 5,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0125",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Yara Fenwick",
+      "cite": "projects/harborridge.md:9",
+      "note": "Hana Pellow reviewed the EmberYard budget.",
+      "question": "Who is EmberYard's budget owner?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note describes a past review action; no matching fact on file"
+       },
+       "reason": "Note describes a past review action; no matching fact on file",
+       "n_candidates": 4,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0149",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "contradicts",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "stale",
+      "answer": "Postgres 16",
+      "cite": "projects/bramblegate.md:9",
+      "note": "BrambleGate data lives in DynamoDB.",
+      "question": "What is the BrambleGate primary database?",
+      "gold_target": "BrambleGate primary database",
+      "record": {
+       "relation": "contradicts",
+       "target": "BrambleGate Primary database",
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "contradicts",
+        "target": "BrambleGate Primary database",
+        "reason": "Note contradicts on-file value: states DynamoDB vs recorded Postgres 16."
+       },
+       "reason": "Note contradicts on-file value: states DynamoDB vs recorded Postgres 16.",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0150",
+      "category": "A",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "ObsidianStack Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "wrong",
+      "answer": "Hollis Systems",
+      "cite": "projects/obsidianstack.md:9",
+      "note": "ObsidianStack vendor update: Hollis Partners replaces Dunmere Systems.",
+      "question": "What is ObsidianStack's vendor?",
+      "gold_target": "ObsidianStack vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "ObsidianStack Vendor",
+       "wrote": "ObsidianStack Vendor",
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "ObsidianStack Vendor",
+        "reason": "Hollis Partners replaces Dunmere Systems as vendor"
+       },
+       "reason": "Hollis Partners replaces Dunmere Systems as vendor",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0157",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Noor Quell",
+      "cite": "projects/cinderpeak.md:11",
+      "note": "Rafael Kestner wrote the TundraStack runbook.",
+      "question": "Who is TundraStack's on-call engineer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note is about runbook authorship; no matching key on file."
+       },
+       "reason": "Note is about runbook authorship; no matching key on file.",
+       "n_candidates": 3,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0158",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Wes Eastwick",
+      "cite": "projects/cinderpeak.md:10",
+      "note": "Nadia Kestner shared a mockup for NimbusWorks.",
+      "question": "Who is the NimbusWorks design reviewer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note describes past action; no recorded role change."
+       },
+       "reason": "Note describes past action; no recorded role change.",
+       "n_candidates": 7,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0168",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "MongoDB 7",
+      "cite": "projects/rivuletpoint.md:9",
+      "note": "RivuletPoint benchmarked ScyllaDB for a report.",
+      "question": "What is the RivuletPoint primary database?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "Benchmarking is an activity, not a statement of current database use."
+       },
+       "reason": "Benchmarking is an activity, not a statement of current database use.",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0172",
+      "category": "D",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": "target_in_candidates",
+      "who": "classifier",
+      "outcome": "stale",
+      "answer": "Noor Corvane",
+      "cite": "projects/gossamerhub.md:7",
+      "note": "After the reorg Noor Corvane moved to another org and Tomasz Marrow owns GossamerHub.",
+      "question": "Who is GossamerHub's project lead?",
+      "gold_target": "GossamerHub project lead",
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": "target_in_candidates",
+       "raw": {
+        "relation": "supersedes",
+        "target": "GossameraHub Project lead",
+        "reason": "Noor Corvane moved; Tomasz Marrow now owns GossameraHub"
+       },
+       "reason": "Noor Corvane moved; Tomasz Marrow now owns GossameraHub",
+       "n_candidates": 9,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0174",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "us-east-1",
+      "cite": "projects/brambleyard.md:9",
+      "note": "BrambleYard hosts its status page in ap-southeast-2.",
+      "question": "What is the BrambleYard deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note describes status page hosting location, unrelated to listed BrambleYard facts"
+       },
+       "reason": "Note describes status page hosting location, unrelated to listed BrambleYard facts",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0210",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "OnyxGate Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "wrong",
+      "answer": "Dunmere Freight",
+      "cite": "projects/onyxgate.md:9",
+      "note": "The OnyxGate vendor changed from Brightwater Freight to Calloway Logistics.",
+      "question": "What is OnyxGate's vendor?",
+      "gold_target": "OnyxGate vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "OnyxGate Vendor",
+       "wrote": "OnyxGate Vendor",
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "OnyxGate Vendor",
+        "reason": "Note states vendor changed from current value Brightwater Freight to Calloway Logistics."
+       },
+       "reason": "Note states vendor changed from current value Brightwater Freight to Calloway Logistics.",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0258",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "ap-southeast-2",
+      "cite": "projects/thistleridge.md:11",
+      "note": "ThistleRidge added a read replica in ap-south-1.",
+      "question": "What is the ThistleRidge deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "Note says added; unclear if read replica replaces or supplements ap-southeast-2"
+       },
+       "reason": "Note says added; unclear if read replica replaces or supplements ap-southeast-2",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0272",
+      "category": "B",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "JuniperPoint Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "wrong",
+      "answer": "Dunmere Industries",
+      "cite": "projects/juniperpoint.md:10",
+      "note": "JuniperPoint stopped buying from Fairhaven Systems and buys from Northwind Industries.",
+      "question": "What is JuniperPoint's vendor?",
+      "gold_target": "JuniperPoint vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "JuniperPoint Vendor",
+       "wrote": "JuniperPoint Vendor",
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "JuniperPoint Vendor",
+        "reason": "Vendor changed from Fairhaven Systems to Northwind Industries"
+       },
+       "reason": "Vendor changed from Fairhaven Systems to Northwind Industries",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0279",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "ThistlePeak Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "wrong",
+      "answer": "Fairhaven Freight",
+      "cite": "projects/thistlepeak.md:12",
+      "note": "The ThistlePeak vendor changed from Dunmere Systems to Kellmark Partners.",
+      "question": "What is the ThistlePeak vendor?",
+      "gold_target": "ThistlePeak vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "ThistlePeak Vendor",
+       "wrote": "ThistlePeak Vendor",
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "ThistlePeak Vendor",
+        "reason": "Note states vendor changed from Dunmere Systems to Kellmark Partners."
+       },
+       "reason": "Note states vendor changed from Dunmere Systems to Kellmark Partners.",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0287",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "CircleCI",
+      "cite": "projects/kestrelworks.md:9",
+      "note": "Azure Pipelines sent KestrelWorks a sales pitch.",
+      "question": "What is the KestrelWorks CI provider?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "A sales pitch is a marketing attempt, not evidence KestrelWorks switched providers."
+       },
+       "reason": "A sales pitch is a marketing attempt, not evidence KestrelWorks switched providers.",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     }
+    ]
+   },
+   "agent+classifier": {
+    "label": "D agent, then classifier",
+    "overall": {
+     "n": 90,
+     "tags_written": 53,
+     "precision": 0.981,
+     "recall": 1.0,
+     "false_supersession": 0.026,
+     "false_tags": 1,
+     "wrong_target": 0,
+     "abstention_rate": 0.244,
+     "stale_rate": 0.0,
+     "implicit_stale": 0.0,
+     "current_acc": 0.899,
+     "g_abstained": 0.0,
+     "g_answered_with_note": 0,
+     "overridden": 1
+    },
+    "two_by_two": {
+     "supersession": {
+      "detected": 52,
+      "wrong_target": 0,
+      "abstained": 0,
+      "rejected": 0
+     },
+     "unrelated_or_ambiguous": {
+      "rejected": 15,
+      "abstained": 22,
+      "falsely_tagged": 1
+     }
+    },
+    "by_category": {
+     "A": {
+      "n": 11,
+      "tags_written": 11,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": null,
+      "current_acc": 0.727,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "B": {
+      "n": 14,
+      "tags_written": 14,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": 0.0,
+      "current_acc": 0.857,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "C": {
+      "n": 14,
+      "tags_written": 14,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": 0.0,
+      "current_acc": 0.929,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "D": {
+      "n": 13,
+      "tags_written": 13,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": null,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.0,
+      "stale_rate": 0.0,
+      "implicit_stale": 0.0,
+      "current_acc": 0.923,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "E": {
+      "n": 14,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.429,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": 1.0,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "F": {
+      "n": 13,
+      "tags_written": 1,
+      "precision": 0.0,
+      "recall": null,
+      "false_supersession": 0.077,
+      "false_tags": 1,
+      "wrong_target": 0,
+      "abstention_rate": 0.846,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": 0.923,
+      "g_abstained": null,
+      "g_answered_with_note": 0,
+      "overridden": 1
+     },
+     "G": {
+      "n": 11,
+      "tags_written": 0,
+      "precision": null,
+      "recall": null,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.455,
+      "stale_rate": null,
+      "implicit_stale": null,
+      "current_acc": null,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     }
+    },
+    "by_wording": {
+     "reserved": {
+      "n": 31,
+      "tags_written": 19,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_supersession": 0.0,
+      "false_tags": 0,
+      "wrong_target": 0,
+      "abstention_rate": 0.29,
+      "stale_rate": 0.0,
+      "implicit_stale": 0.0,
+      "current_acc": 0.857,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 0
+     },
+     "seen": {
+      "n": 59,
+      "tags_written": 34,
+      "precision": 0.971,
+      "recall": 1.0,
+      "false_supersession": 0.038,
+      "false_tags": 1,
+      "wrong_target": 0,
+      "abstention_rate": 0.22,
+      "stale_rate": 0.0,
+      "implicit_stale": 0.0,
+      "current_acc": 0.922,
+      "g_abstained": 0.0,
+      "g_answered_with_note": 0,
+      "overridden": 1
+     }
+    },
+    "relations": {
+     "supersedes -> supersedes": 52,
+     "unrelated -> insufficient": 11,
+     "insufficient -> insufficient": 11,
+     "unrelated -> unrelated": 14,
+     "insufficient -> unrelated": 1,
+     "insufficient -> supersedes": 1
+    },
+    "outcomes": {
+     "C:correct": 13,
+     "E:correct": 14,
+     "B:correct": 12,
+     "D:correct": 12,
+     "G:answered_other": 11,
+     "F:correct": 12,
+     "A:correct": 8,
+     "B:wrong": 2,
+     "C:wrong": 1,
+     "D:wrong": 1,
+     "A:wrong": 3,
+     "F:overridden": 1
+    },
+    "failed_checks": {},
+    "decided_by": {
+     "agent": 50,
+     "classifier": 40
+    },
+    "gold_in_candidates": 1.0,
+    "candidates_ms_median": 14.58,
+    "seconds": 21.1,
+    "failures": [
+     {
+      "id": "t0016",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Noor Quell",
+      "cite": "projects/cinderpeak.md:11",
+      "note": "Ines Dellamore shadowed an DriftwoodField incident.",
+      "question": "Who is DriftwoodField's on-call engineer?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "Shadowing describes a learning activity, not current responsibility"
+       },
+       "reason": "Shadowing describes a learning activity, not current responsibility",
+       "n_candidates": 4,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0024",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "eu-west-1",
+      "cite": "projects/cedarbay.md:9",
+      "note": "CedarBay ran a load test in eu-west-2.",
+      "question": "What is CedarBay's deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "Running a load test is a temporary activity, not a permanent region change."
+       },
+       "reason": "Running a load test is a temporary activity, not a permanent region change.",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0029",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Wes Eastwick",
+      "cite": "projects/cinderpeak.md:10",
+      "note": "Nadia Dellamore left comments on an FjordPeak wireframe.",
+      "question": "Who is the FjordPeak design reviewer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note describes an action taken; no fact on file matches."
+       },
+       "reason": "Note describes an action taken; no fact on file matches.",
+       "n_candidates": 6,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0041",
+      "category": "B",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "CinderBay Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Northwind Networks",
+      "cite": "projects/cinderbay.md:8",
+      "note": "CinderBay switched suppliers from Calloway Partners to Ellison Industries.",
+      "question": "What is CinderBay's vendor?",
+      "gold_target": "CinderBay vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "CinderBay Vendor",
+       "wrote": "CinderBay Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "CinderBay Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0054",
+      "category": "C",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "MeridianField Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Kellmark Freight",
+      "cite": "projects/meridianfield.md:8",
+      "note": "MeridianField gets its supplies from Ellison Freight.",
+      "question": "What is MeridianField's vendor?",
+      "gold_target": "MeridianField vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "MeridianField Vendor",
+       "wrote": "MeridianField Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "MeridianField Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0077",
+      "category": "D",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "LodestarBay Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Fairhaven Networks",
+      "cite": "projects/lodestarbay.md:10",
+      "note": "Dunmere Freight went bankrupt in the spring; LodestarBay orders from Hollis Systems.",
+      "question": "What is LodestarBay's vendor?",
+      "gold_target": "LodestarBay vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "LodestarBay Vendor",
+       "wrote": "LodestarBay Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "LodestarBay Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0092",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Yara Fenwick",
+      "cite": "projects/harborridge.md:9",
+      "note": "Hana Ashgrove asked about ZephyrGate costs.",
+      "question": "Who is ZephyrGate's budget owner?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note reports an inquiry made, not a change to any fact on file."
+       },
+       "reason": "Note reports an inquiry made, not a change to any fact on file.",
+       "n_candidates": 5,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0125",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Yara Fenwick",
+      "cite": "projects/harborridge.md:9",
+      "note": "Hana Pellow reviewed the EmberYard budget.",
+      "question": "Who is EmberYard's budget owner?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note describes a past review action; no matching fact on file"
+       },
+       "reason": "Note describes a past review action; no matching fact on file",
+       "n_candidates": 4,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0150",
+      "category": "A",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "ObsidianStack Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Hollis Systems",
+      "cite": "projects/obsidianstack.md:9",
+      "note": "ObsidianStack vendor update: Hollis Partners replaces Dunmere Systems.",
+      "question": "What is ObsidianStack's vendor?",
+      "gold_target": "ObsidianStack vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "ObsidianStack Vendor",
+       "wrote": "ObsidianStack Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "ObsidianStack Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0157",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Noor Quell",
+      "cite": "projects/cinderpeak.md:11",
+      "note": "Rafael Kestner wrote the TundraStack runbook.",
+      "question": "Who is TundraStack's on-call engineer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note is about runbook authorship; no matching key on file."
+       },
+       "reason": "Note is about runbook authorship; no matching key on file.",
+       "n_candidates": 3,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0158",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "Wes Eastwick",
+      "cite": "projects/cinderpeak.md:10",
+      "note": "Nadia Kestner shared a mockup for NimbusWorks.",
+      "question": "Who is the NimbusWorks design reviewer?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note describes past action; no recorded role change."
+       },
+       "reason": "Note describes past action; no recorded role change.",
+       "n_candidates": 7,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0168",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "MongoDB 7",
+      "cite": "projects/rivuletpoint.md:9",
+      "note": "RivuletPoint benchmarked ScyllaDB for a report.",
+      "question": "What is the RivuletPoint primary database?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "Benchmarking is an activity, not a statement of current database use."
+       },
+       "reason": "Benchmarking is an activity, not a statement of current database use.",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0174",
+      "category": "G",
+      "wording": "reserved",
+      "gold": "unrelated",
+      "relation": "unrelated",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "us-east-1",
+      "cite": "projects/brambleyard.md:9",
+      "note": "BrambleYard hosts its status page in ap-southeast-2.",
+      "question": "What is the BrambleYard deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "unrelated",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "unrelated",
+        "target": null,
+        "reason": "Note describes status page hosting location, unrelated to listed BrambleYard facts"
+       },
+       "reason": "Note describes status page hosting location, unrelated to listed BrambleYard facts",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0210",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "OnyxGate Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Dunmere Freight",
+      "cite": "projects/onyxgate.md:9",
+      "note": "The OnyxGate vendor changed from Brightwater Freight to Calloway Logistics.",
+      "question": "What is OnyxGate's vendor?",
+      "gold_target": "OnyxGate vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "OnyxGate Vendor",
+       "wrote": "OnyxGate Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "OnyxGate Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0258",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "ap-southeast-2",
+      "cite": "projects/thistleridge.md:11",
+      "note": "ThistleRidge added a read replica in ap-south-1.",
+      "question": "What is the ThistleRidge deploy region?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "Note says added; unclear if read replica replaces or supplements ap-southeast-2"
+       },
+       "reason": "Note says added; unclear if read replica replaces or supplements ap-southeast-2",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0272",
+      "category": "B",
+      "wording": "reserved",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "JuniperPoint Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Dunmere Industries",
+      "cite": "projects/juniperpoint.md:10",
+      "note": "JuniperPoint stopped buying from Fairhaven Systems and buys from Northwind Industries.",
+      "question": "What is JuniperPoint's vendor?",
+      "gold_target": "JuniperPoint vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "JuniperPoint Vendor",
+       "wrote": "JuniperPoint Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "JuniperPoint Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0279",
+      "category": "A",
+      "wording": "seen",
+      "gold": "supersedes",
+      "relation": "supersedes",
+      "wrote": "ThistlePeak Vendor",
+      "right_target": true,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "wrong",
+      "answer": "Fairhaven Freight",
+      "cite": "projects/thistlepeak.md:12",
+      "note": "The ThistlePeak vendor changed from Dunmere Systems to Kellmark Partners.",
+      "question": "What is the ThistlePeak vendor?",
+      "gold_target": "ThistlePeak vendor",
+      "record": {
+       "relation": "supersedes",
+       "target": "ThistlePeak Vendor",
+       "wrote": "ThistlePeak Vendor",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "ThistlePeak Vendor",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 10,
+       "gold_in_candidates": true
+      }
+     },
+     {
+      "id": "t0287",
+      "category": "G",
+      "wording": "seen",
+      "gold": "unrelated",
+      "relation": "insufficient",
+      "wrote": null,
+      "right_target": false,
+      "failed_check": null,
+      "who": "classifier",
+      "outcome": "answered_other",
+      "answer": "CircleCI",
+      "cite": "projects/kestrelworks.md:9",
+      "note": "Azure Pipelines sent KestrelWorks a sales pitch.",
+      "question": "What is the KestrelWorks CI provider?",
+      "gold_target": null,
+      "record": {
+       "relation": "insufficient",
+       "target": null,
+       "wrote": null,
+       "who": "classifier",
+       "failed_check": null,
+       "raw": {
+        "relation": "insufficient",
+        "target": null,
+        "reason": "A sales pitch is a marketing attempt, not evidence KestrelWorks switched providers."
+       },
+       "reason": "A sales pitch is a marketing attempt, not evidence KestrelWorks switched providers.",
+       "n_candidates": 10,
+       "gold_in_candidates": false
+      }
+     },
+     {
+      "id": "t0299",
+      "category": "F",
+      "wording": "seen",
+      "gold": "insufficient",
+      "relation": "supersedes",
+      "wrote": "QuillPeak Project lead",
+      "right_target": false,
+      "failed_check": null,
+      "who": "agent",
+      "outcome": "overridden",
+      "answer": "Bram Garside has been running QuillPeak lately",
+      "cite": "log.md:1200",
+      "note": "Bram Garside has been running QuillPeak lately.",
+      "question": "Who is the QuillPeak project lead?",
+      "gold_target": null,
+      "record": {
+       "relation": "supersedes",
+       "target": "QuillPeak Project lead",
+       "wrote": "QuillPeak Project lead",
+       "who": "agent",
+       "failed_check": null,
+       "raw": {
+        "relation": "supersedes",
+        "target": "QuillPeak Project lead",
+        "reason": "agent passed supersedes",
+        "declared": true
+       },
+       "reason": "agent passed supersedes",
+       "n_candidates": 5,
+       "gold_in_candidates": false
+      }
+     }
+    ]
+   }
+  },
+  "llm": {
+   "model": "haiku",
+   "real_calls_this_run": 0,
+   "cache_hits": 310,
+   "agent_parse_failures": 0,
+   "classifier_parse_failures": 0,
+   "seconds_per_call_median": null
+  },
+  "llm_calls_total_ledger": 1395
+ },
+ "temporal36": {
+  "n": 1000,
+  "seed": 2026,
+  "arms": {
+   "baseline": {
+    "adversarial_stale": 36,
+    "adversarial_correct": 0,
+    "adversarial_other": 0,
+    "adversarial_tags": 0,
+    "adversarial_right_target": 0,
+    "noise_tags": 0,
+    "heldout_current_acc": 0.763,
+    "heldout_stale_rate": 0.158,
+    "verdicts": [
+     {
+      "kind": "adversarial",
+      "id": "t0012",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0028",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0043",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0098",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0113",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0146",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0161",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0184",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0209",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0383",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0422",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0464",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0467",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0470",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0495",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0509",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0526",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0548",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0586",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0635",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0638",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0698",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0712",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0764",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0766",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0814",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0822",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0826",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0844",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0845",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0853",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0858",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0908",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0928",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0950",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0981",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:679",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:878",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:1081",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:285",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:460",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:720",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:543",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:863",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:952",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:356",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:539",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:94",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:207",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:502",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:121",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:37",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:453",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:273",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:525",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:803",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:87",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:368",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:888",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:698",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:153",
+      "wrote": null,
+      "relation": null,
+      "failed_check": null
+     }
+    ]
+   },
+   "agent": {
+    "adversarial_stale": 4,
+    "adversarial_correct": 31,
+    "adversarial_other": 1,
+    "adversarial_tags": 32,
+    "adversarial_right_target": 32,
+    "noise_tags": 0,
+    "heldout_current_acc": 0.899,
+    "heldout_stale_rate": 0.018,
+    "verdicts": [
+     {
+      "kind": "adversarial",
+      "id": "t0012",
+      "note": "RivuletGate builds run on Azure Pipelines from now on.",
+      "wrote": "RivuletGate CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0028",
+      "note": "Ivo Jarrow now signs off on spend for WharfSpire.",
+      "wrote": "WharfSpire Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0043",
+      "note": "Rosalind Brandtley now signs off on spend for ZephyrCore.",
+      "wrote": "ZephyrCore Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0098",
+      "note": "HeronWorks ships on 2026-12-31.",
+      "wrote": "HeronWorks Release date",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0113",
+      "note": "AlderForge was migrated onto CockroachDB.",
+      "wrote": "AlderForge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0146",
+      "note": "Harbor pings go to #infra-triage-87.",
+      "wrote": "Harbor Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0161",
+      "note": "IsthmusVault rehearses on blue-harbor-27 before any rollout.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0184",
+      "note": "Priya Eastwick now signs off on spend for BirchGate.",
+      "wrote": "BirchGate Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0209",
+      "note": "UmbraSpan builds run on Travis CI from now on.",
+      "wrote": "UmbraSpan CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0383",
+      "note": "BasaltMill pings go to #platform-war-room-83.",
+      "wrote": "BasaltMill Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0422",
+      "note": "Mateo Ingleby took over from Zeno Quenby on JetstreamLabs.",
+      "wrote": "JetstreamLabs Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0464",
+      "note": "Kelp now runs out of us-east-2.",
+      "wrote": "Kelp Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0467",
+      "note": "Mara Eastwick picked up the pager for DriftwoodForge.",
+      "wrote": "DriftwoodForge On-call engineer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0470",
+      "note": "LodestarForge was migrated onto MariaDB 10.",
+      "wrote": "LodestarForge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0495",
+      "note": "TamarackWave builds run on CircleCI from now on.",
+      "wrote": "TamarackWave CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0509",
+      "note": "MeridianVault now runs out of sa-east-1.",
+      "wrote": "MeridianVault Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0526",
+      "note": "JuniperField now runs out of us-east-1.",
+      "wrote": "JuniperField Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0548",
+      "note": "Ugo Nettleby reviews all mockups for KelpCore.",
+      "wrote": "KelpCore Design reviewer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0586",
+      "note": "Meridian was migrated onto MySQL 8.",
+      "wrote": "Meridian Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0635",
+      "note": "LanternCore pings go to #sre-war-room-51.",
+      "wrote": "LanternCore Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0638",
+      "note": "Soren Rushworth now signs off on spend for TamarackGate.",
+      "wrote": "TamarackGate Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0698",
+      "note": "HarborForge pings go to #sre-war-room-43.",
+      "wrote": "HarborForge Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0712",
+      "note": "Wes Lindqvist took over from Soren Everley on LodestarFold.",
+      "wrote": "LodestarFold Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0764",
+      "note": "Imani Blackwood reviews all mockups for QuarrySpan.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0766",
+      "note": "EmberRun pings go to #platform-watch-92.",
+      "wrote": "EmberRun Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0814",
+      "note": "AsterField builds run on Azure Pipelines from now on.",
+      "wrote": "AsterField CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0822",
+      "note": "DogwoodBay keeps hot data in Valkey.",
+      "wrote": "DogwoodBay Cache layer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0826",
+      "note": "Soren Quell took over from Rosalind Stavely on SaffronLoop.",
+      "wrote": "SaffronLoop Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0844",
+      "note": "PetrelCrest builds run on Jenkins from now on.",
+      "wrote": "PetrelCrest CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0845",
+      "note": "CobaltRidge was migrated onto TimescaleDB.",
+      "wrote": "CobaltRidge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0853",
+      "note": "LichenRun pings go to #platform-war-room-57.",
+      "wrote": "LichenRun Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0858",
+      "note": "KelpHub now runs out of eu-central-1.",
+      "wrote": "KelpHub Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0908",
+      "note": "BirchLoop buys its tooling from Mossgate Partners these days.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0928",
+      "note": "Talia Ashgrove now signs off on spend for WillowGrove.",
+      "wrote": "WillowGrove Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0950",
+      "note": "Priya Corvane reviews all mockups for AsterPeak.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0981",
+      "note": "Elias Ambrose reviews all mockups for FjordReef.",
+      "wrote": "FjordReef Design reviewer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:679",
+      "note": "Skimmed the Upland onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:878",
+      "note": "Sent the ZephyrForge newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:1081",
+      "note": "Met with the HalcyonStack team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:285",
+      "note": "Sent the RivuletWave newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:460",
+      "note": "Skimmed the MeridianReef onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:720",
+      "note": "Reminder: HeronRun quarterly review is next month.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:543",
+      "note": "Sync with VireoBridge folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:863",
+      "note": "Someone asked about DogwoodMill swag again; no budget for it this quarter.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:952",
+      "note": "Sync with TundraGate folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:356",
+      "note": "TODO: archive old AtlasWorks tickets.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:539",
+      "note": "Standup for IsthmusWorks ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:94",
+      "note": "Met with the TundraPoint team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:207",
+      "note": "Sync with KestrelCore folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:502",
+      "note": "Skimmed the DuneRidge onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:121",
+      "note": "TODO: archive old CedarPeak tickets.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:37",
+      "note": "Standup for OrionRidge ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:453",
+      "note": "TODO: archive old OnyxLoop tickets.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:273",
+      "note": "Pairing session on NimbusGlen documentation, notes in the wiki.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:525",
+      "note": "Met with the DogwoodGrove team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:803",
+      "note": "Someone asked about RookeryShore swag again; no budget for it this quarter.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:87",
+      "note": "Sync with GlacierRidge folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:368",
+      "note": "Skimmed the AsterDeck onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:888",
+      "note": "Sent the WharfBay newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:698",
+      "note": "Standup for CinderRidge ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:153",
+      "note": "TODO: write up the ObsidianGate retro notes.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "agent"
+     }
+    ]
+   },
+   "classifier": {
+    "adversarial_stale": 4,
+    "adversarial_correct": 31,
+    "adversarial_other": 1,
+    "adversarial_tags": 32,
+    "adversarial_right_target": 32,
+    "noise_tags": 0,
+    "heldout_current_acc": 0.899,
+    "heldout_stale_rate": 0.018,
+    "verdicts": [
+     {
+      "kind": "adversarial",
+      "id": "t0012",
+      "note": "RivuletGate builds run on Azure Pipelines from now on.",
+      "wrote": "RivuletGate CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0028",
+      "note": "Ivo Jarrow now signs off on spend for WharfSpire.",
+      "wrote": "WharfSpire Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0043",
+      "note": "Rosalind Brandtley now signs off on spend for ZephyrCore.",
+      "wrote": "ZephyrCore Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0098",
+      "note": "HeronWorks ships on 2026-12-31.",
+      "wrote": "HeronWorks Release date",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0113",
+      "note": "AlderForge was migrated onto CockroachDB.",
+      "wrote": "AlderForge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0146",
+      "note": "Harbor pings go to #infra-triage-87.",
+      "wrote": "Harbor Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0161",
+      "note": "IsthmusVault rehearses on blue-harbor-27 before any rollout.",
+      "wrote": "IsthmusVault Staging cluster",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0184",
+      "note": "Priya Eastwick now signs off on spend for BirchGate.",
+      "wrote": "BirchGate Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0209",
+      "note": "UmbraSpan builds run on Travis CI from now on.",
+      "wrote": "UmbraSpan CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0383",
+      "note": "BasaltMill pings go to #platform-war-room-83.",
+      "wrote": "BasaltMill Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0422",
+      "note": "Mateo Ingleby took over from Zeno Quenby on JetstreamLabs.",
+      "wrote": "JetstreamLabs Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0464",
+      "note": "Kelp now runs out of us-east-2.",
+      "wrote": "Kelp Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0467",
+      "note": "Mara Eastwick picked up the pager for DriftwoodForge.",
+      "wrote": "DriftwoodForge On-call engineer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0470",
+      "note": "LodestarForge was migrated onto MariaDB 10.",
+      "wrote": "LodestarForge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0495",
+      "note": "TamarackWave builds run on CircleCI from now on.",
+      "wrote": "TamarackWave CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0509",
+      "note": "MeridianVault now runs out of sa-east-1.",
+      "wrote": "MeridianVault Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0526",
+      "note": "JuniperField now runs out of us-east-1.",
+      "wrote": "JuniperField Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0548",
+      "note": "Ugo Nettleby reviews all mockups for KelpCore.",
+      "wrote": null,
+      "relation": "insufficient",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0586",
+      "note": "Meridian was migrated onto MySQL 8.",
+      "wrote": "Meridian Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0635",
+      "note": "LanternCore pings go to #sre-war-room-51.",
+      "wrote": "LanternCore Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0638",
+      "note": "Soren Rushworth now signs off on spend for TamarackGate.",
+      "wrote": "TamarackGate Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0698",
+      "note": "HarborForge pings go to #sre-war-room-43.",
+      "wrote": "HarborForge Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0712",
+      "note": "Wes Lindqvist took over from Soren Everley on LodestarFold.",
+      "wrote": "LodestarFold Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0764",
+      "note": "Imani Blackwood reviews all mockups for QuarrySpan.",
+      "wrote": null,
+      "relation": "contradicts",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0766",
+      "note": "EmberRun pings go to #platform-watch-92.",
+      "wrote": "EmberRun Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0814",
+      "note": "AsterField builds run on Azure Pipelines from now on.",
+      "wrote": "AsterField CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0822",
+      "note": "DogwoodBay keeps hot data in Valkey.",
+      "wrote": null,
+      "relation": "contradicts",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0826",
+      "note": "Soren Quell took over from Rosalind Stavely on SaffronLoop.",
+      "wrote": "SaffronLoop Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0844",
+      "note": "PetrelCrest builds run on Jenkins from now on.",
+      "wrote": "PetrelCrest CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0845",
+      "note": "CobaltRidge was migrated onto TimescaleDB.",
+      "wrote": "CobaltRidge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0853",
+      "note": "LichenRun pings go to #platform-war-room-57.",
+      "wrote": "LichenRun Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0858",
+      "note": "KelpHub now runs out of eu-central-1.",
+      "wrote": "KelpHub Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0908",
+      "note": "BirchLoop buys its tooling from Mossgate Partners these days.",
+      "wrote": "BirchLoop Vendor",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0928",
+      "note": "Talia Ashgrove now signs off on spend for WillowGrove.",
+      "wrote": "WillowGrove Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0950",
+      "note": "Priya Corvane reviews all mockups for AsterPeak.",
+      "wrote": "AsterPeak Design reviewer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0981",
+      "note": "Elias Ambrose reviews all mockups for FjordReef.",
+      "wrote": null,
+      "relation": "insufficient",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:679",
+      "note": "Skimmed the Upland onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:878",
+      "note": "Sent the ZephyrForge newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:1081",
+      "note": "Met with the HalcyonStack team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:285",
+      "note": "Sent the RivuletWave newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:460",
+      "note": "Skimmed the MeridianReef onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:720",
+      "note": "Reminder: HeronRun quarterly review is next month.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:543",
+      "note": "Sync with VireoBridge folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:863",
+      "note": "Someone asked about DogwoodMill swag again; no budget for it this quarter.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:952",
+      "note": "Sync with TundraGate folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:356",
+      "note": "TODO: archive old AtlasWorks tickets.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:539",
+      "note": "Standup for IsthmusWorks ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:94",
+      "note": "Met with the TundraPoint team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:207",
+      "note": "Sync with KestrelCore folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:502",
+      "note": "Skimmed the DuneRidge onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:121",
+      "note": "TODO: archive old CedarPeak tickets.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:37",
+      "note": "Standup for OrionRidge ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:453",
+      "note": "TODO: archive old OnyxLoop tickets.",
+      "wrote": null,
+      "relation": "insufficient",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:273",
+      "note": "Pairing session on NimbusGlen documentation, notes in the wiki.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:525",
+      "note": "Met with the DogwoodGrove team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:803",
+      "note": "Someone asked about RookeryShore swag again; no budget for it this quarter.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:87",
+      "note": "Sync with GlacierRidge folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:368",
+      "note": "Skimmed the AsterDeck onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:888",
+      "note": "Sent the WharfBay newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:698",
+      "note": "Standup for CinderRidge ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:153",
+      "note": "TODO: write up the ObsidianGate retro notes.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     }
+    ]
+   },
+   "agent+classifier": {
+    "adversarial_stale": 1,
+    "adversarial_correct": 34,
+    "adversarial_other": 1,
+    "adversarial_tags": 35,
+    "adversarial_right_target": 35,
+    "noise_tags": 0,
+    "heldout_current_acc": 0.912,
+    "heldout_stale_rate": 0.004,
+    "verdicts": [
+     {
+      "kind": "adversarial",
+      "id": "t0012",
+      "note": "RivuletGate builds run on Azure Pipelines from now on.",
+      "wrote": "RivuletGate CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0028",
+      "note": "Ivo Jarrow now signs off on spend for WharfSpire.",
+      "wrote": "WharfSpire Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0043",
+      "note": "Rosalind Brandtley now signs off on spend for ZephyrCore.",
+      "wrote": "ZephyrCore Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0098",
+      "note": "HeronWorks ships on 2026-12-31.",
+      "wrote": "HeronWorks Release date",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0113",
+      "note": "AlderForge was migrated onto CockroachDB.",
+      "wrote": "AlderForge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0146",
+      "note": "Harbor pings go to #infra-triage-87.",
+      "wrote": "Harbor Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0161",
+      "note": "IsthmusVault rehearses on blue-harbor-27 before any rollout.",
+      "wrote": "IsthmusVault Staging cluster",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0184",
+      "note": "Priya Eastwick now signs off on spend for BirchGate.",
+      "wrote": "BirchGate Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0209",
+      "note": "UmbraSpan builds run on Travis CI from now on.",
+      "wrote": "UmbraSpan CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0383",
+      "note": "BasaltMill pings go to #platform-war-room-83.",
+      "wrote": "BasaltMill Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0422",
+      "note": "Mateo Ingleby took over from Zeno Quenby on JetstreamLabs.",
+      "wrote": "JetstreamLabs Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0464",
+      "note": "Kelp now runs out of us-east-2.",
+      "wrote": "Kelp Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0467",
+      "note": "Mara Eastwick picked up the pager for DriftwoodForge.",
+      "wrote": "DriftwoodForge On-call engineer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0470",
+      "note": "LodestarForge was migrated onto MariaDB 10.",
+      "wrote": "LodestarForge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0495",
+      "note": "TamarackWave builds run on CircleCI from now on.",
+      "wrote": "TamarackWave CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0509",
+      "note": "MeridianVault now runs out of sa-east-1.",
+      "wrote": "MeridianVault Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0526",
+      "note": "JuniperField now runs out of us-east-1.",
+      "wrote": "JuniperField Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0548",
+      "note": "Ugo Nettleby reviews all mockups for KelpCore.",
+      "wrote": "KelpCore Design reviewer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0586",
+      "note": "Meridian was migrated onto MySQL 8.",
+      "wrote": "Meridian Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0635",
+      "note": "LanternCore pings go to #sre-war-room-51.",
+      "wrote": "LanternCore Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0638",
+      "note": "Soren Rushworth now signs off on spend for TamarackGate.",
+      "wrote": "TamarackGate Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0698",
+      "note": "HarborForge pings go to #sre-war-room-43.",
+      "wrote": "HarborForge Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0712",
+      "note": "Wes Lindqvist took over from Soren Everley on LodestarFold.",
+      "wrote": "LodestarFold Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0764",
+      "note": "Imani Blackwood reviews all mockups for QuarrySpan.",
+      "wrote": null,
+      "relation": "contradicts",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0766",
+      "note": "EmberRun pings go to #platform-watch-92.",
+      "wrote": "EmberRun Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0814",
+      "note": "AsterField builds run on Azure Pipelines from now on.",
+      "wrote": "AsterField CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0822",
+      "note": "DogwoodBay keeps hot data in Valkey.",
+      "wrote": "DogwoodBay Cache layer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0826",
+      "note": "Soren Quell took over from Rosalind Stavely on SaffronLoop.",
+      "wrote": "SaffronLoop Project lead",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0844",
+      "note": "PetrelCrest builds run on Jenkins from now on.",
+      "wrote": "PetrelCrest CI provider",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0845",
+      "note": "CobaltRidge was migrated onto TimescaleDB.",
+      "wrote": "CobaltRidge Primary database",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0853",
+      "note": "LichenRun pings go to #platform-war-room-57.",
+      "wrote": "LichenRun Alert channel",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0858",
+      "note": "KelpHub now runs out of eu-central-1.",
+      "wrote": "KelpHub Deploy region",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0908",
+      "note": "BirchLoop buys its tooling from Mossgate Partners these days.",
+      "wrote": "BirchLoop Vendor",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0928",
+      "note": "Talia Ashgrove now signs off on spend for WillowGrove.",
+      "wrote": "WillowGrove Budget owner",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0950",
+      "note": "Priya Corvane reviews all mockups for AsterPeak.",
+      "wrote": "AsterPeak Design reviewer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "adversarial",
+      "id": "t0981",
+      "note": "Elias Ambrose reviews all mockups for FjordReef.",
+      "wrote": "FjordReef Design reviewer",
+      "relation": "supersedes",
+      "failed_check": null,
+      "who": "agent"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:679",
+      "note": "Skimmed the Upland onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:878",
+      "note": "Sent the ZephyrForge newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:1081",
+      "note": "Met with the HalcyonStack team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:285",
+      "note": "Sent the RivuletWave newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:460",
+      "note": "Skimmed the MeridianReef onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:720",
+      "note": "Reminder: HeronRun quarterly review is next month.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:543",
+      "note": "Sync with VireoBridge folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:863",
+      "note": "Someone asked about DogwoodMill swag again; no budget for it this quarter.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:952",
+      "note": "Sync with TundraGate folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:356",
+      "note": "TODO: archive old AtlasWorks tickets.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:539",
+      "note": "Standup for IsthmusWorks ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:94",
+      "note": "Met with the TundraPoint team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:207",
+      "note": "Sync with KestrelCore folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:502",
+      "note": "Skimmed the DuneRidge onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:121",
+      "note": "TODO: archive old CedarPeak tickets.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:37",
+      "note": "Standup for OrionRidge ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:453",
+      "note": "TODO: archive old OnyxLoop tickets.",
+      "wrote": null,
+      "relation": "insufficient",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:273",
+      "note": "Pairing session on NimbusGlen documentation, notes in the wiki.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:525",
+      "note": "Met with the DogwoodGrove team about onboarding docs.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:803",
+      "note": "Someone asked about RookeryShore swag again; no budget for it this quarter.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:87",
+      "note": "Sync with GlacierRidge folks pushed to the afternoon.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:368",
+      "note": "Skimmed the AsterDeck onboarding doc, typos only.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q3.md:888",
+      "note": "Sent the WharfBay newsletter draft around for comments.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q1.md:698",
+      "note": "Standup for CinderRidge ran long today, parked two threads.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     },
+     {
+      "kind": "noise",
+      "id": "logs/2026-Q2.md:153",
+      "note": "TODO: write up the ObsidianGate retro notes.",
+      "wrote": null,
+      "relation": "unrelated",
+      "failed_check": null,
+      "who": "classifier"
+     }
+    ]
+   }
+  },
+  "llm": {
+   "real_calls_this_run": 0,
+   "cache_hits": 212
+  },
+  "llm_calls_total_ledger": 1395
+ },
+ "llm_calls_total": 1395
+}

@@ -1,0 +1,2133 @@
+{
+ "n": 1000,
+ "seed": 2026,
+ "arms": {
+  "baseline": {
+   "adversarial_stale": 36,
+   "adversarial_correct": 0,
+   "adversarial_other": 0,
+   "adversarial_tags": 0,
+   "adversarial_right_target": 0,
+   "noise_tags": 0,
+   "heldout_current_acc": 0.763,
+   "heldout_stale_rate": 0.158,
+   "verdicts": [
+    {
+     "kind": "adversarial",
+     "id": "t0012",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0028",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0043",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0098",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0113",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0146",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0161",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0184",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0209",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0383",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0422",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0464",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0467",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0470",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0495",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0509",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0526",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0548",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0586",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0635",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0638",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0698",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0712",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0764",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0766",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0814",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0822",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0826",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0844",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0845",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0853",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0858",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0908",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0928",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0950",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0981",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:679",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:878",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:1081",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:285",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:460",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:720",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:543",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:863",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:952",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:356",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:539",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:94",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:207",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:502",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:121",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:37",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:453",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:273",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:525",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:803",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:87",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:368",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:888",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:698",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:153",
+     "wrote": null,
+     "relation": null,
+     "failed_check": null
+    }
+   ]
+  },
+  "agent": {
+   "adversarial_stale": 4,
+   "adversarial_correct": 31,
+   "adversarial_other": 1,
+   "adversarial_tags": 32,
+   "adversarial_right_target": 32,
+   "noise_tags": 0,
+   "heldout_current_acc": 0.899,
+   "heldout_stale_rate": 0.018,
+   "verdicts": [
+    {
+     "kind": "adversarial",
+     "id": "t0012",
+     "note": "RivuletGate builds run on Azure Pipelines from now on.",
+     "wrote": "RivuletGate CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0028",
+     "note": "Ivo Jarrow now signs off on spend for WharfSpire.",
+     "wrote": "WharfSpire Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0043",
+     "note": "Rosalind Brandtley now signs off on spend for ZephyrCore.",
+     "wrote": "ZephyrCore Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0098",
+     "note": "HeronWorks ships on 2026-12-31.",
+     "wrote": "HeronWorks Release date",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0113",
+     "note": "AlderForge was migrated onto CockroachDB.",
+     "wrote": "AlderForge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0146",
+     "note": "Harbor pings go to #infra-triage-87.",
+     "wrote": "Harbor Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0161",
+     "note": "IsthmusVault rehearses on blue-harbor-27 before any rollout.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0184",
+     "note": "Priya Eastwick now signs off on spend for BirchGate.",
+     "wrote": "BirchGate Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0209",
+     "note": "UmbraSpan builds run on Travis CI from now on.",
+     "wrote": "UmbraSpan CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0383",
+     "note": "BasaltMill pings go to #platform-war-room-83.",
+     "wrote": "BasaltMill Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0422",
+     "note": "Mateo Ingleby took over from Zeno Quenby on JetstreamLabs.",
+     "wrote": "JetstreamLabs Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0464",
+     "note": "Kelp now runs out of us-east-2.",
+     "wrote": "Kelp Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0467",
+     "note": "Mara Eastwick picked up the pager for DriftwoodForge.",
+     "wrote": "DriftwoodForge On-call engineer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0470",
+     "note": "LodestarForge was migrated onto MariaDB 10.",
+     "wrote": "LodestarForge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0495",
+     "note": "TamarackWave builds run on CircleCI from now on.",
+     "wrote": "TamarackWave CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0509",
+     "note": "MeridianVault now runs out of sa-east-1.",
+     "wrote": "MeridianVault Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0526",
+     "note": "JuniperField now runs out of us-east-1.",
+     "wrote": "JuniperField Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0548",
+     "note": "Ugo Nettleby reviews all mockups for KelpCore.",
+     "wrote": "KelpCore Design reviewer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0586",
+     "note": "Meridian was migrated onto MySQL 8.",
+     "wrote": "Meridian Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0635",
+     "note": "LanternCore pings go to #sre-war-room-51.",
+     "wrote": "LanternCore Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0638",
+     "note": "Soren Rushworth now signs off on spend for TamarackGate.",
+     "wrote": "TamarackGate Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0698",
+     "note": "HarborForge pings go to #sre-war-room-43.",
+     "wrote": "HarborForge Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0712",
+     "note": "Wes Lindqvist took over from Soren Everley on LodestarFold.",
+     "wrote": "LodestarFold Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0764",
+     "note": "Imani Blackwood reviews all mockups for QuarrySpan.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0766",
+     "note": "EmberRun pings go to #platform-watch-92.",
+     "wrote": "EmberRun Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0814",
+     "note": "AsterField builds run on Azure Pipelines from now on.",
+     "wrote": "AsterField CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0822",
+     "note": "DogwoodBay keeps hot data in Valkey.",
+     "wrote": "DogwoodBay Cache layer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0826",
+     "note": "Soren Quell took over from Rosalind Stavely on SaffronLoop.",
+     "wrote": "SaffronLoop Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0844",
+     "note": "PetrelCrest builds run on Jenkins from now on.",
+     "wrote": "PetrelCrest CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0845",
+     "note": "CobaltRidge was migrated onto TimescaleDB.",
+     "wrote": "CobaltRidge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0853",
+     "note": "LichenRun pings go to #platform-war-room-57.",
+     "wrote": "LichenRun Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0858",
+     "note": "KelpHub now runs out of eu-central-1.",
+     "wrote": "KelpHub Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0908",
+     "note": "BirchLoop buys its tooling from Mossgate Partners these days.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0928",
+     "note": "Talia Ashgrove now signs off on spend for WillowGrove.",
+     "wrote": "WillowGrove Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0950",
+     "note": "Priya Corvane reviews all mockups for AsterPeak.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0981",
+     "note": "Elias Ambrose reviews all mockups for FjordReef.",
+     "wrote": "FjordReef Design reviewer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:679",
+     "note": "Skimmed the Upland onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:878",
+     "note": "Sent the ZephyrForge newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:1081",
+     "note": "Met with the HalcyonStack team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:285",
+     "note": "Sent the RivuletWave newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:460",
+     "note": "Skimmed the MeridianReef onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:720",
+     "note": "Reminder: HeronRun quarterly review is next month.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:543",
+     "note": "Sync with VireoBridge folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:863",
+     "note": "Someone asked about DogwoodMill swag again; no budget for it this quarter.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:952",
+     "note": "Sync with TundraGate folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:356",
+     "note": "TODO: archive old AtlasWorks tickets.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:539",
+     "note": "Standup for IsthmusWorks ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:94",
+     "note": "Met with the TundraPoint team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:207",
+     "note": "Sync with KestrelCore folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:502",
+     "note": "Skimmed the DuneRidge onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:121",
+     "note": "TODO: archive old CedarPeak tickets.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:37",
+     "note": "Standup for OrionRidge ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:453",
+     "note": "TODO: archive old OnyxLoop tickets.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:273",
+     "note": "Pairing session on NimbusGlen documentation, notes in the wiki.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:525",
+     "note": "Met with the DogwoodGrove team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:803",
+     "note": "Someone asked about RookeryShore swag again; no budget for it this quarter.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:87",
+     "note": "Sync with GlacierRidge folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:368",
+     "note": "Skimmed the AsterDeck onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:888",
+     "note": "Sent the WharfBay newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:698",
+     "note": "Standup for CinderRidge ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:153",
+     "note": "TODO: write up the ObsidianGate retro notes.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "agent"
+    }
+   ]
+  },
+  "classifier": {
+   "adversarial_stale": 4,
+   "adversarial_correct": 31,
+   "adversarial_other": 1,
+   "adversarial_tags": 32,
+   "adversarial_right_target": 32,
+   "noise_tags": 0,
+   "heldout_current_acc": 0.899,
+   "heldout_stale_rate": 0.018,
+   "verdicts": [
+    {
+     "kind": "adversarial",
+     "id": "t0012",
+     "note": "RivuletGate builds run on Azure Pipelines from now on.",
+     "wrote": "RivuletGate CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0028",
+     "note": "Ivo Jarrow now signs off on spend for WharfSpire.",
+     "wrote": "WharfSpire Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0043",
+     "note": "Rosalind Brandtley now signs off on spend for ZephyrCore.",
+     "wrote": "ZephyrCore Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0098",
+     "note": "HeronWorks ships on 2026-12-31.",
+     "wrote": "HeronWorks Release date",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0113",
+     "note": "AlderForge was migrated onto CockroachDB.",
+     "wrote": "AlderForge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0146",
+     "note": "Harbor pings go to #infra-triage-87.",
+     "wrote": "Harbor Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0161",
+     "note": "IsthmusVault rehearses on blue-harbor-27 before any rollout.",
+     "wrote": "IsthmusVault Staging cluster",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0184",
+     "note": "Priya Eastwick now signs off on spend for BirchGate.",
+     "wrote": "BirchGate Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0209",
+     "note": "UmbraSpan builds run on Travis CI from now on.",
+     "wrote": "UmbraSpan CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0383",
+     "note": "BasaltMill pings go to #platform-war-room-83.",
+     "wrote": "BasaltMill Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0422",
+     "note": "Mateo Ingleby took over from Zeno Quenby on JetstreamLabs.",
+     "wrote": "JetstreamLabs Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0464",
+     "note": "Kelp now runs out of us-east-2.",
+     "wrote": "Kelp Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0467",
+     "note": "Mara Eastwick picked up the pager for DriftwoodForge.",
+     "wrote": "DriftwoodForge On-call engineer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0470",
+     "note": "LodestarForge was migrated onto MariaDB 10.",
+     "wrote": "LodestarForge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0495",
+     "note": "TamarackWave builds run on CircleCI from now on.",
+     "wrote": "TamarackWave CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0509",
+     "note": "MeridianVault now runs out of sa-east-1.",
+     "wrote": "MeridianVault Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0526",
+     "note": "JuniperField now runs out of us-east-1.",
+     "wrote": "JuniperField Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0548",
+     "note": "Ugo Nettleby reviews all mockups for KelpCore.",
+     "wrote": null,
+     "relation": "insufficient",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0586",
+     "note": "Meridian was migrated onto MySQL 8.",
+     "wrote": "Meridian Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0635",
+     "note": "LanternCore pings go to #sre-war-room-51.",
+     "wrote": "LanternCore Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0638",
+     "note": "Soren Rushworth now signs off on spend for TamarackGate.",
+     "wrote": "TamarackGate Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0698",
+     "note": "HarborForge pings go to #sre-war-room-43.",
+     "wrote": "HarborForge Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0712",
+     "note": "Wes Lindqvist took over from Soren Everley on LodestarFold.",
+     "wrote": "LodestarFold Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0764",
+     "note": "Imani Blackwood reviews all mockups for QuarrySpan.",
+     "wrote": null,
+     "relation": "contradicts",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0766",
+     "note": "EmberRun pings go to #platform-watch-92.",
+     "wrote": "EmberRun Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0814",
+     "note": "AsterField builds run on Azure Pipelines from now on.",
+     "wrote": "AsterField CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0822",
+     "note": "DogwoodBay keeps hot data in Valkey.",
+     "wrote": null,
+     "relation": "contradicts",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0826",
+     "note": "Soren Quell took over from Rosalind Stavely on SaffronLoop.",
+     "wrote": "SaffronLoop Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0844",
+     "note": "PetrelCrest builds run on Jenkins from now on.",
+     "wrote": "PetrelCrest CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0845",
+     "note": "CobaltRidge was migrated onto TimescaleDB.",
+     "wrote": "CobaltRidge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0853",
+     "note": "LichenRun pings go to #platform-war-room-57.",
+     "wrote": "LichenRun Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0858",
+     "note": "KelpHub now runs out of eu-central-1.",
+     "wrote": "KelpHub Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0908",
+     "note": "BirchLoop buys its tooling from Mossgate Partners these days.",
+     "wrote": "BirchLoop Vendor",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0928",
+     "note": "Talia Ashgrove now signs off on spend for WillowGrove.",
+     "wrote": "WillowGrove Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0950",
+     "note": "Priya Corvane reviews all mockups for AsterPeak.",
+     "wrote": "AsterPeak Design reviewer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0981",
+     "note": "Elias Ambrose reviews all mockups for FjordReef.",
+     "wrote": null,
+     "relation": "insufficient",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:679",
+     "note": "Skimmed the Upland onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:878",
+     "note": "Sent the ZephyrForge newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:1081",
+     "note": "Met with the HalcyonStack team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:285",
+     "note": "Sent the RivuletWave newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:460",
+     "note": "Skimmed the MeridianReef onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:720",
+     "note": "Reminder: HeronRun quarterly review is next month.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:543",
+     "note": "Sync with VireoBridge folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:863",
+     "note": "Someone asked about DogwoodMill swag again; no budget for it this quarter.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:952",
+     "note": "Sync with TundraGate folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:356",
+     "note": "TODO: archive old AtlasWorks tickets.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:539",
+     "note": "Standup for IsthmusWorks ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:94",
+     "note": "Met with the TundraPoint team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:207",
+     "note": "Sync with KestrelCore folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:502",
+     "note": "Skimmed the DuneRidge onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:121",
+     "note": "TODO: archive old CedarPeak tickets.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:37",
+     "note": "Standup for OrionRidge ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:453",
+     "note": "TODO: archive old OnyxLoop tickets.",
+     "wrote": null,
+     "relation": "insufficient",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:273",
+     "note": "Pairing session on NimbusGlen documentation, notes in the wiki.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:525",
+     "note": "Met with the DogwoodGrove team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:803",
+     "note": "Someone asked about RookeryShore swag again; no budget for it this quarter.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:87",
+     "note": "Sync with GlacierRidge folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:368",
+     "note": "Skimmed the AsterDeck onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:888",
+     "note": "Sent the WharfBay newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:698",
+     "note": "Standup for CinderRidge ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:153",
+     "note": "TODO: write up the ObsidianGate retro notes.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    }
+   ]
+  },
+  "agent+classifier": {
+   "adversarial_stale": 1,
+   "adversarial_correct": 34,
+   "adversarial_other": 1,
+   "adversarial_tags": 35,
+   "adversarial_right_target": 35,
+   "noise_tags": 0,
+   "heldout_current_acc": 0.912,
+   "heldout_stale_rate": 0.004,
+   "verdicts": [
+    {
+     "kind": "adversarial",
+     "id": "t0012",
+     "note": "RivuletGate builds run on Azure Pipelines from now on.",
+     "wrote": "RivuletGate CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0028",
+     "note": "Ivo Jarrow now signs off on spend for WharfSpire.",
+     "wrote": "WharfSpire Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0043",
+     "note": "Rosalind Brandtley now signs off on spend for ZephyrCore.",
+     "wrote": "ZephyrCore Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0098",
+     "note": "HeronWorks ships on 2026-12-31.",
+     "wrote": "HeronWorks Release date",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0113",
+     "note": "AlderForge was migrated onto CockroachDB.",
+     "wrote": "AlderForge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0146",
+     "note": "Harbor pings go to #infra-triage-87.",
+     "wrote": "Harbor Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0161",
+     "note": "IsthmusVault rehearses on blue-harbor-27 before any rollout.",
+     "wrote": "IsthmusVault Staging cluster",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0184",
+     "note": "Priya Eastwick now signs off on spend for BirchGate.",
+     "wrote": "BirchGate Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0209",
+     "note": "UmbraSpan builds run on Travis CI from now on.",
+     "wrote": "UmbraSpan CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0383",
+     "note": "BasaltMill pings go to #platform-war-room-83.",
+     "wrote": "BasaltMill Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0422",
+     "note": "Mateo Ingleby took over from Zeno Quenby on JetstreamLabs.",
+     "wrote": "JetstreamLabs Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0464",
+     "note": "Kelp now runs out of us-east-2.",
+     "wrote": "Kelp Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0467",
+     "note": "Mara Eastwick picked up the pager for DriftwoodForge.",
+     "wrote": "DriftwoodForge On-call engineer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0470",
+     "note": "LodestarForge was migrated onto MariaDB 10.",
+     "wrote": "LodestarForge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0495",
+     "note": "TamarackWave builds run on CircleCI from now on.",
+     "wrote": "TamarackWave CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0509",
+     "note": "MeridianVault now runs out of sa-east-1.",
+     "wrote": "MeridianVault Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0526",
+     "note": "JuniperField now runs out of us-east-1.",
+     "wrote": "JuniperField Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0548",
+     "note": "Ugo Nettleby reviews all mockups for KelpCore.",
+     "wrote": "KelpCore Design reviewer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0586",
+     "note": "Meridian was migrated onto MySQL 8.",
+     "wrote": "Meridian Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0635",
+     "note": "LanternCore pings go to #sre-war-room-51.",
+     "wrote": "LanternCore Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0638",
+     "note": "Soren Rushworth now signs off on spend for TamarackGate.",
+     "wrote": "TamarackGate Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0698",
+     "note": "HarborForge pings go to #sre-war-room-43.",
+     "wrote": "HarborForge Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0712",
+     "note": "Wes Lindqvist took over from Soren Everley on LodestarFold.",
+     "wrote": "LodestarFold Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0764",
+     "note": "Imani Blackwood reviews all mockups for QuarrySpan.",
+     "wrote": null,
+     "relation": "contradicts",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0766",
+     "note": "EmberRun pings go to #platform-watch-92.",
+     "wrote": "EmberRun Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0814",
+     "note": "AsterField builds run on Azure Pipelines from now on.",
+     "wrote": "AsterField CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0822",
+     "note": "DogwoodBay keeps hot data in Valkey.",
+     "wrote": "DogwoodBay Cache layer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0826",
+     "note": "Soren Quell took over from Rosalind Stavely on SaffronLoop.",
+     "wrote": "SaffronLoop Project lead",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0844",
+     "note": "PetrelCrest builds run on Jenkins from now on.",
+     "wrote": "PetrelCrest CI provider",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0845",
+     "note": "CobaltRidge was migrated onto TimescaleDB.",
+     "wrote": "CobaltRidge Primary database",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0853",
+     "note": "LichenRun pings go to #platform-war-room-57.",
+     "wrote": "LichenRun Alert channel",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0858",
+     "note": "KelpHub now runs out of eu-central-1.",
+     "wrote": "KelpHub Deploy region",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0908",
+     "note": "BirchLoop buys its tooling from Mossgate Partners these days.",
+     "wrote": "BirchLoop Vendor",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0928",
+     "note": "Talia Ashgrove now signs off on spend for WillowGrove.",
+     "wrote": "WillowGrove Budget owner",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0950",
+     "note": "Priya Corvane reviews all mockups for AsterPeak.",
+     "wrote": "AsterPeak Design reviewer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "adversarial",
+     "id": "t0981",
+     "note": "Elias Ambrose reviews all mockups for FjordReef.",
+     "wrote": "FjordReef Design reviewer",
+     "relation": "supersedes",
+     "failed_check": null,
+     "who": "agent"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:679",
+     "note": "Skimmed the Upland onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:878",
+     "note": "Sent the ZephyrForge newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:1081",
+     "note": "Met with the HalcyonStack team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:285",
+     "note": "Sent the RivuletWave newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:460",
+     "note": "Skimmed the MeridianReef onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:720",
+     "note": "Reminder: HeronRun quarterly review is next month.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:543",
+     "note": "Sync with VireoBridge folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:863",
+     "note": "Someone asked about DogwoodMill swag again; no budget for it this quarter.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:952",
+     "note": "Sync with TundraGate folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:356",
+     "note": "TODO: archive old AtlasWorks tickets.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:539",
+     "note": "Standup for IsthmusWorks ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:94",
+     "note": "Met with the TundraPoint team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:207",
+     "note": "Sync with KestrelCore folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:502",
+     "note": "Skimmed the DuneRidge onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:121",
+     "note": "TODO: archive old CedarPeak tickets.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:37",
+     "note": "Standup for OrionRidge ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:453",
+     "note": "TODO: archive old OnyxLoop tickets.",
+     "wrote": null,
+     "relation": "insufficient",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:273",
+     "note": "Pairing session on NimbusGlen documentation, notes in the wiki.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:525",
+     "note": "Met with the DogwoodGrove team about onboarding docs.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:803",
+     "note": "Someone asked about RookeryShore swag again; no budget for it this quarter.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:87",
+     "note": "Sync with GlacierRidge folks pushed to the afternoon.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:368",
+     "note": "Skimmed the AsterDeck onboarding doc, typos only.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q3.md:888",
+     "note": "Sent the WharfBay newsletter draft around for comments.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q1.md:698",
+     "note": "Standup for CinderRidge ran long today, parked two threads.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    },
+    {
+     "kind": "noise",
+     "id": "logs/2026-Q2.md:153",
+     "note": "TODO: write up the ObsidianGate retro notes.",
+     "wrote": null,
+     "relation": "unrelated",
+     "failed_check": null,
+     "who": "classifier"
+    }
+   ]
+  }
+ },
+ "llm": {
+  "real_calls_this_run": 0,
+  "cache_hits": 212
+ },
+ "llm_calls_total_ledger": 1395
+}
