@@ -21,7 +21,11 @@ Split rule (frozen before any system runs): case ids of each category are shuffl
 templates; the last one is reserved for held-out cases, which draw from all of them, so part of the
 held-out set uses wording nobody tuned on. ``wording`` on each case says which.
 
-    python bench/supersession/generate.py --cases 300 --seed 2026 --out /tmp/supersession
+    python bench/supersession/generate.py --cases 300 --seed 4127 --prefix t --out /tmp/supersession
+
+Run 2 uses seed 4127 and case ids t0001..t0300 (run 1: seed 2026, s0001..s0300, archived in run1/),
+so no run-2 case id can coincide with a run-1 one. Generation fails if a note collides with an
+existing fact key of its entity (``audit_templates``, ``check_cases``).
 """
 
 from __future__ import annotations
@@ -36,7 +40,10 @@ from datetime import date, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from synth import FIRST, LAST, PROJECTS  # noqa: E402
+
+from plainmem.text import tokenize  # noqa: E402
 
 NOW = date(2026, 10, 1)
 SPLIT_SEED_OFFSET = 1
@@ -122,7 +129,8 @@ T: dict[str, dict[str, list[str]]] = {
         "D": ["After the {old} outage, {E} was relocated; it serves from {new} now.",
               "{old} got too expensive, so {E} traffic is in {new}.",
               "The {old} capacity crunch pushed {E} over to {new} for good."],
-        "E": ["{E} added a read replica in {new}.", "{E} ran a load test in {new}.", "{E} keeps backups in {new}."],
+        "E": ["{E} added a read replica in {new}.", "{E} ran a load test in {new}.",
+              "{E} hosts its status page in {new}."],
         "F": ["{E} is probably moving to {new} at some point.", "{E} may run out of {new} soon.",
               "Part of {E} traffic is being tried in {new}."],
     },
@@ -134,7 +142,7 @@ T: dict[str, dict[str, list[str]]] = {
         "D": ["The {old} cluster for {E} was retired after the cutover to {new}.",
               "{old} kept falling over, so {E} was moved onto {new}.",
               "Once {old} hit its limits, {E} records went to {new} for good."],
-        "E": ["{E} added {new} for analytics.", "{E} exports a nightly dump to {new}.",
+        "E": ["{E} added {new} for analytics.", "{E} wrote a {new} connector for a customer.",
               "{E} benchmarked {new} for a report."],
         "F": ["The {E} team is evaluating {new}.", "{E} may move to {new}.",
               "Someone prototyped {E} on {new}."],
@@ -166,6 +174,57 @@ T: dict[str, dict[str, list[str]]] = {
 }  # fmt: skip
 A_TEMPLATES = ["{old} is no longer the {E} {a}. {new} is.", "The {E} {a} changed from {old} to {new}.",
                "{E} {a} update: {new} replaces {old}."]  # fmt: skip
+
+# Key-collision guard (added for run 2). Run 1 labelled "{E} keeps backups in {new}." as unrelated
+# although every entity could hold a "Backup region" fact that the sentence does update. A note is
+# taken to touch attribute ``b`` when it contains every cue word of ``b`` (the key's tokens, normalised
+# as plainmem normalises keys, minus the generic kind words) and its value has ``b``'s kind.
+GENERIC = frozenset(tokenize("region database provider vendor lead owner engineer reviewer date size ceiling"))
+
+
+def cues(attr: str) -> frozenset[str]:
+    toks = frozenset(tokenize(attr))
+    return (toks - GENERIC) or toks
+
+
+def touches(note: str, attr: str, value_kind: str) -> bool:
+    """True if ``note`` (with a value of ``value_kind``) could be an update of attribute ``attr``."""
+    kind = {a.lower(): k for a, k in KINDS.items()}[attr.lower()]
+    return kind == value_kind and cues(attr) <= set(tokenize(note))
+
+
+def audit_templates(templates: dict[str, dict[str, list[str]]] | None = None) -> list[str]:
+    """Template-level check, independent of any seed: problems for every entity the generator could make.
+
+    A must-not-supersede template (E, F; G reuses E) may not touch any other attribute of the same kind,
+    since any entity may hold that attribute. A supersedes template (B, C, D) may not touch a sibling
+    of the same kind either, or its gold target would be ambiguous.
+    """
+    problems = []
+    for attr, cats in (templates or T).items():
+        kind = KINDS[attr]
+        for cat, options in cats.items():
+            for t in options:
+                for other in KINDS:
+                    if other != attr and touches(
+                        t.replace("{E}", "").replace("{old}", "").replace("{new}", ""), other, kind
+                    ):
+                        problems.append(f"{attr}/{cat}: {t!r} touches {other!r}")
+    return problems
+
+
+def check_cases(files: dict[str, str], cases: list[Case]) -> list[str]:
+    """Case-level check on generated data: no negative note may touch an existing fact key of its entity
+    other than the asked attribute (by plainmem's key normalisation); no positive note a sibling one."""
+    problems = []
+    for c in cases:
+        text = files[f"projects/{c.entity.lower()}.md"]
+        keys = [ln[2:].split(":", 1)[0].strip().lower() for ln in text.splitlines() if ln.startswith("- ")]
+        body = c.note.replace(c.entity, "").replace(c.new, "").replace(c.old or "\0", "")
+        for k in keys:
+            if frozenset(tokenize(k)) != frozenset(tokenize(c.attribute)) and touches(body, k, KINDS[c.attribute]):
+                problems.append(f"{c.id} [{c.category}] {c.note!r} touches existing fact {k!r} of {c.entity}")
+    return problems
 
 
 @dataclass
@@ -223,12 +282,12 @@ def _targets(n: int) -> dict[str, int]:
     return counts
 
 
-def generate(n_cases: int, seed: int) -> tuple[dict[str, str], list[Case], list[tuple[str, str]]]:
+def generate(n_cases: int, seed: int, prefix: str = "s") -> tuple[dict[str, str], list[Case], list[tuple[str, str]]]:
     """(entity files, cases, noise notes as (date, text))."""
     rng = random.Random(seed)
     cats = [c for c, k in _targets(n_cases).items() for _ in range(k)]
     rng.shuffle(cats)
-    ids = [f"s{i + 1:04d}" for i in range(len(cats))]
+    ids = [f"{prefix}{i + 1:04d}" for i in range(len(cats))]
 
     # split first, so wording can depend on it
     srng = random.Random(seed + SPLIT_SEED_OFFSET)
@@ -307,6 +366,9 @@ def generate(n_cases: int, seed: int) -> tuple[dict[str, str], list[Case], list[
         attrs = rng.sample(list(KINDS), 4)
         body = "".join(f"- {a[0].upper() + a[1:]}: {_gen(KINDS[a], rng)}\n" for a in attrs)
         files[f"projects/{n.lower()}.md"] = f"---\nentity: {n}\nupdated: 2025-11-15\n---\n# {n}\n\n{body}"
+    problems = audit_templates() + check_cases(files, cases)
+    if problems:
+        raise ValueError("key collision in generated cases:\n" + "\n".join(problems))
     return files, cases, noise
 
 
@@ -318,11 +380,12 @@ def cases_sha(cases: list[Case]) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--cases", type=int, default=300)
-    ap.add_argument("--seed", type=int, default=2026)
+    ap.add_argument("--seed", type=int, default=4127)
+    ap.add_argument("--prefix", default="t", help="case id prefix (run 1 used s)")
     ap.add_argument("--out", required=True)
-    ap.add_argument("--freeze", action="store_true", help="write split.json next to this script")
+    ap.add_argument("--freeze", action="store_true", help="write split_v2.json next to this script")
     a = ap.parse_args()
-    files, cases, noise = generate(a.cases, a.seed)
+    files, cases, noise = generate(a.cases, a.seed, a.prefix)
     out = Path(a.out)
     for rel, text in files.items():
         p = out / "notes" / rel
@@ -333,12 +396,13 @@ def main() -> None:
     if a.freeze:
         split = {
             "seed": a.seed,
+            "prefix": a.prefix,
             "n_cases": a.cases,
             "heldout_fraction": HELDOUT_FRACTION,
             "heldout": sorted(c.id for c in cases if c.split == "heldout"),
             "cases_sha256": cases_sha(cases),
         }
-        (Path(__file__).resolve().parent / "split.json").write_text(json.dumps(split, indent=1) + "\n")
+        (Path(__file__).resolve().parent / "split_v2.json").write_text(json.dumps(split, indent=1) + "\n")
     print(f"wrote {len(files)} files, {len(cases)} cases, {len(noise)} noise notes to {out}")
 
 

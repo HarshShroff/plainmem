@@ -1,5 +1,7 @@
 # Supersession benchmark (experimental)
 
+Two runs. Run 1 (seed 2026, files in `run1/`) had a labelling bug in its generator, described in `run1/README.md`. Run 2 (seed 4127) is a second attempt with the bug fixed, a fresh frozen held-out split and its own pre-registration below. Both are reported.
+
 Question: can a write-path step link an update that does not repeat a fact's key ("Priya took over from Sam on Orion") to that fact (`Orion project lead`), without linking notes that only look similar? The read path is unchanged: `explain` stays deterministic and makes no model calls. The model is only consulted when a note is written, it only returns a verdict, and plainmem validates that verdict and writes the tag itself.
 
 ## Reproduce
@@ -40,7 +42,7 @@ The same person wrote the templates, the classifier prompt and the agent-simulat
 
 B, C and D pass through the same validator before a tag is written (target among the candidates, still current, the note supplies a value, relation allowed). All model calls are `claude -p --model haiku`. A lexical heuristic was tried on dev (precision 0.70, recall 0.16, no false tags) and dropped.
 
-## Pre-registered success criterion
+## Run 1 pre-registered success criterion
 
 Written and committed before the held-out run:
 
@@ -53,6 +55,25 @@ Written and committed before the held-out run:
 
 See the docstring of `run.py`. Precision and recall count a tag as right only with the right target key. The abstention 2x2 splits true supersessions into detected / wrong target / abstained (`insufficient`) / rejected, and unrelated + ambiguous notes into rejected / abstained / falsely tagged. The agent arm can only pass a key or nothing, so it never abstains as such; "passed nothing" counts as rejected.
 
-## Outcome (added after the held-out run)
+## Run 1 outcome (added after the held-out run)
 
 The pre-registered criterion was not met by any arm. Implicit stale fell from 1.000 to 0.220 (B), 0.268 (C) and 0.171 (D), but each arm wrote 1 false tag on 38 unrelated or ambiguous notes (2.6%). It was the same note in all three ("BasaltStack keeps backups in us-west-2.", a held-out-only template). Arguably that is a generator labelling error, since the entity has a `Backup region` fact that the note does update. That reading is post-hoc, so the result stands as a fail. B and D also wrote 2 wrong-target tags on true updates. Full tables are in `results.md`; the tuning history is in `dev-rounds.md`.
+
+## Run 2: what changed before any system ran
+
+- **Generator audit.** Every negative template (E, F; G reuses E) was checked for a key collision with any attribute an entity can hold. Two changed: "{E} keeps backups in {new}." (updates `Backup region`, the run-1 bug) became "{E} hosts its status page in {new}."; "{E} exports a nightly dump to {new}." (arguably a `Replica database`) became "{E} wrote a {new} connector for a customer." Both replacements still name a value of the asked kind next to the entity, about an attribute no entity has, so the case stays as hard. No case was deleted.
+- **Collision guard.** `generate.py` now refuses to generate if a must-not-supersede note touches an existing fact key of its entity other than the asked one, or a positive note touches a same-kind sibling. "Touches" = the note contains every cue word of the key (the key tokenised as plainmem tokenises keys, minus generic kind words such as region or provider) and its value has that key's kind. It runs at template level (`audit_templates`, any entity) and on the generated cases (`check_cases`). With the old template it fails on exactly the run-1 note. Tests: `tests/test_supersession_generate.py`.
+- **Fresh split.** Seed 4127, case ids t0001..t0300 (run 1 used s0001..s0300, so no id can repeat), 30% held out per category, frozen in `split_v2.json` and committed before any model call. 90 held-out cases, 38 of them negatives (E 14, F 13, G 11), 31 with reserved wording.
+- Run-1 cache, ledger and results are in `run1/`. Run 2 starts from an empty `llm_cache.json`.
+
+## Run 2 pre-registered success criterion
+
+Written and committed with `split_v2.json`, before any run-2 model call.
+
+- **Success for an arm** = both of:
+  1. implicit-supersession stale rate (categories B, C, D, `implicit_stale`) at most **half** of arm A's on held-out. Arm A is expected at 1.0, so the bar is <= 0.50.
+  2. false-supersession rate **<= 1%** of held-out unrelated + ambiguous notes (E, F, G). With 38 such notes this means **zero** false tags.
+- Reported for every arm, not part of the bar: precision, recall, wrong-target tags, the abstention 2x2, stale rate on A-D, the 36 `bench/temporal` held-out adversarial cases before and after.
+- Missing either part is a fail for that arm, not a partial success.
+- Default recommendation rule, fixed now: classifier-only (C) is recommended as the default only if C meets the bar. Among arms that meet it, prefer fewer wrong tags (false + wrong-target), then lower implicit stale. If no arm meets it, no consolidation arm is recommended as a default.
+- Tuning (prompt wording, validator, candidate retrieval) uses the dev split only, logged in `dev-rounds-v2.md`. Held-out is run once, after the configuration is frozen. Total model calls, dev included, are capped at about 1,500 and reported.

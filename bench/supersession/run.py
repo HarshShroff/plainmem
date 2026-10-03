@@ -62,7 +62,8 @@ from plainmem.consolidate_llm import LLMClassifier, claude_cli  # noqa: E402
 from plainmem.consolidate_llm import build_prompt as classifier_prompt  # noqa: E402
 from plainmem.text import tokenize  # noqa: E402
 
-SEED = 2026
+SEED = 4127  # run 2; run 1 (seed 2026) is archived in run1/
+PREFIX = "t"
 N_CASES = 300
 ARMS = ("baseline", "agent", "classifier", "agent+classifier")
 LABELS = {"baseline": "A current plainmem", "agent": "B agent-declared (simulated)",
@@ -289,8 +290,8 @@ def by(rows: list[dict], field: str) -> dict[str, dict]:
 
 
 def run(split: str, arms: list[str], cache_only: bool, workdir: Path) -> dict:
-    files, cases, noise = generate(N_CASES, SEED)
-    frozen = json.loads((HERE / "split.json").read_text())
+    files, cases, noise = generate(N_CASES, SEED, PREFIX)
+    frozen = json.loads((HERE / "split_v2.json").read_text())
     assert frozen["cases_sha256"] == cases_sha(cases), "generated cases differ from the frozen split"
     assert sorted(c.id for c in cases if c.split == "heldout") == frozen["heldout"]
     scoped = [c for c in cases if c.split == split]
