@@ -233,20 +233,39 @@ The question this benchmark is built to answer, and able to answer "no": do expl
 
 `bench/temporal/generate.py` builds a deterministic corpus (seed 2026) of project notes plus quarterly logs, with ten kinds of question: a single update, several sequential updates, two contradictory values on the same day (one `{explicit, user}`, one `{inferred, agent}`), look-alike distractor facts, facts that never change, "right now" questions, "what was it on date T" questions (a third of them back-dated with `from`), provenance questions, adversarial updates whose wording shares nothing with the key ("Priya took over from Sam on Orion"), and paraphrased questions. A 30% held-out split, stratified by category, was frozen in `bench/temporal/split.json` before any system ran. Two fixes were made while looking only at dev failures (fact picking by key overlap, and not matching the as-of date as words); the held-out set was run once after that. The full output is in [bench/temporal/results.md](bench/temporal/results.md), and the analysis and caveats are in [bench/temporal/README.md](bench/temporal/README.md).
 
+This is a purpose-built benchmark, not a standard public memory benchmark. Its goal is to isolate temporal supersession and provenance, not to claim broad memory-system superiority. The generator and the frozen split are in the repo so anyone can rerun or extend it.
+
+It scores four separate things, because a system can do well on one and badly on another:
+
+- **Retrieval** (recall@1, recall@5): did the right line come back at all?
+- **Current-state answering**: is the answer what is true now? The stale-answer rate is how often a superseded value was given as current.
+- **Historical answering** (as-of): is the answer what was true on a given date?
+- **Provenance**: does the answer cite the right line and source?
+
 Held-out split, 1,000-case corpus (300 held-out questions, 1,203 files, 9,013 chunks):
 
 | system | recall@1 | recall@5 | current-state acc | stale-answer rate | as-of acc | provenance acc | median ms |
 |---|---|---|---|---|---|---|---|
-| bm25-raw | 0.123 | 0.847 | 0.105 | 0.825 | 0.310 | 0.000 | 0.33 |
-| bm25 (stemmed) | 0.123 | 0.853 | 0.105 | 0.825 | 0.310 | 0.000 | 0.36 |
-| plainmem search (top hit) | 0.690 | 0.833 | 0.759 | 0.158 | 0.095 | 1.000 | 6.52 |
-| plainmem explain | 0.793 | 0.900 | 0.763 | 0.158 | 1.000 | 1.000 | 7.58 |
+| bm25-raw | 0.123 | 0.847 | 0.105 | 0.825 | 0.310 | 0.000 | 0.31 |
+| bm25 (stemmed) | 0.123 | 0.853 | 0.105 | 0.825 | 0.310 | 0.000 | 0.32 |
+| plainmem search (top hit) | 0.690 | 0.833 | 0.759 | 0.158 | 0.095 | 1.000 | 5.10 |
+| plainmem explain | 0.793 | 0.900 | 0.763 | 0.158 | 1.000 | 1.000 | 6.57 |
+| plainmem explain + embeddings (hybrid) | 0.780 | 0.883 | 0.820 | 0.158 | 0.929 | 1.000 | 93.68 |
 
-What worked. Lifecycle semantics did nearly all of the work on stale answers: 0.825 to 0.158. The one retrieval improvement measured here, stemming, moved recall@5 by 0.006 and the stale rate by nothing. At n=1,000, every held-out single-update, multi-update, "right now", distractor, stable, contradictory, as-of and provenance question was answered correctly by `explain` (at n=100 and n=500 one as-of and one distractor question failed; see the bench notes). The contradictory, provenance and back-dated as-of cases are only answerable with the tags, so those wins exist by construction.
+Retrieval tells an agent what it can find. Temporal state tells it what is still true. The finding: in this benchmark, better retrieval did not reduce stale answers, and explicit temporal state did. BM25 and plainmem retrieve the right line about equally often (recall@5 0.853 against 0.900), but the stale-answer rate falls from 0.825 to 0.158 once supersession is tracked. Stemming moved the stale rate by nothing. Adding embeddings didn't move it either:
 
-What did not. Every remaining stale answer is an adversarial update (36 of 36 held-out adversarial questions): with no shared key words, plainmem can't link the update to the fact, and in 24 of the 36 the update wasn't even retrieved. Paraphrased questions scored 0 of 18, 6 of them retrieval misses. The `supersedes` tag fixes the adversarial case when someone writes it, but nothing infers it. Answers are about 20 times slower than bare BM25 (7.6 ms against 0.36 ms median), which doesn't matter at this size.
+| | lexical | + embeddings |
+|---|---|---|
+| current-state acc | 0.763 | 0.820 |
+| stale-answer rate | 0.158 | 0.158 |
+| as-of acc | 1.000 | 0.929 |
+| median latency | 7 ms | 94 ms |
 
-The pre-agreed rule for what to build next: if recall@5 is below 0.9, build hybrid retrieval; otherwise fix lifecycle reasoning. Applied on dev (decisions are tuning, so they use dev), recall@5 was 0.870, so hybrid retrieval was built (`--mode hybrid`). Held-out recall@5 came out at exactly 0.900. The hybrid row was run afterwards with `sentence-transformers` installed (all-MiniLM-L6-v2). Held-out at n=1,000 it left the stale rate at 0.158, the same as lexical plainmem, so the claim holds against embeddings too. It fixed paraphrased questions (0 of 18 to 14 of 18 correct) and raised current-state accuracy from 0.763 to 0.820, but it lowered as-of accuracy (1.000 to 0.929) and takes about 94 ms per answer instead of 7 ms. Reproduce: `pip install -e ".[embeddings]" && python bench/temporal/run.py`.
+Embeddings do help. They fixed most paraphrased questions (0 of 18 correct to 14 of 18), which is where the current-state gain comes from. They cost as-of accuracy, because the embedding candidates push some dated lines out of the top five, and they are about 13 times slower. The accurate summary is that embeddings improved retrieval but did not reduce the stale-answer rate here. This is one embedding model (all-MiniLM-L6-v2) with untuned fusion, so treat it as one data point.
+
+Where it breaks: every remaining stale answer, 36 of 36, is an adversarial update, one worded with nothing in common with the fact it replaces ("Priya took over from Sam on Orion" against "Orion project lead: Sam"). Neither lexical nor embedding retrieval links the two: in 24 of the 36 the update isn't retrieved at all, with or without embeddings, and in the other 12 it is retrieved but nothing ties it to the old fact. An explicit `supersedes` tag fixes it when someone writes one; nothing infers it from prose. That boundary, explicit supersession works and implicit change doesn't yet, is the open problem.
+
+Some wins exist by construction: contradictory questions are only solvable through the authority tag, provenance questions reward returning a citation, and back-dated as-of questions need the `from` tag. BM25 never had a chance on those, so they show the tags work as specified, not that they are a good idea. How the next step was chosen (the pre-agreed recall@5 rule, applied on dev) and the per-category tables are in [bench/temporal/README.md](bench/temporal/README.md) and [bench/temporal/results.md](bench/temporal/results.md). Reproduce, including the hybrid row: `pip install -e ".[embeddings]" && python bench/temporal/run.py`.
 
 ## Retrieval benchmark
 
