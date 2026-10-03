@@ -261,6 +261,8 @@ class Engine:
         if mode not in ("full", "bm25"):
             raise ValueError(f"unknown mode {mode!r}")
         now = as_of or now or date.today()
+        if as_of is not None:  # the date is a filter, not something to match words against
+            query = query.replace(as_of.isoformat(), " ")
         q = tokenize(query, stem=self.stem)
         raw = self.bm25.scores(q)
         if as_of is not None:

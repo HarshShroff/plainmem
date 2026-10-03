@@ -40,7 +40,9 @@ def _parser() -> argparse.ArgumentParser:
     s = sub.add_parser("search", help="ranked search with citations and freshness")
     s.add_argument("query", nargs="+")
     s.add_argument("-k", type=int, default=5)
-    s.add_argument("--mode", choices=["full", "bm25"], default="full")
+    s.add_argument(
+        "--mode", choices=["full", "bm25", "hybrid"], default="full", help="hybrid needs plainmem[embeddings]"
+    )
     s.add_argument("--as-of", type=_date, default=None, help="search the notes as they stood on this date")
     s.add_argument("--json", action="store_true", help="machine readable output with searched_at and no_match")
     s.add_argument("--no-refresh", action="store_true", help="search the saved index without re-scanning files")
@@ -48,6 +50,7 @@ def _parser() -> argparse.ArgumentParser:
     s = sub.add_parser("explain", help="current value, superseded values and timeline for one fact")
     s.add_argument("question", nargs="+")
     s.add_argument("--as-of", type=_date, default=None, help="the value in effect on this date")
+    s.add_argument("--mode", choices=["full", "hybrid"], default="full", help="hybrid needs plainmem[embeddings]")
     s.add_argument("--json", action="store_true")
     s.add_argument("--no-refresh", action="store_true", help="use the saved index without re-scanning files")
 
@@ -203,7 +206,9 @@ def main(argv: list[str] | None = None) -> int:
                 _print_hits(resp)
             return EXIT_NO_MATCH if resp["no_match"] else EXIT_OK
         if args.cmd == "explain":
-            r = mem.explain(" ".join(args.question), now=args.now, refresh=not args.no_refresh, as_of=args.as_of)
+            r = mem.explain(
+                " ".join(args.question), now=args.now, refresh=not args.no_refresh, as_of=args.as_of, mode=args.mode
+            )
             if args.json:
                 print(json.dumps(r, ensure_ascii=False, indent=2))
             else:
@@ -260,6 +265,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"plainmem: {e}", file=sys.stderr)
         return EXIT_USAGE
     except LockTimeout as e:
+        print(f"plainmem: {e}", file=sys.stderr)
+        return EXIT_USAGE
+    except ImportError as e:  # --mode hybrid without the embeddings extra
         print(f"plainmem: {e}", file=sys.stderr)
         return EXIT_USAGE
     return EXIT_USAGE

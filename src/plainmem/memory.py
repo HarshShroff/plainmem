@@ -108,7 +108,12 @@ class Memory:
         index_dir: str | Path | None = None,
         cfg: FreshnessConfig | None = None,
         rank: RankConfig | None = None,
+        embed: Any = None,
     ) -> None:
+        """``embed`` is an optional ``list[str] -> vectors`` function for mode="hybrid"
+        (default: sentence-transformers, from the ``embeddings`` extra)."""
+        self.embed = embed
+        self._hybrid: Any = None
         self.root = Path(root).expanduser().resolve()
         self.index_file = idx.index_path(self.root, Path(index_dir) if index_dir else None)
         self.cfg = cfg or FreshnessConfig()
@@ -141,6 +146,7 @@ class Memory:
 
     def _set(self, data: idx.IndexData) -> None:
         self._data = data
+        self._hybrid = None
         self._engine = Engine(data.ordered_docs(), self.cfg, self.rank, tokens=data.ordered_tokens())
 
     def ensure(self, refresh: bool = True) -> Engine:
@@ -174,7 +180,10 @@ class Memory:
         """Ranked hits. ``as_of`` searches the notes as they stood on that date (see ``Engine.search``)."""
         eng = self.ensure(refresh=refresh)
         assert self._data is not None
-        hits = eng.search(query, k=k, now=now, mode=mode, as_of=as_of)
+        if mode == "hybrid":
+            hits = self.hybrid().search(query, k=k, now=now, as_of=as_of)
+        else:
+            hits = eng.search(query, k=k, now=now, mode=mode, as_of=as_of)
         return SearchResponse(
             query=query,
             searched_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -186,8 +195,22 @@ class Memory:
             as_of=as_of,
         )
 
+    def hybrid(self) -> Any:
+        """The BM25 + embeddings retriever (``hybrid.py``), built on first use. Needs the embeddings extra."""
+        from .hybrid import Hybrid
+
+        eng = self.ensure(refresh=False)
+        if self._hybrid is None or self._hybrid.engine is not eng:
+            self._hybrid = Hybrid(eng, self.embed)
+        return self._hybrid
+
     def explain(
-        self, question: str, now: date | None = None, refresh: bool = True, as_of: date | None = None
+        self,
+        question: str,
+        now: date | None = None,
+        refresh: bool = True,
+        as_of: date | None = None,
+        mode: str = "full",
     ) -> dict[str, Any]:
         """Current answer, superseded values, timeline and freshness for the fact a question is about.
 
@@ -202,7 +225,8 @@ class Memory:
             "files_indexed": len(self._data.docs),
             "chunks_indexed": len(eng.chunks),
         }
-        return history.explain(eng, question, now or date.today(), searched, as_of=as_of)
+        search = self.hybrid().searcher() if mode == "hybrid" else None
+        return history.explain(eng, question, now or date.today(), searched, as_of=as_of, search=search)
 
     def diff(self, since: date, until: date | None = None, refresh: bool = True) -> dict[str, Any]:
         """Facts added or updated between two dates (inclusive), by entry date."""

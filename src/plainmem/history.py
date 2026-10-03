@@ -12,6 +12,7 @@ a file was saved, not when a fact became true, so an answer resting on one is re
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import date
 from typing import Any
@@ -80,15 +81,21 @@ def _entry_dict(e: Entry) -> dict[str, Any]:
 
 
 def _pick_fact(eng: Engine, hits: list[Hit], qset: set[str]) -> tuple[str, int] | None:
-    """The first hit that states a fact whose key shares a word with the question."""
+    """The fact whose key shares the most words with the question; ties go to the higher-ranked hit.
+
+    Taking the first hit with any shared word picked the wrong fact when that word was only the
+    entity name ("Orion release date" for "who is the Orion lead") or only the attribute (another
+    project's "project lead").
+    """
     pos = {id(c): i for i, c in enumerate(eng.chunks)}
-    for h in hits:
+    best: tuple[int, int, str, int] | None = None  # (overlap, -rank, key, chunk index)
+    for rank, h in enumerate(hits):
         i = pos[id(h.chunk)]
-        scored = [(len(set(a.key.split()) & qset), a.key) for a in eng.assertions[i]]
-        scored = [s for s in scored if s[0] > 0]
-        if scored:
-            return max(scored, key=lambda s: (s[0], -len(s[1])))[1], i
-    return None
+        for a in eng.assertions[i]:
+            n = len(set(a.key.split()) & qset)
+            if n and (best is None or (n, -rank, -len(a.key)) > (best[0], best[1], -len(best[2]))):
+                best = (n, -rank, a.key, i)
+    return (best[2], best[3]) if best else None
 
 
 def timeline(items: list[Entry]) -> list[dict[str, Any]]:
@@ -132,15 +139,22 @@ def value_at(eng: Engine, key: str, items: list[Entry], when: date) -> tuple[Ent
 
 
 def explain(
-    eng: Engine, question: str, now: date, searched: dict[str, Any], as_of: date | None = None
+    eng: Engine,
+    question: str,
+    now: date,
+    searched: dict[str, Any],
+    as_of: date | None = None,
+    search: Callable[..., list[Hit]] | None = None,
 ) -> dict[str, Any]:
+    """``search`` replaces ``eng.search`` for finding candidate facts (e.g. ``Hybrid.searcher()``)."""
     res: dict[str, Any] = {"question": question, **searched, "as_of": _iso(as_of), "fact": None}
-    hits = eng.search(question, k=10, now=now, as_of=as_of)
+    hits = (search or eng.search)(question, k=10, now=now, as_of=as_of)
     res["no_match"] = not hits
     res["no_fact"] = False
     if not hits:
         return res
-    picked = _pick_fact(eng, hits, set(tokenize(question, stem=eng.stem)))
+    words = question.replace(as_of.isoformat(), " ") if as_of else question
+    picked = _pick_fact(eng, hits, set(tokenize(words, stem=eng.stem)))
     if picked is None:
         res["no_fact"] = True
         res["nearest"] = [h.chunk.cite for h in hits[:3]]
