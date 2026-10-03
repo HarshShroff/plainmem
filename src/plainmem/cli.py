@@ -41,11 +41,13 @@ def _parser() -> argparse.ArgumentParser:
     s.add_argument("query", nargs="+")
     s.add_argument("-k", type=int, default=5)
     s.add_argument("--mode", choices=["full", "bm25"], default="full")
+    s.add_argument("--as-of", type=_date, default=None, help="search the notes as they stood on this date")
     s.add_argument("--json", action="store_true", help="machine readable output with searched_at and no_match")
     s.add_argument("--no-refresh", action="store_true", help="search the saved index without re-scanning files")
 
     s = sub.add_parser("explain", help="current value, superseded values and timeline for one fact")
     s.add_argument("question", nargs="+")
+    s.add_argument("--as-of", type=_date, default=None, help="the value in effect on this date")
     s.add_argument("--json", action="store_true")
     s.add_argument("--no-refresh", action="store_true", help="use the saved index without re-scanning files")
 
@@ -75,10 +77,19 @@ def _parser() -> argparse.ArgumentParser:
     return p
 
 
+def _prov(d: dict) -> str:
+    """'explicit, user, from 2026-08-14' style summary of a result's metadata, or ''."""
+    parts = [d.get("authority"), d.get("source")]
+    parts += [f"from {d['valid_from']}" if d.get("valid_from") else None]
+    parts += [f"until {d['valid_until']}" if d.get("valid_until") else None]
+    return ", ".join(p for p in parts if p)
+
+
 def _print_hits(resp_dict: dict) -> None:
     print(
         f"searched {resp_dict['files_indexed']} files / {resp_dict['chunks_indexed']} chunks "
         f"(index {resp_dict['index_version']}, {resp_dict['searched_at']})"
+        + (f", as of {resp_dict['as_of']}" if resp_dict.get("as_of") else "")
     )
     if resp_dict["no_match"]:
         print("no match")
@@ -92,6 +103,8 @@ def _print_hits(resp_dict: dict) -> None:
             flag += " must re-verify before asserting"
         if r["superseded_by"]:
             flag += f" superseded by {', '.join(r['superseded_by'])}"
+        if _prov(r):
+            flag += f"  {{{_prov(r)}}}"
         print(f"\n{r['cite']}{flag}")
         if r["heading_path"]:
             print("  " + " > ".join(r["heading_path"]))
@@ -112,11 +125,31 @@ def _print_explain(r: dict) -> None:
         print(f"no fact found: nothing states a value for this question. nearest: {', '.join(r['nearest'])}")
         return
     c = f["current"]
-    print(f"\n{f['label']}")
-    tag = "" if f["resolved"] else "  (UNRESOLVED: same date as a different value)"
-    print(f"  current     {c['value']}  ({c['cite']}, {c['as_of'] or 'undated'}){tag}")
+    print(f"\n{f['label']}" + (f"  (as of {r['as_of']})" if r.get("as_of") else ""))
+    if c is None:
+        why = "nothing recorded by then" if f["status"] == "none" else "only undated entries; cannot tell"
+        print(f"  {f['status'].upper()}  {why}")
+        return
+
+    def where(e: dict) -> str:
+        p = _prov(e)
+        return f"({e['cite']}, {e['as_of'] or 'undated'}" + (f"; {p})" if p else ")")
+
+    tag = ""
+    if not f["resolved"]:
+        tag = (
+            "  (UNRESOLVED: an inferred value contradicts an explicit one)"
+            if f.get("unresolved_reason") == "inferred-over-explicit"
+            else "  (UNRESOLVED: same date as a different value)"
+        )
+    if f.get("status") not in (None, "known"):
+        tag += f"  ({f['status'].upper()})"
+    label = "value then  " if r.get("as_of") else "current     "
+    print(f"  {label}{c['value']}  {where(c)}{tag}")
     for s in f["superseded"]:
-        print(f"  superseded  {s['value']}  ({s['cite']}, {s['as_of'] or 'undated'})")
+        print(f"  superseded  {s['value']}  {where(s)}")
+    for s in f.get("changed_after", []):
+        print(f"  later       {s['value']}  {where(s)}")
     fr = f["freshness"]
     age = f", {fr['age_days']}d old" if fr["age_days"] is not None else ""
     print(f"  freshness   {fr['status']}{age}" + ("  must re-verify before asserting" if fr["must_reverify"] else ""))
@@ -129,12 +162,14 @@ def _print_explain(r: dict) -> None:
 def _print_diff(r: dict) -> None:
     print(f"changes since {r['since']}" + (f" until {r['until']}" if r["until"] else ""))
     for row in r["added"]:
-        print(f"  ADDED    {row['label']}: {row['value']}  ({row['cite']}, {row['as_of']})")
+        p = _prov(row)
+        print(f"  ADDED    {row['label']}: {row['value']}  ({row['cite']}, {row['as_of']}" + (f"; {p})" if p else ")"))
     for row in r["updated"]:
         p = row["previous"]
+        prov = _prov(row)
         print(
             f"  UPDATED  {row['label']}: {p['value']} ({p['cite']}, {p['as_of']}) "
-            f"-> {row['value']} ({row['cite']}, {row['as_of']})"
+            f"-> {row['value']} ({row['cite']}, {row['as_of']}" + (f"; {prov})" if prov else ")")
         )
     if not r["added"] and not r["updated"]:
         print("  no changes")
@@ -155,7 +190,12 @@ def main(argv: list[str] | None = None) -> int:
             return EXIT_OK
         if args.cmd == "search":
             resp = mem.search(
-                " ".join(args.query), k=args.k, now=args.now, mode=args.mode, refresh=not args.no_refresh
+                " ".join(args.query),
+                k=args.k,
+                now=args.now,
+                mode=args.mode,
+                refresh=not args.no_refresh,
+                as_of=args.as_of,
             ).to_dict()
             if args.json:
                 print(json.dumps(resp, ensure_ascii=False, indent=2))
@@ -163,7 +203,7 @@ def main(argv: list[str] | None = None) -> int:
                 _print_hits(resp)
             return EXIT_NO_MATCH if resp["no_match"] else EXIT_OK
         if args.cmd == "explain":
-            r = mem.explain(" ".join(args.question), now=args.now, refresh=not args.no_refresh)
+            r = mem.explain(" ".join(args.question), now=args.now, refresh=not args.no_refresh, as_of=args.as_of)
             if args.json:
                 print(json.dumps(r, ensure_ascii=False, indent=2))
             else:

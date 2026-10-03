@@ -11,6 +11,9 @@ Inline freshness tags, anywhere in a chunk:
 
 * ``[verified: 2026-05-01]`` the fact was checked on that date
 * ``[volatile]`` the fact changes over time (price, status, hours, availability)
+
+A fact line may also end in a metadata tag such as ``{explicit, user, from 2026-08-14}``;
+see ``meta.py``. Tags are stripped from the clean text like the two above.
 """
 
 from __future__ import annotations
@@ -18,6 +21,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 from datetime import date
+
+from .meta import strip_tags
 
 FRONT_MATTER_KEYS = ("verified", "updated", "date", "volatile", "entity", "title")
 
@@ -66,6 +71,12 @@ class Chunk:
 
     def clean_text(self) -> str:
         """Text with inline tags removed, for display and fact extraction."""
+        t = _VERIFIED_RE.sub("", self.text)
+        t = _VOLATILE_RE.sub("", t)
+        return re.sub(r"[ \t]+", " ", strip_tags(t)).strip()
+
+    def tagged_text(self) -> str:
+        """Like ``clean_text`` but keeping metadata tags, for per-line fact extraction."""
         t = _VERIFIED_RE.sub("", self.text)
         t = _VOLATILE_RE.sub("", t)
         return re.sub(r"[ \t]+", " ", t).strip()
