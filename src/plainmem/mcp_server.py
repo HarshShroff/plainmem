@@ -41,20 +41,37 @@ def build_server(mem: Memory) -> Any:
         except ImportError as e:  # pragma: no cover - depends on optional install
             raise SystemExit("plainmem-mcp needs the MCP SDK: pip install 'plainmem[mcp]'") from e
 
+    try:
+        from mcp.types import ToolAnnotations
+    except ImportError:  # pragma: no cover - depends on optional install
+        ToolAnnotations = None  # noqa: N806
+
+    def ann(**kw: Any) -> Any:
+        return ToolAnnotations(**kw) if ToolAnnotations else None
+
     server = Server("plainmem")
 
-    @server.tool()
+    @server.tool(
+        title="Search memory",
+        annotations=ann(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False),
+    )
     def search(query: str, k: int = 5) -> dict[str, Any]:
         """Search long-term Markdown memory. Results carry file:line citations and FRESH/AGING/STALE/SUPERSEDED
         status. Check no_match before claiming something is not recorded."""
         return tool_search(mem, query, k)
 
-    @server.tool()
+    @server.tool(
+        title="Add note",
+        annotations=ann(read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=False),
+    )
     def add(text: str) -> dict[str, Any]:
         """Append a dated note to the memory log."""
         return tool_add(mem, text)
 
-    @server.tool()
+    @server.tool(
+        title="List stale facts",
+        annotations=ann(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False),
+    )
     def stale() -> dict[str, Any]:
         """List volatile facts (prices, status, availability) that must be re-verified before asserting."""
         return tool_stale(mem)

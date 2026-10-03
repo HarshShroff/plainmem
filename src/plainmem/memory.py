@@ -92,7 +92,7 @@ class Memory:
         cfg: FreshnessConfig | None = None,
         rank: RankConfig | None = None,
     ) -> None:
-        self.root = Path(root).resolve()
+        self.root = Path(root).expanduser().resolve()
         self.index_file = idx.index_path(self.root, Path(index_dir) if index_dir else None)
         self.cfg = cfg or FreshnessConfig()
         self.rank = rank or RankConfig()

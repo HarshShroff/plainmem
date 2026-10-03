@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "plainmem": {
+      "command": "uvx",
+      "args": ["--from", "plainmem[mcp]==0.1.1", "plainmem-mcp", "--root", "${user_config.notes_dir}"]
+    }
+  }
+}

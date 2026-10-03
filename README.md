@@ -186,3 +186,7 @@ streamlit run demo/app.py
 ```
 
 MIT licensed. Written by Harsh Shroff.
+
+## Privacy
+
+plainmem runs locally. It reads the Markdown files under the folder you point it at, writes its index cache to `.plainmem/` inside that folder, and appends to `log.md` there when you call `add`. It makes no network calls and collects no telemetry. The Claude plugin installs it from PyPI with `uvx` the first time the MCP server starts; that download is the only network access.
