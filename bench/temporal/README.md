@@ -36,7 +36,7 @@ The held-out split is 30% of each category, chosen with `random.Random(seed + 1)
 - `bm25-raw` and `bm25`: BM25 without and with stemming. The answer is the top chunk's text.
 - `plainmem-search`: plainmem's full ranker (decay, superseded chunks demoted, the superseding chunk lifted). The answer is the top chunk. Same index as below.
 - `plainmem`: `explain`, which picks a fact and resolves it through the supersession chain, the tags and `as_of`. The answer is the reported value, citation and source.
-- `plainmem+hybrid`: `explain` with BM25 + all-MiniLM-L6-v2 candidates fused by RRF. Skipped in the committed run (see below).
+- `plainmem+hybrid`: `explain` with BM25 + all-MiniLM-L6-v2 candidates fused by RRF. Needs `pip install -e ".[embeddings]"`; included in the committed run.
 
 A chunk-text answer counts as correct if it contains the expected value. That is generous to the baselines, since a chunk that mentions both the old and the new value counts as right. "Stale" means a current-state question was answered with a superseded value and not the right one. Recall@k asks whether the line that states the right value is in the top k search results (plainmem's search is as-of-aware for as-of questions). Latency is the time to answer one question with the index already built.
 
@@ -63,7 +63,7 @@ At n=100 the held-out set is 30 questions, of which 4 are as-of questions, so th
 
 The stale-answer rate fell from 0.825 (BM25) to 0.158 (plainmem) at n=1,000. Stemming, the one retrieval improvement measured here, changed recall@5 by 0.006 and the stale rate by nothing. Recall@5 for BM25 and plainmem is about the same (0.853 against 0.900), so the gap in stale answers isn't coming from finding more of the right lines. It comes from knowing which of the lines found is current. On this data the claim holds against lexical retrieval.
 
-It has not been tested against semantic retrieval. The hybrid row needs `sentence-transformers`, which is not installed in the environment this was run in, and no model was downloaded for this. Until that row exists, "more than better retrieval" means "more than better lexical retrieval".
+It was also run against semantic retrieval. `plainmem+hybrid` (BM25 plus all-MiniLM-L6-v2 fused by reciprocal rank) leaves the stale rate at 0.158, the same as lexical plainmem, so adding embeddings did not remove stale answers. What it did change: paraphrased questions went from 0 of 18 to 14 of 18 correct (recall@5 0.667 to 1.000), which lifted overall current-state accuracy from 0.763 to 0.820. What it cost: as-of accuracy fell from 1.000 to 0.929 (as-of recall@5 1.000 to 0.786, the embedding candidates pushed out the dated lines), and the median answer takes about 94 ms instead of 7 ms. Adversarial updates are untouched: still 36 of 36 stale, because an update that shares no key words with its fact is not linked by embeddings either. The hybrid row uses one embedding model, one fusion constant and no tuning beyond dev, so treat it as one data point, not a verdict on embeddings.
 
 The search-only row shows where the gain sits. Ranking with supersession (`plainmem-search`) already brings the stale rate down to 0.158, the same as `explain`. But for as-of questions, ranking for the present is worse than plain BM25 (0.095 against 0.310). Only the explicit as-of path gets them right (1.000).
 
