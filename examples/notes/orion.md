@@ -7,6 +7,7 @@ verified: 2025-11-02
 
 - Project lead: Dana Whit
 - Budget: $40,000
+- Deploy region: us-east-1
 
 ## Notes
 

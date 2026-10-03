@@ -11,6 +11,7 @@ from . import history
 from . import index as idx
 from . import log as logmod
 from .engine import Conflict, Engine, Hit, RankConfig
+from .facts import display_value
 from .freshness import FreshnessConfig
 from .markdown import Document, parse
 
@@ -24,6 +25,7 @@ class SearchResponse:
     chunks_indexed: int
     mode: str
     hits: list[Hit]
+    as_of: date | None = None
 
     @property
     def no_match(self) -> bool:
@@ -37,13 +39,20 @@ class SearchResponse:
             "files_indexed": self.files_indexed,
             "chunks_indexed": self.chunks_indexed,
             "mode": self.mode,
+            "as_of": self.as_of.isoformat() if self.as_of else None,
             "no_match": self.no_match,
             "results": [hit_to_dict(h) for h in self.hits],
         }
 
 
+def fact_to_dict(a: Any) -> dict[str, Any]:
+    return {"label": a.label, "value": display_value(a.raw_value), **a.meta.to_dict()}
+
+
 def hit_to_dict(h: Hit) -> dict[str, Any]:
     f = h.freshness
+    facts = [fact_to_dict(a) for a in h.facts]
+    tagged = next((x for x in facts if x["authority"] or x["source"] or x["valid_from"] or x["valid_until"]), None)
     return {
         "cite": h.chunk.cite,
         "path": h.chunk.path,
@@ -61,6 +70,12 @@ def hit_to_dict(h: Hit) -> dict[str, Any]:
         "superseded_by": [c.cite for c in h.superseded_by],
         "supersedes": [c.cite for c in h.supersedes],
         "keys": h.keys,
+        # provenance of the first tagged fact in the chunk (most chunks hold one line); every fact is in "facts"
+        "authority": tagged["authority"] if tagged else None,
+        "source": tagged["source"] if tagged else None,
+        "valid_from": tagged["valid_from"] if tagged else None,
+        "valid_until": tagged["valid_until"] if tagged else None,
+        "facts": facts,
     }
 
 
@@ -73,6 +88,7 @@ def conflict_to_dict(engine: Engine, c: Conflict) -> dict[str, Any]:
         "key": c.key,
         "label": c.label,
         "resolved": c.resolved,
+        "unresolved_reason": c.reason or None,
         "current": entry(c.winner),
         "superseded": [entry(i) for i in c.losers],
     }
@@ -92,7 +108,12 @@ class Memory:
         index_dir: str | Path | None = None,
         cfg: FreshnessConfig | None = None,
         rank: RankConfig | None = None,
+        embed: Any = None,
     ) -> None:
+        """``embed`` is an optional ``list[str] -> vectors`` function for mode="hybrid"
+        (default: sentence-transformers, from the ``embeddings`` extra)."""
+        self.embed = embed
+        self._hybrid: Any = None
         self.root = Path(root).expanduser().resolve()
         self.index_file = idx.index_path(self.root, Path(index_dir) if index_dir else None)
         self.cfg = cfg or FreshnessConfig()
@@ -125,6 +146,7 @@ class Memory:
 
     def _set(self, data: idx.IndexData) -> None:
         self._data = data
+        self._hybrid = None
         self._engine = Engine(data.ordered_docs(), self.cfg, self.rank, tokens=data.ordered_tokens())
 
     def ensure(self, refresh: bool = True) -> Engine:
@@ -147,11 +169,21 @@ class Memory:
     # --- queries ---------------------------------------------------------
 
     def search(
-        self, query: str, k: int = 5, now: date | None = None, mode: str = "full", refresh: bool = True
+        self,
+        query: str,
+        k: int = 5,
+        now: date | None = None,
+        mode: str = "full",
+        refresh: bool = True,
+        as_of: date | None = None,
     ) -> SearchResponse:
+        """Ranked hits. ``as_of`` searches the notes as they stood on that date (see ``Engine.search``)."""
         eng = self.ensure(refresh=refresh)
         assert self._data is not None
-        hits = eng.search(query, k=k, now=now, mode=mode)
+        if mode == "hybrid":
+            hits = self.hybrid().search(query, k=k, now=now, as_of=as_of)
+        else:
+            hits = eng.search(query, k=k, now=now, mode=mode, as_of=as_of)
         return SearchResponse(
             query=query,
             searched_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -160,10 +192,31 @@ class Memory:
             chunks_indexed=len(eng.chunks),
             mode=mode,
             hits=hits,
+            as_of=as_of,
         )
 
-    def explain(self, question: str, now: date | None = None, refresh: bool = True) -> dict[str, Any]:
-        """Current answer, superseded values, timeline and freshness for the fact a question is about."""
+    def hybrid(self) -> Any:
+        """The BM25 + embeddings retriever (``hybrid.py``), built on first use. Needs the embeddings extra."""
+        from .hybrid import Hybrid
+
+        eng = self.ensure(refresh=False)
+        if self._hybrid is None or self._hybrid.engine is not eng:
+            self._hybrid = Hybrid(eng, self.embed)
+        return self._hybrid
+
+    def explain(
+        self,
+        question: str,
+        now: date | None = None,
+        refresh: bool = True,
+        as_of: date | None = None,
+        mode: str = "full",
+    ) -> dict[str, Any]:
+        """Current answer, superseded values, timeline and freshness for the fact a question is about.
+
+        With ``as_of``, the answer is the value in effect on that date, with a ``status`` of
+        known / uncertain / expired / none / unknown instead of a guess.
+        """
         eng = self.ensure(refresh=refresh)
         assert self._data is not None
         searched = {
@@ -172,7 +225,8 @@ class Memory:
             "files_indexed": len(self._data.docs),
             "chunks_indexed": len(eng.chunks),
         }
-        return history.explain(eng, question, now or date.today(), searched)
+        search = self.hybrid().searcher() if mode == "hybrid" else None
+        return history.explain(eng, question, now or date.today(), searched, as_of=as_of, search=search)
 
     def diff(self, since: date, until: date | None = None, refresh: bool = True) -> dict[str, Any]:
         """Facts added or updated between two dates (inclusive), by entry date."""

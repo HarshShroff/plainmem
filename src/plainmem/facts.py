@@ -27,14 +27,21 @@ read as a list, not a conflict.
 
 When one key has several values, the chunk with the newest effective date wins
 and the others are marked SUPERSEDED. Equal dates are reported as unresolved.
+
+A line may end in a metadata tag (``meta.py``): ``from`` replaces the line's date as
+the date the value took effect, authority breaks a same-date tie, and
+``supersedes <key>`` files the line under that key even when its wording does not
+match it. The value of such a line is its ``key: value`` value when it has one,
+else the whole line.
 """
 
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .markdown import Chunk, Document, is_date_heading
+from .meta import EMPTY, FactMeta, split_line
 from .text import tokenize, words
 
 _KV_RE = re.compile(r"^\s*(?:[-*+]|\d+[.)])?\s*(?:\*\*)?(?P<key>[^:|`]{2,60}?)(?:\*\*)?\s*:\s+(?P<val>\S.*)$")
@@ -76,6 +83,7 @@ class Assertion:
     label: str  # human readable key as written
     value: str  # normalised value for comparison
     raw_value: str
+    meta: FactMeta = field(default=EMPTY, compare=False)
 
 
 def _norm_value(v: str) -> str:
@@ -115,30 +123,48 @@ def extract(chunk: Chunk, doc: Document) -> list[Assertion]:
     if chunk.kind == "code":
         return []
     out: list[Assertion] = []
-    for line in chunk.clean_text().split("\n"):
-        kv = _KV_RE.match(line)
-        if kv:
-            key = kv.group("key").strip().strip("*_ ")
-            first = words(key)[:1]
-            if len(key.split()) <= 6 and not (first and first[0] in _SKIP_KEYS) and not re.search(r"\d$", key):
-                k = _key(key, doc, chunk)
-                val = _norm_value(kv.group("val"))
-                if k and val:
-                    out.append(Assertion(k[0], k[1], val, kv.group("val").strip()))
-                    continue
-        body = re.sub(r"^\s*(?:[-*+]|\d+[.)])\s+", "", line)
-        for sentence in _SENTENCE_RE.split(body):
-            sentence = re.sub(r"^(?:the|my|our)\s+", "", sentence.strip(), flags=re.IGNORECASE)
-            m = _IS_RE.match(sentence)
-            if not m:
+    for tagged in chunk.tagged_text().split("\n"):
+        line, meta = split_line(tagged)
+        meta = meta or EMPTY
+        found = _line_assertions(line, doc, chunk)
+        if meta.supersedes:
+            k = _key(meta.supersedes, doc, chunk)
+            if k is None:
                 continue
-            subj = m.group("subj")
-            if words(subj)[:1] and words(subj)[0] in _PRONOUNS:
-                continue
-            k = _key(subj, doc, chunk)
-            val = _norm_value(m.group("val"))
+            kv = _KV_RE.match(line)
+            raw = kv.group("val").strip() if kv else re.sub(r"^\s*(?:[-*+]|\d+[.)])\s+", "", line).strip()
+            val = _norm_value(raw)
+            if val:
+                out.append(Assertion(k[0], meta.supersedes, val, raw, meta))
+            continue
+        out.extend(Assertion(a.key, a.label, a.value, a.raw_value, meta) for a in found)
+    return out
+
+
+def _line_assertions(line: str, doc: Document, chunk: Chunk) -> list[Assertion]:
+    out: list[Assertion] = []
+    kv = _KV_RE.match(line)
+    if kv:
+        key = kv.group("key").strip().strip("*_ ")
+        first = words(key)[:1]
+        if len(key.split()) <= 6 and not (first and first[0] in _SKIP_KEYS) and not re.search(r"\d$", key):
+            k = _key(key, doc, chunk)
+            val = _norm_value(kv.group("val"))
             if k and val:
-                out.append(Assertion(k[0], k[1], val, m.group("val").strip()))
+                return [Assertion(k[0], k[1], val, kv.group("val").strip())]
+    body = re.sub(r"^\s*(?:[-*+]|\d+[.)])\s+", "", line)
+    for sentence in _SENTENCE_RE.split(body):
+        sentence = re.sub(r"^(?:the|my|our)\s+", "", sentence.strip(), flags=re.IGNORECASE)
+        m = _IS_RE.match(sentence)
+        if not m:
+            continue
+        subj = m.group("subj")
+        if words(subj)[:1] and words(subj)[0] in _PRONOUNS:
+            continue
+        k = _key(subj, doc, chunk)
+        val = _norm_value(m.group("val"))
+        if k and val:
+            out.append(Assertion(k[0], k[1], val, m.group("val").strip()))
     return out
 
 

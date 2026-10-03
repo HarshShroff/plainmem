@@ -1,4 +1,4 @@
-"""MCP server exposing search, add and stale over stdio.
+"""MCP server exposing search, explain, diff, add and stale over stdio.
 
 The tool bodies are plain functions (``tool_search`` etc.) so they can be tested
 without the SDK. The MCP Python SDK (``pip install mcp``) is imported only when
@@ -12,13 +12,24 @@ from __future__ import annotations
 import argparse
 from typing import Any
 
+from .markdown import parse_date
 from .memory import Memory
 
 
-def tool_search(mem: Memory, query: str, k: int = 5) -> dict[str, Any]:
+def _day(s: str | None) -> Any:
+    """Optional YYYY-MM-DD argument. A malformed date is an error, never silently ignored."""
+    if not s:
+        return None
+    d = parse_date(s)
+    if d is None or len(s.strip()) != 10:
+        raise ValueError(f"expected YYYY-MM-DD, got {s!r}")
+    return d
+
+
+def tool_search(mem: Memory, query: str, k: int = 5, as_of: str | None = None) -> dict[str, Any]:
     """Search notes. Always returns searched_at, index_version and no_match, so a caller can
     show it actually looked before saying there is no record of something."""
-    return mem.search(query, k=max(1, min(int(k), 50))).to_dict()
+    return mem.search(query, k=max(1, min(int(k), 50)), as_of=_day(as_of)).to_dict()
 
 
 def tool_add(mem: Memory, text: str) -> dict[str, Any]:
@@ -32,9 +43,14 @@ def tool_stale(mem: Memory) -> dict[str, Any]:
     return {"count": len(items), "items": items}
 
 
-def tool_explain(mem: Memory, question: str) -> dict[str, Any]:
+def tool_explain(mem: Memory, question: str, as_of: str | None = None) -> dict[str, Any]:
     """Current answer, superseded values with citations, timeline and freshness for one fact."""
-    return mem.explain(question)
+    return mem.explain(question, as_of=_day(as_of))
+
+
+def tool_diff(mem: Memory, since: str, until: str | None = None) -> dict[str, Any]:
+    """Facts added or updated between two dates, inclusive."""
+    return mem.diff(_day(since), _day(until))
 
 
 def build_server(mem: Memory) -> Any:
@@ -60,10 +76,12 @@ def build_server(mem: Memory) -> Any:
         title="Search memory",
         annotations=ann(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False),
     )
-    def search(query: str, k: int = 5) -> dict[str, Any]:
-        """Search long-term Markdown memory. Results carry file:line citations and FRESH/AGING/STALE/SUPERSEDED
-        status. Check no_match before claiming something is not recorded."""
-        return tool_search(mem, query, k)
+    def search(query: str, k: int = 5, as_of: str | None = None) -> dict[str, Any]:
+        """Search long-term Markdown memory. Results carry file:line citations, FRESH/AGING/STALE/SUPERSEDED/EXPIRED
+        status and provenance (authority, source, valid_from, valid_until) when the note is tagged. as_of
+        (YYYY-MM-DD) searches the notes as they stood on that date. Check no_match before claiming something is
+        not recorded."""
+        return tool_search(mem, query, k, as_of)
 
     @server.tool(
         title="Add note",
@@ -85,10 +103,21 @@ def build_server(mem: Memory) -> Any:
         title="Explain a fact",
         annotations=ann(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False),
     )
-    def explain(question: str) -> dict[str, Any]:
-        """Explain how the answer to a question changed: current value, superseded values, timeline and
-        freshness, each with file:line citations. Check no_match and no_fact before claiming nothing is recorded."""
-        return tool_explain(mem, question)
+    def explain(question: str, as_of: str | None = None) -> dict[str, Any]:
+        """Explain how the answer to a question changed: current value, superseded values, timeline,
+        freshness and provenance, each with file:line citations. as_of (YYYY-MM-DD) gives the value in effect on
+        that date with a status of known/uncertain/expired/none/unknown. Check no_match and no_fact before
+        claiming nothing is recorded."""
+        return tool_explain(mem, question, as_of)
+
+    @server.tool(
+        title="Diff facts between dates",
+        annotations=ann(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False),
+    )
+    def diff(since: str, until: str | None = None) -> dict[str, Any]:
+        """Facts added or updated between two dates (YYYY-MM-DD, inclusive), with the previous value, citations
+        and provenance."""
+        return tool_diff(mem, since, until)
 
     return server
 

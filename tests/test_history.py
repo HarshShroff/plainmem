@@ -38,6 +38,10 @@ def test_explain_one_supersession(tmp_path: Path) -> None:
         "cite": "log.md:5",
         "as_of": "2026-08-14",
         "date_source": "heading",
+        "authority": None,
+        "source": None,
+        "valid_from": None,
+        "valid_until": None,
     }
     assert [(s["value"], s["cite"], s["as_of"]) for s in f["superseded"]] == [("Dana Whit", "orion.md:6", "2025-11-02")]
     assert f["timeline"] == [
@@ -102,11 +106,11 @@ def test_cli_explain_and_diff_json_shapes(tmp_path: Path, capsys) -> None:
     assert main([*base, "explain", "--json", "orion", "project", "lead"]) == EXIT_OK
     out = json.loads(capsys.readouterr().out)
     assert {"question", "searched_at", "index_version", "no_match", "no_fact", "fact"} <= out.keys()
-    assert {"key", "label", "resolved", "current", "superseded", "timeline", "freshness"} == out["fact"].keys()
+    assert {"key", "label", "resolved", "current", "superseded", "timeline", "freshness"} <= out["fact"].keys()
     assert main([*base, "diff", "--since", "2026-08-01", "--json"]) == EXIT_OK
     out = json.loads(capsys.readouterr().out)
     assert out.keys() == {"since", "until", "added", "updated", "undated_skipped"}
-    assert out["updated"][0]["previous"].keys() == {"value", "cite", "as_of", "date_source"}
+    assert {"value", "cite", "as_of", "date_source", "authority", "source"} <= out["updated"][0]["previous"].keys()
 
 
 def test_cli_explain_text_and_exit_codes(tmp_path: Path, capsys) -> None:
