@@ -40,6 +40,16 @@ or only implied. A note about what someone has been doing, might do, or did once
 they now hold the fact.
 If unsure between supersedes and anything else, answer insufficient.
 
+Matching a key:
+- A note often names a fact by what its holder does rather than by the key's words (who gets \
+paged, who approves purchases, who reviews designs, where it runs, what its builds run on, who it \
+buys from). Map that to the key that names this role or property.
+- A note that says outright who or what holds the role now ("X signs off now", "Y runs on Z \
+these days", "from now on") and gives a value different from the one on file supersedes it, even \
+if it does not name the old value.
+- If several keys could fit, a key with a qualifier the note does not use (backup, replica, \
+staging, secondary) is not the target; prefer the key the note describes without a qualifier.
+
 target: the exact key from the list for supersedes, refines or contradicts; otherwise null.
 
 New note: {note}
