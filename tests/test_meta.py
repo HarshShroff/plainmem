@@ -177,8 +177,8 @@ def test_explain_as_of_walks_the_chain(tmp_path: Path) -> None:
 def test_explain_as_of_before_anything_was_recorded(tmp_path: Path) -> None:
     mem = _mem(tmp_path, {"orion.md": ORION, "log.md": HIST})
     r = mem.explain("Orion project lead", now=NOW, as_of=date(2025, 1, 1))
-    # the dated entries all start later; nothing is found at that date
-    assert r["no_match"] or r["fact"] is None or r["fact"]["status"] == "none"
+    # every dated entry starts later: the fact is found, and the answer is "nothing recorded yet"
+    assert r["no_match"] is False and r["fact"]["status"] == "none" and r["fact"]["current"] is None
 
 
 def test_explain_as_of_with_only_mtime_dates_is_honest(tmp_path: Path) -> None:

@@ -155,7 +155,11 @@ def explain(
 ) -> dict[str, Any]:
     """``search`` replaces ``eng.search`` for finding candidate facts (e.g. ``Hybrid.searcher()``)."""
     res: dict[str, Any] = {"question": question, **searched, "as_of": _iso(as_of), "fact": None}
-    hits = (search or eng.search)(question, k=10, now=now, as_of=as_of)
+    find = search or eng.search
+    hits = find(question, k=10, now=now, as_of=as_of)
+    if not hits and as_of is not None:
+        # Nothing existed yet on that date. Find the fact anyway so the answer can say so ("none").
+        hits = find(question, k=10, now=now)
     res["no_match"] = not hits
     res["no_fact"] = False
     if not hits:
