@@ -252,7 +252,7 @@ Held-out split, 1,000-case corpus (300 held-out questions, 1,203 files, 9,013 ch
 | plainmem explain | 0.793 | 0.900 | 0.763 | 0.158 | 1.000 | 1.000 | 6.57 |
 | plainmem explain + embeddings (hybrid) | 0.780 | 0.883 | 0.820 | 0.158 | 0.929 | 1.000 | 93.68 |
 
-The finding: in this benchmark, better retrieval did not reduce stale answers, and explicit temporal state did. BM25 and plainmem retrieve the right line about equally often (recall@5 0.853 against 0.900), but the stale-answer rate falls from 0.825 to 0.158 once supersession is tracked. Stemming moved the stale rate by nothing. Adding embeddings didn't move it either:
+Retrieval tells an agent what it can find. Temporal state tells it what is still true. The finding: in this benchmark, better retrieval did not reduce stale answers, and explicit temporal state did. BM25 and plainmem retrieve the right line about equally often (recall@5 0.853 against 0.900), but the stale-answer rate falls from 0.825 to 0.158 once supersession is tracked. Stemming moved the stale rate by nothing. Adding embeddings didn't move it either:
 
 | | lexical | + embeddings |
 |---|---|---|
