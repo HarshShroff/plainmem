@@ -41,6 +41,7 @@ import shutil
 import statistics
 import sys
 import tempfile
+import threading
 import time
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
@@ -80,6 +81,7 @@ class CachedModel:
         self.real = 0
         self.hits = 0
         self.seconds: list[float] = []
+        self._lock = threading.Lock()
 
     @staticmethod
     def key(prompt: str) -> str:
@@ -95,10 +97,12 @@ class CachedModel:
         t = time.perf_counter()
         reply = self.live(prompt)
         self.seconds.append(time.perf_counter() - t)
-        self.real += 1
-        self.cache[k] = reply
-        with LEDGER.open("a") as f:
-            f.write(json.dumps({"key": k, "model": self.model, "at": time.strftime("%Y-%m-%dT%H:%M:%S")}) + "\n")
+        with self._lock:  # saved after every call, so an interrupted run loses nothing
+            self.real += 1
+            self.cache[k] = reply
+            with LEDGER.open("a") as f:
+                f.write(json.dumps({"key": k, "model": self.model, "at": time.strftime("%Y-%m-%dT%H:%M:%S")}) + "\n")
+            self._write()
         return reply
 
     def prefetch(self, prompts: list[str], workers: int = 8) -> None:
@@ -114,7 +118,13 @@ class CachedModel:
 
     def save(self) -> None:
         if self.real:
-            CACHE.write_text(json.dumps(self.cache, indent=0, sort_keys=True) + "\n")
+            with self._lock:
+                self._write()
+
+    def _write(self) -> None:
+        tmp = CACHE.with_suffix(".tmp")
+        tmp.write_text(json.dumps(self.cache, indent=0, sort_keys=True) + "\n")
+        tmp.replace(CACHE)
 
 
 def _canon(key: str | None) -> frozenset[str]:

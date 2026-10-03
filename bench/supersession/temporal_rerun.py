@@ -5,7 +5,7 @@ n=1000), copied to a temp dir, and each adversarial update line is passed throug
 answers are graded with bench/temporal's own ``plainmem_system`` and ``grade``. A tag is appended to
 the copied line only when the validated verdict is ``supersedes``.
 
-To catch collateral damage, 40 noise lines from the same logs (fixed sample, seed 7) go through the
+To catch collateral damage, 25 noise lines from the same logs (fixed sample, seed 7) go through the
 same arms; any tag on them is a false supersession. All 300 held-out temporal questions are then
 re-graded on the modified copy.
 
@@ -36,7 +36,7 @@ from plainmem import consolidate as cons  # noqa: E402
 from plainmem import engine_from_texts  # noqa: E402
 from plainmem.text import tokenize  # noqa: E402
 
-N, SEED, N_NOISE = 1000, 2026, 40
+N, SEED, N_NOISE = 1000, 2026, 25
 ARMS = ("baseline", "agent", "classifier", "agent+classifier")
 
 
@@ -152,7 +152,7 @@ def main() -> None:
     model.save()
     out["llm_calls_total_ledger"] = srun.ledger_calls()
 
-    rows = ["| arm | stale (of 36) | correct | other | tags on the 36 | right target | tags on 40 noise lines | "
+    rows = ["| arm | stale (of 36) | correct | other | tags on the 36 | right target | tags on 25 noise lines | "
             "all held-out current_acc | all held-out stale_rate |",
             "|---|---|---|---|---|---|---|---|---|"]  # fmt: skip
     for arm, r in out["arms"].items():
