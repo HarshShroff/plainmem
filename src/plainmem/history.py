@@ -45,7 +45,13 @@ def _iso(d: date | None) -> str | None:
 
 
 def fact_entries(eng: Engine) -> dict[str, list[Entry]]:
-    """Every assertion grouped by key, oldest first (undated entries sort before dated ones)."""
+    """Every assertion grouped by key, oldest first (undated entries sort before dated ones).
+
+    Cached on the engine, which never changes after it is built.
+    """
+    cached = getattr(eng, "_fact_entries", None)
+    if cached is not None:
+        return cached
     out: dict[str, list[Entry]] = {}
     for i, alist in enumerate(eng.assertions):
         for a in alist:
@@ -63,6 +69,7 @@ def fact_entries(eng: Engine) -> dict[str, list[Entry]]:
             )
     for items in out.values():
         items.sort(key=lambda e: (e.as_of or date.min, e.index))
+    eng._fact_entries = out  # type: ignore[attr-defined]
     return out
 
 
