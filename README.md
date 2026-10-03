@@ -232,7 +232,7 @@ Unknown dates are not guessed. A date that only comes from file mtime says when 
 An update that doesn't repeat a fact's key ("Priya took over from Sam on Orion") isn't linked to `Orion project lead`, so `explain` keeps answering Sam. The `supersedes` tag fixes that when someone writes it. Consolidation is an optional step on the write path that decides whether to write it. The read path doesn't change: `search` and `explain` make no model calls.
 
 ```python
-mem.candidates_for("Priya took over from Sam on Orion.")   # current facts it may replace: key, value, cite
+mem.candidates_for("Priya took over from Sam on Orion.")  # current facts it may replace: key, value, cite
 mem.add("Priya took over from Sam on Orion.", supersedes="Orion project lead")
 mem.consolidate("Priya took over from Sam on Orion.", classifier)
 ```
@@ -289,6 +289,53 @@ Where it breaks: every remaining stale answer, 36 of 36, is an adversarial updat
 
 Some wins exist by construction: contradictory questions are only solvable through the authority tag, provenance questions reward returning a citation, and back-dated as-of questions need the `from` tag. BM25 never had a chance on those, so they show the tags work as specified, not that they are a good idea. How the next step was chosen (the pre-agreed recall@5 rule, applied on dev) and the per-category tables are in [bench/temporal/README.md](bench/temporal/README.md) and [bench/temporal/results.md](bench/temporal/results.md). Reproduce, including the hybrid row: `pip install -e ".[embeddings]" && python bench/temporal/run.py`.
 
+## Supersession experiment
+
+Branch `implicit-supersession`, experimental. Code and data are in `bench/supersession/` (README, `results.md`, `dev-rounds.md`). It asks whether consolidation can link updates that don't repeat the key without linking notes that only look similar.
+
+The data has 300 generated cases, each one fact plus one later note: explicit updates (A), implicit updates naming the old value (B), implicit updates without it (C), event-based updates (D), similar-looking unrelated notes (E), ambiguous notes (F), and questions about an attribute that was never recorded (G). The 30% held-out split was frozen before anything ran, and a third of it uses wording reserved for held-out only. There are four arms. A is current plainmem. B is a **simulated** writing agent: one model call that sees only the skill file, the note and the `candidates` output, and passes `supersedes` or nothing. C is the JSON classifier alone. D is B, with C asked only when the agent passed nothing. Every model call was `claude -p --model haiku`, and every verdict went through the same validator.
+
+The criterion was pre-registered before the held-out run: the implicit (B to D) stale rate falls to half of A's or less, and false supersession is at most 1% of unrelated and ambiguous notes.
+
+Held-out (90 cases: 52 true updates, 38 unrelated or ambiguous):
+
+| arm | precision | recall | false supersession | wrong-target tags | abstention rate | stale (A-D) | implicit stale (B-D) |
+|---|---|---|---|---|---|---|---|
+| A current plainmem | n/a | 0.000 | 0.000 | 0 | n/a | 1.000 | 1.000 |
+| B agent (simulated) | 0.935 | 0.827 | 0.026 (1 of 38) | 2 | 0.000 | 0.173 | 0.220 |
+| C classifier | 0.976 | 0.788 | 0.026 (1 of 38) | 0 | 0.300 | 0.212 | 0.268 |
+| D agent, then classifier | 0.938 | 0.865 | 0.026 (1 of 38) | 2 | 0.256 | 0.135 | 0.171 |
+
+Abstention 2x2. True updates are detected / wrong target / abstained / rejected; unrelated and ambiguous notes are rejected / abstained / falsely tagged:
+
+| arm | detected | wrong target | abstained | rejected | | rejected | abstained | falsely tagged |
+|---|---|---|---|---|---|---|---|---|
+| B agent (simulated) | 43 | 2 | 0 | 7 | | 37 | 0 | 1 |
+| C classifier | 41 | 0 | 7 | 4 | | 17 | 20 | 1 |
+| D agent, then classifier | 45 | 2 | 3 | 2 | | 17 | 20 | 1 |
+
+The 36 held-out adversarial cases from the temporal benchmark (n=1,000) were never used for tuning. Each update line went through consolidation on a copy of the corpus. 25 noise lines from the same logs went through the same arms as a check for collateral tags.
+
+| arm | stale (of 36) | tags on the 36, all right target | tags on 25 noise lines | all 300 held-out: current acc | stale rate |
+|---|---|---|---|---|---|
+| A current plainmem | 36 | 0 | 0 | 0.763 | 0.158 |
+| B agent (simulated) | 5 | 31 | 0 | 0.895 | 0.022 |
+| C classifier | 12 | 24 | 0 | 0.868 | 0.053 |
+| D agent, then classifier | 3 | 33 | 0 | 0.904 | 0.013 |
+
+**Against the pre-registered criterion, every arm fails.** Stale answers fell a lot, but each arm wrote one false tag out of 38 (2.6%, above the 1% bar). So yes, the LLM arms increase false supersession: from 0 (current plainmem) to 1 of 38, and B and D also wrote 2 wrong-target tags.
+
+Failures, held-out:
+
+- The one false tag is the same note in all three arms: "BasaltStack keeps backups in us-west-2." uses a template reserved for held-out. The generator labels it unrelated, because the question asks for the deploy region. But the entity also has a `Backup region` fact, and the note does state a new backup region, so the label is arguably wrong rather than the model. Counted as a failure anyway. Reading it as a labelling error is post-hoc.
+- Wrong-target tags are the more serious harm, and false supersession doesn't count them. "NectarRidge lives in eu-west-2." was filed under `Backup region` instead of `Deploy region`, and "FathomYard ships through GitHub Actions." under `CD provider` instead of `CI provider`. Both came from the agent (B, D). The classifier alone wrote none, because it abstained on exactly these sibling-key cases.
+- Indirect updates (C) are the weak category: recall is 0.43 for B and C and 0.57 for D. Phrasings like "pages go to X", "purchases need X's approval" and "X signs off on spend" weren't linked to `on-call engineer` or `budget owner`. The classifier mostly said `insufficient`, which is the intended bias.
+- All errors came from held-out-only wording. On held-out cases with dev wording, every arm had precision 1.0 and no false tags. The templates, the classifier prompt and the agent prompt were written by the same person.
+- A read-path problem surfaced. Once a `vendor` fact is superseded and demoted, `explain` for "What is X's vendor?" can pick the sibling key `backup vendor`, because they tie on shared words. The tag is right but the answer is wrong. This is the same tie as the temporal benchmark's distractor failure, and it is not fixed here.
+- G questions (attribute never recorded): `explain` never abstained in any arm. It answers another fact about the same entity. Consolidation can't fix that.
+
+Cost: 1,377 model calls across the whole experiment (smoke test, two dev rounds, held-out, temporal), well under the 1,500 cap. A held-out run made 193 calls at a median of 6.2 s each through `claude -p`. Candidate lookup on the write path takes about 15 ms. The read path is unchanged and makes no model calls. `results.md` lists every number, and `--cache-only` reproduces it from `llm_cache.json` without calling a model.
+
 ## Retrieval benchmark
 
 `python bench/run.py` generates a synthetic corpus and labelled queries, then scores six systems. Everything below is the actual output of that run on an Apple Silicon laptop, CPU only.
@@ -338,7 +385,7 @@ Reproduce: `pip install -e ".[dev,embeddings]" && python bench/run.py` (drop `em
 - The benchmark is synthetic and self-labelled, as described above. Real notes are messier, and the paraphrase templates are only as varied as one author made them.
 - The core has no semantic understanding. It matches words and word stems. Use the embedding numbers above to decide whether that is enough for you.
 - Supersession is pattern based. It only sees `key: value` lines and a handful of "X is now Y" verbs, only compares values as normalised strings, and it can be fooled: "Dana is out today" and "Dana is back" become a conflict about Dana. Keys that differ by a word ("lead" vs "owner") are not linked. A same-day disagreement is flagged but not resolved.
-- Metadata tags have to be written. Nothing infers authority, source, validity dates or a `supersedes` link from prose, and an update worded without the key's words is missed (see the adversarial row above).
+- Metadata tags have to be written. Nothing infers authority, source, validity dates or a `supersedes` link from prose, and an update worded without the key's words is missed (see the adversarial row above). The experimental consolidation step (above) infers `supersedes` on the write path; it does not yet meet its own false-supersession bar.
 - Hybrid retrieval is benchmarked once, with one embedding model and untuned fusion settings. It helps paraphrase and hurts as-of recall and latency; see the temporal benchmark notes.
 - `explain` and `diff` read the same extracted facts, so they inherit those limits. A timeline "from" date is the date the value was recorded or last verified (a front matter `verified:` date, for instance), not when it became true. A fact with no recoverable date is shown with `?` in `explain` and skipped by `diff` (counted in `undated_skipped`). `explain` follows one key: when a key is a same-day list, it reports the line the search ranked first and does not merge the values. `explain` only answers from keys that share a word with the question, so a paraphrase that shares none returns `no_fact` or, when only the entity name matches, a different fact about the same entity.
 - The volatile detector is a list of regular expressions. It will miss volatile facts phrased some other way and occasionally flag a budget or a quoted price that is historical. Tag facts explicitly with `[volatile]` or `[verified: date]` when it matters.

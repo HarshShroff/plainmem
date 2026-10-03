@@ -277,10 +277,23 @@ def generate(n_cases: int, seed: int) -> tuple[dict[str, str], list[Case], list[
         question = rng.choice(["{Wh} is the {E} {a}?", "{Wh} is {E}'s {a}?"]).format(Wh=wh, E=ent, a=attr)
         gold = GOLD[cat]
         cases.append(
-            Case(cid, cat, split, wording, ent, attr, gold, f"{ent} {attr}" if gold == "supersedes" else None,
-                 None if cat == "G" else old, new, note, when.isoformat(), question,
-                 {"supersedes": "new", "unrelated": "old", "insufficient": "old"}[gold] if cat != "G" else "abstain",
-                 base_cite)  # fmt: skip
+            Case(
+                cid,
+                cat,
+                split,
+                wording,
+                ent,
+                attr,
+                gold,
+                f"{ent} {attr}" if gold == "supersedes" else None,
+                None if cat == "G" else old,
+                new,
+                note,
+                when.isoformat(),
+                question,
+                {"supersedes": "new", "unrelated": "old", "insufficient": "old"}[gold] if cat != "G" else "abstain",
+                base_cite,
+            )  # fmt: skip
         )
 
     noise_t = ["Standup for {E} ran long today.", "Sent the {E} newsletter draft around.",

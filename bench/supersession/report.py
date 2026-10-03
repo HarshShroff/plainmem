@@ -1,8 +1,8 @@
 """Combine results-heldout.* and results-temporal36.* into results.md and results.json.
 
-    python bench/supersession/run.py --split heldout --cache-only
-    python bench/supersession/temporal_rerun.py --cache-only
-    python bench/supersession/report.py
+python bench/supersession/run.py --split heldout --cache-only
+python bench/supersession/temporal_rerun.py --cache-only
+python bench/supersession/report.py
 """
 
 from __future__ import annotations
@@ -42,7 +42,8 @@ def main() -> None:
         o = r["overall"]
         ok = o["implicit_stale"] is not None and o["implicit_stale"] <= base / 2 and o["false_supersession"] <= 0.01
         verdict.append(f"- {r['label']}: implicit stale {base} -> {o['implicit_stale']}, false supersession "
-                       f"{o['false_supersession']} ({o['false_tags']} tags): **{'pass' if ok else 'fail'}**")  # fmt: skip
+                       f"{o['false_supersession']} ({o['false_tags']} tags): "
+                       f"**{'pass' if ok else 'fail'}**")  # fmt: skip
     md = [HEAD, "## Pre-registered criterion, held-out", "", *verdict, "",
           (HERE / "results-heldout.md").read_text().strip(), "",
           (HERE / "results-temporal36.md").read_text().strip(), "",

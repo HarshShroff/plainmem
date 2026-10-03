@@ -52,3 +52,7 @@ Written and committed before the held-out run:
 ## Metrics
 
 See the docstring of `run.py`. Precision and recall count a tag as right only with the right target key. The abstention 2x2 splits true supersessions into detected / wrong target / abstained (`insufficient`) / rejected, and unrelated + ambiguous notes into rejected / abstained / falsely tagged. The agent arm can only pass a key or nothing, so it never abstains as such; "passed nothing" counts as rejected.
+
+## Outcome (added after the held-out run)
+
+The pre-registered criterion was not met by any arm. Implicit stale fell from 1.000 to 0.220 (B), 0.268 (C) and 0.171 (D), but each arm wrote 1 false tag on 38 unrelated or ambiguous notes (2.6%). It was the same note in all three ("BasaltStack keeps backups in us-west-2.", a held-out-only template). Arguably that is a generator labelling error, since the entity has a `Backup region` fact that the note does update. That reading is post-hoc, so the result stands as a fail. B and D also wrote 2 wrong-target tags on true updates. Full tables are in `results.md`; the tuning history is in `dev-rounds.md`.
