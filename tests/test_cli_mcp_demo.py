@@ -156,6 +156,10 @@ def test_mcp_server_registers_tools(notes: Path) -> None:
 
     server = build_server(Memory(notes))
     names = sorted(t.name for t in asyncio.run(server.list_tools()))
-    assert names == ["add", "search", "stale"]
+    assert names == ["add", "explain", "search", "stale"]
     content = asyncio.run(server.call_tool("search", {"query": "zebra"}))
     assert "no_match" in str(content)
+    tools = {t.name: t for t in asyncio.run(server.list_tools())}
+    a = tools["explain"].annotations
+    assert tools["explain"].title == "Explain a fact"
+    assert (a.read_only_hint, a.destructive_hint, a.idempotent_hint, a.open_world_hint) == (True, False, True, False)

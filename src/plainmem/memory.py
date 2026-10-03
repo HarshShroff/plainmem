@@ -7,6 +7,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from . import history
 from . import index as idx
 from . import log as logmod
 from .engine import Conflict, Engine, Hit, RankConfig
@@ -160,6 +161,22 @@ class Memory:
             mode=mode,
             hits=hits,
         )
+
+    def explain(self, question: str, now: date | None = None, refresh: bool = True) -> dict[str, Any]:
+        """Current answer, superseded values, timeline and freshness for the fact a question is about."""
+        eng = self.ensure(refresh=refresh)
+        assert self._data is not None
+        searched = {
+            "searched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "index_version": self._data.version,
+            "files_indexed": len(self._data.docs),
+            "chunks_indexed": len(eng.chunks),
+        }
+        return history.explain(eng, question, now or date.today(), searched)
+
+    def diff(self, since: date, until: date | None = None, refresh: bool = True) -> dict[str, Any]:
+        """Facts added or updated between two dates (inclusive), by entry date."""
+        return history.diff(self.ensure(refresh=refresh), since, until)
 
     def conflicts(self, refresh: bool = True) -> list[dict[str, Any]]:
         eng = self.ensure(refresh=refresh)

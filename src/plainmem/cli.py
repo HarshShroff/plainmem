@@ -1,4 +1,4 @@
-"""Command line interface: index, search, add, conflicts, stale, stats, rotate."""
+"""Command line interface: index, search, explain, diff, add, conflicts, stale, stats, rotate."""
 
 from __future__ import annotations
 
@@ -44,6 +44,17 @@ def _parser() -> argparse.ArgumentParser:
     s.add_argument("--json", action="store_true", help="machine readable output with searched_at and no_match")
     s.add_argument("--no-refresh", action="store_true", help="search the saved index without re-scanning files")
 
+    s = sub.add_parser("explain", help="current value, superseded values and timeline for one fact")
+    s.add_argument("question", nargs="+")
+    s.add_argument("--json", action="store_true")
+    s.add_argument("--no-refresh", action="store_true", help="use the saved index without re-scanning files")
+
+    s = sub.add_parser("diff", help="facts added or updated in a date window")
+    s.add_argument("--since", type=_date, required=True)
+    s.add_argument("--until", type=_date, default=None)
+    s.add_argument("--json", action="store_true")
+    s.add_argument("--no-refresh", action="store_true", help="use the saved index without re-scanning files")
+
     s = sub.add_parser("add", help="append a dated entry to the log")
     s.add_argument("text", nargs="+")
     s.add_argument("--log", default="log.md")
@@ -88,6 +99,49 @@ def _print_hits(resp_dict: dict) -> None:
             print("  " + line)
 
 
+def _print_explain(r: dict) -> None:
+    print(
+        f"searched {r['files_indexed']} files / {r['chunks_indexed']} chunks "
+        f"(index {r['index_version']}, {r['searched_at']})"
+    )
+    if r["no_match"]:
+        print("no match")
+        return
+    f = r["fact"]
+    if f is None:
+        print(f"no fact found: nothing states a value for this question. nearest: {', '.join(r['nearest'])}")
+        return
+    c = f["current"]
+    print(f"\n{f['label']}")
+    tag = "" if f["resolved"] else "  (UNRESOLVED: same date as a different value)"
+    print(f"  current     {c['value']}  ({c['cite']}, {c['as_of'] or 'undated'}){tag}")
+    for s in f["superseded"]:
+        print(f"  superseded  {s['value']}  ({s['cite']}, {s['as_of'] or 'undated'})")
+    fr = f["freshness"]
+    age = f", {fr['age_days']}d old" if fr["age_days"] is not None else ""
+    print(f"  freshness   {fr['status']}{age}" + ("  must re-verify before asserting" if fr["must_reverify"] else ""))
+    if len(f["timeline"]) > 1:
+        print("  timeline")
+        for t in f["timeline"]:
+            print(f"    {t['value']}: {t['from'] or '?'} -> {'present' if t['present'] else t['to'] or '?'}")
+
+
+def _print_diff(r: dict) -> None:
+    print(f"changes since {r['since']}" + (f" until {r['until']}" if r["until"] else ""))
+    for row in r["added"]:
+        print(f"  ADDED    {row['label']}: {row['value']}  ({row['cite']}, {row['as_of']})")
+    for row in r["updated"]:
+        p = row["previous"]
+        print(
+            f"  UPDATED  {row['label']}: {p['value']} ({p['cite']}, {p['as_of']}) "
+            f"-> {row['value']} ({row['cite']}, {row['as_of']})"
+        )
+    if not r["added"] and not r["updated"]:
+        print("  no changes")
+    if r["undated_skipped"]:
+        print(f"  ({r['undated_skipped']} undated assertions skipped)")
+
+
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     root = Path(args.root)
@@ -108,6 +162,20 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 _print_hits(resp)
             return EXIT_NO_MATCH if resp["no_match"] else EXIT_OK
+        if args.cmd == "explain":
+            r = mem.explain(" ".join(args.question), now=args.now, refresh=not args.no_refresh)
+            if args.json:
+                print(json.dumps(r, ensure_ascii=False, indent=2))
+            else:
+                _print_explain(r)
+            return EXIT_NO_MATCH if r["no_match"] or r["no_fact"] else EXIT_OK
+        if args.cmd == "diff":
+            r = mem.diff(args.since, args.until, refresh=not args.no_refresh)
+            if args.json:
+                print(json.dumps(r, ensure_ascii=False, indent=2))
+            else:
+                _print_diff(r)
+            return EXIT_OK
         if args.cmd == "add":
             where = mem.add(" ".join(args.text), when=args.date or args.now, logfile=args.log)
             print(f"appended to {where}")

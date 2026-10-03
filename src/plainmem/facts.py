@@ -140,3 +140,10 @@ def extract(chunk: Chunk, doc: Document) -> list[Assertion]:
             if k and val:
                 out.append(Assertion(k[0], k[1], val, m.group("val").strip()))
     return out
+
+
+def display_value(raw: str) -> str:
+    """The value as written, minus trailing commentary and tags (same cut as the comparison form)."""
+    v = _TRAILING_RE.sub(" ", raw)
+    v = re.split(r",\s|;|\s[-–—]\s", v, maxsplit=1)[0]
+    return v.strip().rstrip(".").strip()

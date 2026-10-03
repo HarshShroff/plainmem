@@ -29,6 +29,8 @@ plainmem --root ~/notes index         # builds ~/notes/.plainmem/index.json (a c
 plainmem --root ~/notes search "gym day pass price"
 plainmem --root ~/notes search --json "dentist phone"    # for agents
 plainmem --root ~/notes add "Orion project lead: Sam Okafor"
+plainmem --root ~/notes explain "who is the orion project lead"   # current value, superseded values, timeline
+plainmem --root ~/notes diff --since 2026-09-01   # facts added or updated since a date
 plainmem --root ~/notes conflicts     # facts with more than one value, newest first
 plainmem --root ~/notes stale         # volatile facts past their re-check window
 plainmem --root ~/notes stats
@@ -97,6 +99,33 @@ When two chunks assert different values for the same key, the one with the newer
 
 Keys are compared as sets of stemmed words. Outside dated log sections, a key that does not already name the file's subject is qualified with it (front matter `entity:`, else the H1 title), so `Status: paused` in `orion.md` and in `atlas.md` stay separate, while `Project lead: Dana` in `orion.md` and `Orion project lead: Sam` in a log collide as intended. In search results the current version is placed first and its superseded versions directly under it, so an agent sees both the answer and the history. Two different values with the same date are reported by `plainmem conflicts` as unresolved and neither is demoted.
 
+### Explain and diff
+
+`plainmem explain` takes a question, runs the normal search, and follows the first hit that states a fact whose key shares a word with the question. It prints the current value, the values it replaced, and a timeline, each with a `path:line` cite and date, plus the freshness of the current value. Against `examples/notes`:
+
+```
+$ plainmem --root examples/notes --now 2026-10-03 explain "Who is the Orion project lead?"
+Orion project lead
+  current     Sam Okafor  (log.md:5, 2026-08-14)
+  superseded  Dana Whit  (orion.md:8, 2025-11-02)
+  freshness   FRESH, 50d old
+  timeline
+    Dana Whit: 2025-11-02 -> 2026-08-14
+    Sam Okafor: 2026-08-14 -> present
+```
+
+If the search finds nothing it prints `no match` and exits 1; `--json` adds `searched_at`, `index_version` and `no_match` as `search` does. If chunks match but none states a fact about the question, `no_fact` is true and `nearest` lists the cites. The same call is `Memory.explain(question)` and the `explain` MCP tool.
+
+`plainmem diff --since DATE [--until DATE]` lists facts that appeared (a new key) or changed value (`old -> new`) in a window, by the same entry dates:
+
+```
+$ plainmem --root examples/notes --now 2026-10-03 diff --since 2026-01-01
+changes since 2026-01-01
+  UPDATED  Orion project lead: Dana Whit (orion.md:8, 2025-11-02) -> Sam Okafor (log.md:5, 2026-08-14)
+```
+
+Both ends of the window are inclusive. An updated fact is compared against its last value before `--since`, so several changes inside the window show as one row. It is `Memory.diff(since, until)` in Python, and `--json` returns `added` and `updated` lists.
+
 ### The absence rule
 
 `plainmem search --json` always returns `searched_at`, `index_version`, `files_indexed`, `chunks_indexed` and a `no_match` boolean. The point is a rule you can put in an agent's instructions and check: it may not claim "there is no record of X" unless it ran the search in this session and got `no_match: true`. An agent that answers from its context window instead of searching is the most common way memory systems fail in practice, and a field you can audit is harder to skip than a sentence in a prompt. The CLI exits 1 on no match, so shell wrappers can enforce the same thing.
@@ -154,6 +183,7 @@ Reproduce: `pip install -e ".[dev,embeddings]" && python bench/run.py` (drop `em
 - The benchmark is synthetic and self-labelled, as described above. Real notes are messier, and the paraphrase templates are only as varied as one author made them.
 - The core has no semantic understanding. It matches words and word stems. Use the embedding numbers above to decide whether that is enough for you.
 - Supersession is pattern based. It only sees `key: value` lines and a handful of "X is now Y" verbs, only compares values as normalised strings, and it can be fooled: "Dana is out today" and "Dana is back" become a conflict about Dana. Keys that differ by a word ("lead" vs "owner") are not linked. A same-day disagreement is flagged but not resolved.
+- `explain` and `diff` read the same extracted facts, so they inherit those limits. A timeline "from" date is the date the value was recorded or last verified (a front matter `verified:` date, for instance), not when it became true. A fact with no recoverable date is shown with `?` in `explain` and skipped by `diff` (counted in `undated_skipped`). `explain` follows one key: when a key is a same-day list, it reports the line the search ranked first and does not merge the values. `explain` only answers from keys that share a word with the question, so a paraphrase that shares none returns `no_fact`.
 - The volatile detector is a list of regular expressions. It will miss volatile facts phrased some other way and occasionally flag a budget or a quoted price that is historical. Tag facts explicitly with `[volatile]` or `[verified: date]` when it matters.
 - Dates come from what you write. A note with no tag, no dated heading and no front matter falls back to file mtime, which a `git clone` resets.
 - The index is one JSON file loaded into memory. That is fine for tens of thousands of notes, not for millions.

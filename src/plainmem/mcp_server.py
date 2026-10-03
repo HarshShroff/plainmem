@@ -32,6 +32,11 @@ def tool_stale(mem: Memory) -> dict[str, Any]:
     return {"count": len(items), "items": items}
 
 
+def tool_explain(mem: Memory, question: str) -> dict[str, Any]:
+    """Current answer, superseded values with citations, timeline and freshness for one fact."""
+    return mem.explain(question)
+
+
 def build_server(mem: Memory) -> Any:
     try:  # MCP SDK 2.x renamed FastMCP to MCPServer; accept either.
         from mcp.server.mcpserver import MCPServer as Server
@@ -75,6 +80,15 @@ def build_server(mem: Memory) -> Any:
     def stale() -> dict[str, Any]:
         """List volatile facts (prices, status, availability) that must be re-verified before asserting."""
         return tool_stale(mem)
+
+    @server.tool(
+        title="Explain a fact",
+        annotations=ann(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False),
+    )
+    def explain(question: str) -> dict[str, Any]:
+        """Explain how the answer to a question changed: current value, superseded values, timeline and
+        freshness, each with file:line citations. Check no_match and no_fact before claiming nothing is recorded."""
+        return tool_explain(mem, question)
 
     return server
 
