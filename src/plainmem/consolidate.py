@@ -7,17 +7,16 @@ The read path never calls a model. Consolidation runs once, when a note is writt
    or whose current value it names.
 2. A classifier (any callable, usually an LLM; see ``consolidate_llm.py``) returns a verdict
    ``{"relation": ..., "target": key | None, "reason": str}``.
-3. ``validate`` checks the verdict. The target must be one of the candidates it was shown,
-   otherwise the verdict counts as ``unrelated``. Anything malformed counts as ``unrelated``.
+3. ``validate`` checks the verdict before anything is applied: the relation is one of the five,
+   the target is one of the candidates shown, it is still a current fact and in effect today, and
+   (for ``supersedes``) the note supplies a value of its own. A verdict that fails any check becomes
+   ``unrelated``, with the failed check in ``failed_check``. When unsure, nothing changes: a missed
+   supersession leaves a stale answer that a later explicit note can fix, a false one hides a true fact.
 4. Only ``supersedes`` changes what is written: the note gets a ``{supersedes <key>}`` tag
    (``meta.py``), the same tag a person could have typed. The classifier never edits files.
 
 The key is the identity: ``Orion project lead`` names the entity and the attribute. There are no
 per-memory IDs.
-
-``lexical_classifier`` is a deterministic, model-free classifier for comparison. It only
-supersedes when the text has a change word ("took over", "no longer", "now" ...) and points at
-exactly one candidate, by naming its current value or a word of its key.
 """
 
 from __future__ import annotations
@@ -30,7 +29,7 @@ from typing import Any
 
 from .engine import Engine
 from .history import fact_entries
-from .meta import parse_tag
+from .meta import parse_tag, strip_tags
 from .text import tokenize
 
 RELATIONS = ("supersedes", "refines", "contradicts", "unrelated", "insufficient")
@@ -126,7 +125,7 @@ def candidates(eng: Engine, text: str, k: int = 10, boost: Sequence[int] = ()) -
         kt = set(key.split())
         key_hit = kt & toks
         val_hit = (vtoks & toks) - key_hit
-        named_value = bool(vtoks) and vtoks <= toks
+        named_value = any(t.isalpha() for t in vtoks) and vtoks <= toks
         if key not in boosted and not named_value and not (key_hit & proper if proper else key_hit):
             continue
         score = sum(idf(t) for t in key_hit) + 0.5 * sum(idf(t) for t in val_hit) + 2.0 * boosted.get(key, 0.0)
@@ -148,25 +147,47 @@ def _resolve(target: Any, cands: Sequence[Candidate]) -> Candidate | None:
     return None
 
 
-def validate(raw: Any, cands: Sequence[Candidate]) -> dict[str, Any]:
-    """Check a classifier's verdict. Returns relation, target (a candidate key or None), reason, valid, note.
+def validate(
+    raw: Any,
+    cands: Sequence[Candidate],
+    eng: Engine | None = None,
+    text: str | None = None,
+    today: date | None = None,
+) -> dict[str, Any]:
+    """Check a verdict. Returns relation, target, reason, valid, failed_check, note.
 
-    An unknown relation, a non-dict, or a targeted relation whose target is not one of ``cands``
-    becomes ``unrelated`` with ``valid: False``. ``insufficient`` and ``unrelated`` never carry a target.
+    Checks, in order: ``shape`` (an object), ``relation_allowed`` (one of RELATIONS),
+    ``target_in_candidates`` (targeted relations only), and with ``eng`` given: ``target_current``
+    (the key still has a current value, not past its ``until`` date) and, for ``supersedes`` with
+    ``text`` given, ``supplies_value`` (the note has a content word that is neither in the key nor in
+    the current value). A failed check gives ``relation: unrelated, valid: False``.
     """
-    bad = {"relation": "unrelated", "target": None, "reason": "", "valid": False}
+
+    def fail(check: str, note: str, reason: str = "") -> dict[str, Any]:
+        return {"relation": "unrelated", "target": None, "reason": reason, "valid": False,
+                "failed_check": check, "note": note}  # fmt: skip
+
     if not isinstance(raw, dict):
-        return {**bad, "note": "verdict is not an object"}
+        return fail("shape", "verdict is not an object")
     rel = str(raw.get("relation", "")).strip().lower()
     reason = str(raw.get("reason") or "")[:300]
     if rel not in RELATIONS:
-        return {**bad, "reason": reason, "note": f"unknown relation {rel!r}"}
+        return fail("relation_allowed", f"unknown relation {rel!r}", reason)
     if rel not in TARGETED:
-        return {"relation": rel, "target": None, "reason": reason, "valid": True, "note": ""}
+        return {"relation": rel, "target": None, "reason": reason, "valid": True, "failed_check": None, "note": ""}
     c = _resolve(raw.get("target"), cands)
     if c is None:
-        return {**bad, "reason": reason, "note": f"target {raw.get('target')!r} is not one of the candidates"}
-    return {"relation": rel, "target": c.key, "reason": reason, "valid": True, "note": ""}
+        return fail("target_in_candidates", f"target {raw.get('target')!r} is not one of the candidates", reason)
+    if eng is not None:
+        cur = _current(eng).get(c.canonical)
+        until = cur[1].meta.valid_until if cur else None
+        if cur is None or (until is not None and until < (today or date.today())):
+            return fail("target_current", f"{c.key!r} has no value in effect", reason)
+        if rel == "supersedes" and text is not None:
+            own = set(tokenize(strip_tags(text))) - set(c.canonical.split()) - cur[2]
+            if not own:
+                return fail("supplies_value", "the note adds no value of its own", reason)
+    return {"relation": rel, "target": c.key, "reason": reason, "valid": True, "failed_check": None, "note": ""}
 
 
 def tag_text(text: str, supersedes: str) -> str:
@@ -189,7 +210,14 @@ def tag_text(text: str, supersedes: str) -> str:
     return first + nl + rest
 
 
-def judge(eng: Engine, text: str, classifier: Classifier, k: int = 10, boost: Sequence[int] = ()) -> dict[str, Any]:
+def judge(
+    eng: Engine,
+    text: str,
+    classifier: Classifier,
+    k: int = 10,
+    boost: Sequence[int] = (),
+    today: date | None = None,
+) -> dict[str, Any]:
     """Candidates, the classifier's raw verdict and the validated verdict. Writes nothing.
 
     With no candidates the classifier is not called and the verdict is ``unrelated``. A classifier
@@ -198,46 +226,16 @@ def judge(eng: Engine, text: str, classifier: Classifier, k: int = 10, boost: Se
     cands = candidates(eng, text, k=k, boost=boost)
     shown = [c.to_dict() for c in cands]
     if not cands:
-        verdict = {"relation": "unrelated", "target": None, "reason": "", "valid": True, "note": "no candidates"}
+        verdict = {"relation": "unrelated", "target": None, "reason": "", "valid": True, "failed_check": None,
+                   "note": "no candidates"}  # fmt: skip
         return {"candidates": shown, "raw": None, "verdict": verdict, "called": False}
     try:
         raw = classifier(text, shown)
     except Exception as e:  # noqa: BLE001 - any classifier failure is "no change"
         raw = None
         note = f"classifier error: {e}"
-        verdict = {"relation": "unrelated", "target": None, "reason": "", "valid": False, "note": note}
+        verdict = {"relation": "unrelated", "target": None, "reason": "", "valid": False,
+                   "failed_check": "classifier_error", "note": note}  # fmt: skip
     else:
-        verdict = validate(raw, cands)
+        verdict = validate(raw, cands, eng=eng, text=text, today=today)
     return {"candidates": shown, "raw": raw, "verdict": verdict, "called": True}
-
-
-# --- model-free comparison classifier -------------------------------------------------
-
-_CHANGE_RE = re.compile(
-    r"\b(no longer|took over|takes over|taken over|replac\w*|switched|moved (?:off|to|onto)|migrat\w*|"
-    r"from now on|now|these days|instead of|anymore|handed (?:over|off)|succeed\w*|changed hands|retired|"
-    r"dropped|relocated|stepped (?:down|back))\b",
-    re.IGNORECASE,
-)
-_HEDGE_RE = re.compile(
-    r"\b(lately|maybe|may|might|probably|possibly|perhaps|evaluating|considering|suggested|thinking about|"
-    r"rumou?r\w*|seems?|at some point|temporar\w*|covering|this week|for now|a few)\b",
-    re.IGNORECASE,
-)
-
-
-def lexical_classifier(new_text: str, cands: list[dict[str, Any]]) -> dict[str, Any]:
-    """Supersede only on a change word plus exactly one candidate pointed at; hedges are insufficient."""
-    if _HEDGE_RE.search(new_text):
-        return {"relation": "insufficient", "target": None, "reason": "hedged wording"}
-    if not _CHANGE_RE.search(new_text):
-        return {"relation": "unrelated", "target": None, "reason": "no change word"}
-    toks = set(tokenize(new_text))
-    proper = set(tokenize(" ".join(_PROPER_RE.findall(new_text))))
-    by_value = [c for c in cands if (v := set(tokenize(c["value"]))) and v <= toks]
-    if len(by_value) == 1:
-        return {"relation": "supersedes", "target": by_value[0]["key"], "reason": "names the current value"}
-    by_key = [c for c in cands if (set(tokenize(c["key"])) - proper) & toks]
-    if len(by_key) == 1:
-        return {"relation": "supersedes", "target": by_key[0]["key"], "reason": "names the attribute"}
-    return {"relation": "insufficient", "target": None, "reason": f"{len(by_value)} value / {len(by_key)} key matches"}

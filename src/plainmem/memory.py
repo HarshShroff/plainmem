@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -293,11 +294,17 @@ class Memory:
         return [pos[id(h.chunk)] for h in self.hybrid().search(text, k=10)]
 
     def judge(
-        self, text: str, classifier: cons.Classifier, k: int = 10, mode: str = "full", refresh: bool = True
+        self,
+        text: str,
+        classifier: cons.Classifier,
+        k: int = 10,
+        mode: str = "full",
+        refresh: bool = True,
+        today: date | None = None,
     ) -> dict[str, Any]:
         """Candidates, raw and validated verdict for a new note. Writes nothing."""
         eng = self.ensure(refresh=refresh)
-        return cons.judge(eng, text, classifier, k=k, boost=self._boost(text, mode))
+        return cons.judge(eng, text, classifier, k=k, boost=self._boost(text, mode), today=today)
 
     def consolidate(
         self,
@@ -318,7 +325,17 @@ class Memory:
         target = v["target"] if v["relation"] == "supersedes" else None
         out["appended_to"] = self.add(text, when=when, logfile=logfile, supersedes=target)
         out["wrote_supersedes"] = target
+        self._log_verdict(text, out)
         return out
+
+    def _log_verdict(self, text: str, out: dict[str, Any]) -> None:
+        """One line per consolidated write in ``<index dir>/consolidation.jsonl``, failed checks included."""
+        rec = {"at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "text": text,
+               "verdict": out["verdict"], "raw": out["raw"], "wrote_supersedes": out["wrote_supersedes"]}  # fmt: skip
+        path = self.index_file.parent / "consolidation.jsonl"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(rec, ensure_ascii=False, default=str) + "\n")
 
     def rotate(self, keep_days: int, now: date | None = None, logfile: str = "log.md") -> dict[str, Any]:
         out = logmod.rotate(self.root, keep_days, now=now, logfile=logfile)
