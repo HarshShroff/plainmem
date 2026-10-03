@@ -23,5 +23,8 @@
       "default": "~/notes"
     }
   },
-  "icon": "./.claude-plugin/icon.png"
+  "icon": "./.claude-plugin/icon.png",
+  "privacyPolicyUrl": "https://github.com/HarshShroff/plainmem#privacy",
+  "documentationUrl": "https://github.com/HarshShroff/plainmem#readme",
+  "supportUrl": "https://github.com/HarshShroff/plainmem/issues"
 }
