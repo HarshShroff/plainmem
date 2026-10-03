@@ -1,0 +1,13 @@
+# Three-minute demo
+
+Everything runs against `examples/notes` (two files, seven chunks). `--now 2026-10-03` pins "today" so the output matches what is shown here. Start in the repo root after `pip install -e .`.
+
+1. Show the notes as plain text: `cat examples/notes/orion.md examples/notes/log.md`. Point out that the last two log lines end in `{observed, tool, from 2026-09-18}` and `{explicit, user, until 2026-09-30}`. That is the whole metadata syntax, and the file reads fine without plainmem. (20 s)
+2. Ask the question an agent gets wrong: `plainmem --root examples/notes --now 2026-10-03 search -k 3 who is the orion project lead`. The newer log line is first, and the older `Project lead: Dana Whit` is marked `SUPERSEDED, superseded by log.md:5` instead of being served as the answer. (25 s)
+3. Ask for the history instead of a list of hits: `plainmem --root examples/notes --now 2026-10-03 explain "Who is the Orion project lead?"`. You get the current value, what it replaced, a timeline, and a `path:line` cite for every value. (25 s)
+4. Show provenance: `plainmem --root examples/notes --now 2026-10-03 explain "what is the orion deploy region"`. The current value is `eu-west-2`, read from a tool (`observed, tool`) and true from 2026-09-18. The 2025 value `us-east-1` is listed as superseded. (20 s)
+5. Go back in time: `plainmem --root examples/notes --now 2026-10-03 explain --as-of 2026-09-01 "what is the orion deploy region"`. The answer is `us-east-1`, and `eu-west-2` appears as a later change. Then try `--as-of 2025-06-01`: it prints `NONE nothing recorded by then` rather than guessing. (30 s)
+6. Show expiry: `plainmem --root examples/notes --now 2026-10-03 explain "is the orion release freeze on"`. The freeze was tagged `until 2026-09-30`, so on 2026-10-03 it is reported as `EXPIRED`, not as current. (20 s)
+7. Show what changed: `plainmem --root examples/notes --now 2026-10-03 diff --since 2026-01-01`. You get one ADDED row and two UPDATED rows, with old and new values, cites and provenance. (20 s)
+8. Show the agent-facing contract: `plainmem --root examples/notes --now 2026-10-03 search --json orion deploy region | head -40`. Point at `searched_at`, `no_match`, `status`, `superseded_by`, `authority`, `source`, `valid_from` and `valid_until`. The MCP tools (`search`, `explain`, `diff`) return the same fields. (20 s)
+9. Close on the numbers: open `bench/temporal/results.md`. On the 300 held-out questions, BM25 answers with a superseded value 82.5% of the time and plainmem 15.8%. Every one of plainmem's stale answers is an update worded without the fact's key words, which it can't link. Say that limit out loud. (20 s)

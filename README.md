@@ -1,22 +1,24 @@
 # plainmem
 
+plainmem: durable memory for coding agents, stored as plain text. It tracks when memories become stale or are superseded, so agents avoid confidently using outdated information.
+
 Agents that keep notes across sessions tend to fail in two quiet ways: they repeat a fact that stopped being true months ago, and they say "I have no record of that" without having looked. plainmem is a small, dependency-free memory layer over plain Markdown files that ranks what it finds, tells you how old each fact is, notices when a newer note contradicts an older one, and returns proof that a search actually ran.
 
 Live demo: https://plainmem.streamlit.app/
 
 ```
-$ plainmem --root examples/notes --now 2026-09-29 search -k 3 who is the orion project lead
-searched 2 files / 4 chunks (index 2c1b2b8a2d66, 2026-09-29T17:38:58+00:00)
+$ plainmem --root examples/notes --now 2026-10-03 search -k 3 who is the orion project lead
+searched 2 files / 7 chunks (index dd212fe8308e, 2026-10-03T14:59:17+00:00)
 
-log.md:5  [FRESH, 46d]
+log.md:5  [FRESH, 50d]
   Log > 2026-08-14
   - Orion project lead: Sam Okafor, Dana moved to Atlas.
 
-orion.md:8  [SUPERSEDED, 331d] superseded by log.md:5
+orion.md:8  [SUPERSEDED, 335d] superseded by log.md:5
   Orion > People
   - Project lead: Dana Whit
 
-orion.md:9  [STALE, 331d] must re-verify before asserting
+orion.md:9  [STALE, 335d] must re-verify before asserting
   Orion > People
   - Budget: $40,000
 ```
@@ -30,6 +32,8 @@ plainmem --root ~/notes search "gym day pass price"
 plainmem --root ~/notes search --json "dentist phone"    # for agents
 plainmem --root ~/notes add "Orion project lead: Sam Okafor"
 plainmem --root ~/notes explain "who is the orion project lead"   # current value, superseded values, timeline
+plainmem --root ~/notes explain --as-of 2026-06-01 "who is the orion project lead"   # what was true then
+plainmem --root ~/notes search --as-of 2026-06-01 "orion project lead"   # the notes as they stood then
 plainmem --root ~/notes diff --since 2026-09-01   # facts added or updated since a date
 plainmem --root ~/notes conflicts     # facts with more than one value, newest first
 plainmem --root ~/notes stale         # volatile facts past their re-check window
@@ -40,12 +44,14 @@ plainmem --root ~/notes rotate --keep-days 14   # move old log days to archive/,
 From Python:
 
 ```python
+from datetime import date
 from plainmem import Memory
 
 mem = Memory("~/notes")
 resp = mem.search("orion project lead")
 resp.no_match, resp.searched_at, resp.index_version
 [(h.chunk.cite, h.status, h.must_reverify) for h in resp.hits]
+mem.explain("who is the orion project lead", as_of=date(2026, 6, 1))["fact"]["current"]
 ```
 
 ### Wiring it into Claude Code or Codex
@@ -66,11 +72,30 @@ Notes live as Markdown in `~/notes`. They are the source of truth; `~/notes/.pla
   JSON had `no_match: true`. Quote `searched_at` and `index_version` if asked.
 - To remember something: `plainmem --root ~/notes add "<fact>"`. Write facts in the
   `Thing key: value` or `The thing is now value` shape so later changes are detected.
+  End the line with `{explicit, user}` if the user told you, `{observed, tool}` if you read it
+  from a tool, `{inferred, agent}` if you concluded it yourself.
 ```
 
 MCP setup for Claude Code (`claude mcp add`) and Codex (`config.toml`) is in [examples/AGENTS-snippet.md](examples/AGENTS-snippet.md). The MCP server (`plainmem-mcp`) needs `pip install "plainmem[mcp]"`; the core never imports it.
 
 ## Design
+
+```
+  your notes (*.md, the source of truth)             agent / CLI / MCP
+        |                                                   |
+        v                                                   v
+  parse: chunks with path:line, heading path,      search / explain / diff
+  dates, trailing {tags}                            (optional --as-of DATE)
+        |                                                   |
+        v                                                   |
+  facts: key: value and "X is now Y" lines  --->  supersession by key, newest
+  with authority, source, from, until             wins; authority breaks
+        |                                         same-date ties; until expires
+        v                                                   |
+  .plainmem/index.json (disposable cache)  --->  BM25 (+ optional embeddings,
+                                                  RRF) -> decay, demote
+                                                  superseded -> cited answer
+```
 
 ### Markdown is the source of truth
 
@@ -99,9 +124,34 @@ When two chunks assert different values for the same key, the one with the newer
 
 Keys are compared as sets of stemmed words. Outside dated log sections, a key that does not already name the file's subject is qualified with it (front matter `entity:`, else the H1 title), so `Status: paused` in `orion.md` and in `atlas.md` stay separate, while `Project lead: Dana` in `orion.md` and `Orion project lead: Sam` in a log collide as intended. In search results the current version is placed first and its superseded versions directly under it, so an agent sees both the answer and the history. Two different values with the same date are reported by `plainmem conflicts` as unresolved and neither is demoted.
 
+### Metadata tags
+
+A fact line can end in an optional tag in braces. It is plain text, so the file still reads fine without plainmem, and a line without one behaves exactly as before:
+
+```markdown
+- Orion project lead: Sam Okafor {explicit, user}
+- Orion deploy region: eu-west-2 {observed, tool, from 2026-09-18}
+- Orion release freeze: on {explicit, user, until 2026-09-30}
+- Priya took over from Sam on Orion {explicit, user, supersedes Orion project lead}
+```
+
+Items are comma separated, in any order, each at most once:
+
+| item | values | meaning |
+|---|---|---|
+| authority | `explicit`, `observed`, `inferred`, `imported` | a person said it; read from a tool or system; an agent concluded it; copied from another document |
+| source | `user`, `tool`, `agent`, `document` | who or what it came from |
+| `from YYYY-MM-DD` | date | true from this date (default: the line's own date) |
+| `until YYYY-MM-DD` | date | true up to and including this date; after it the fact is EXPIRED |
+| `supersedes <key>` | key words | this line replaces the current value of that key, for updates whose wording doesn't repeat the key |
+
+The vocabulary is fixed on purpose. Authority is a category, not a confidence number, and it only does two things. On the same date it breaks a tie (explicit, then observed, then imported, then inferred), but only when every rival line is tagged. And an `inferred` value never silently replaces an `explicit` one: the conflict is reported as unresolved (`unresolved_reason: "inferred-over-explicit"`) and nothing is demoted. A brace group containing anything outside the vocabulary is ordinary text, so `{name}` in prose is left alone. In a dated log section, name the entity in `supersedes` the same way you would in the line itself (`supersedes Orion project lead`).
+
+Search results, `explain`, `diff`, `--json` and the MCP tools all carry `authority`, `source`, `valid_from` and `valid_until` (null when a line is untagged). Search results also list every fact in the chunk under `facts`.
+
 ### Explain and diff
 
-`plainmem explain` takes a question, runs the normal search, and follows the first hit that states a fact whose key shares a word with the question. It prints the current value, the values it replaced, and a timeline, each with a `path:line` cite and date, plus the freshness of the current value. Against `examples/notes`:
+`plainmem explain` takes a question, runs the normal search, and follows the fact whose key shares the most words with the question (ties go to the higher-ranked hit). It prints the current value, the values it replaced, and a timeline, each with a `path:line` cite and date, plus the freshness of the current value. Against `examples/notes`:
 
 ```
 $ plainmem --root examples/notes --now 2026-10-03 explain "Who is the Orion project lead?"
@@ -112,7 +162,23 @@ Orion project lead
   timeline
     Dana Whit: 2025-11-02 -> 2026-08-14
     Sam Okafor: 2026-08-14 -> present
+
+$ plainmem --root examples/notes --now 2026-10-03 explain "what is the orion deploy region"
+Orion deploy region
+  current     eu-west-2  (log.md:9, 2026-09-18; observed, tool, from 2026-09-18)
+  superseded  us-east-1  (orion.md:10, 2025-11-02)
+  freshness   FRESH, 11d old
+  timeline
+    us-east-1: 2025-11-02 -> 2026-09-18
+    eu-west-2: 2026-09-18 -> present
+
+$ plainmem --root examples/notes --now 2026-10-03 explain "is the orion release freeze on"
+Orion release freeze
+  current     on  (log.md:10, 2026-09-22; explicit, user, until 2026-09-30)  (EXPIRED)
+  freshness   FRESH, 11d old
 ```
+
+(The `searched ...` header line is left out of these examples.)
 
 If the search finds nothing it prints `no match` and exits 1; `--json` adds `searched_at`, `index_version` and `no_match` as `search` does. If chunks match but none states a fact about the question, `no_fact` is true and `nearest` lists the cites. The same call is `Memory.explain(question)` and the `explain` MCP tool.
 
@@ -121,10 +187,37 @@ If the search finds nothing it prints `no match` and exits 1; `--json` adds `sea
 ```
 $ plainmem --root examples/notes --now 2026-10-03 diff --since 2026-01-01
 changes since 2026-01-01
+  ADDED    Orion release freeze: on  (log.md:10, 2026-09-22; explicit, user, until 2026-09-30)
   UPDATED  Orion project lead: Dana Whit (orion.md:8, 2025-11-02) -> Sam Okafor (log.md:5, 2026-08-14)
+  UPDATED  Orion deploy region: us-east-1 (orion.md:10, 2025-11-02) -> eu-west-2 (log.md:9, 2026-09-18; observed, tool, from 2026-09-18)
 ```
 
 Both ends of the window are inclusive. An updated fact is compared against its last value before `--since`, so several changes inside the window show as one row. It is `Memory.diff(since, until)` in Python, and `--json` returns `added` and `updated` lists.
+
+### As of a date
+
+`--as-of DATE` on `search` and `explain` (and `as_of=` in `Memory.search`, `Memory.explain` and the MCP tools) answers what was true on that date. Notes known to be written or to take effect later are dropped, supersession is recomputed from the facts in effect by then, `until` dates are applied, and ages are measured from that date. The date in the question is a filter, so it is not matched as words.
+
+```
+$ plainmem --root examples/notes --now 2026-10-03 explain --as-of 2026-09-01 "what is the orion deploy region"
+Deploy region  (as of 2026-09-01)
+  value then  us-east-1  (orion.md:10, 2025-11-02)
+  later       eu-west-2  (log.md:9, 2026-09-18; observed, tool, from 2026-09-18)
+  freshness   AGING, 303d old
+  timeline
+    us-east-1: 2025-11-02 -> 2026-09-18
+    eu-west-2: 2026-09-18 -> present
+
+$ plainmem --root examples/notes --now 2026-10-03 explain --as-of 2025-06-01 "what is the orion deploy region"
+Orion deploy region  (as of 2025-06-01)
+  NONE  nothing recorded by then
+```
+
+Unknown dates are not guessed. A date that only comes from file mtime says when a file was saved, not when a fact became true, so an as-of answer resting on one has `status: "uncertain"`, and a date before every saved file gives `"unknown"`. The full set is `known`, `uncertain`, `expired`, `none` and `unknown`.
+
+### Hybrid retrieval (optional)
+
+`--mode hybrid` (and `Memory(..., embed=fn)` / `mode="hybrid"`) fuses BM25 with sentence-embedding similarity by reciprocal-rank fusion, then runs the same decay, supersession, expiry and as-of layer. It needs `pip install "plainmem[embeddings]"`; the core never imports it and the vectors are kept in memory only. It has unit tests with a stub embedder but has not been benchmarked yet; see below.
 
 ### The absence rule
 
@@ -134,7 +227,28 @@ Both ends of the window are inclusive. An updated fact is compared against its l
 
 `plainmem add` appends a bullet under today's `## YYYY-MM-DD` heading in `log.md`. Writers take an atomic `mkdir` lock (either the directory is created or the call fails, so two processes can't both win), and a lock left behind by a crashed writer is broken after 60 seconds. `plainmem rotate` moves whole dated sections older than N days to `archive/log-YYYY-MM.md`. The archive is written and fsynced before the log is rewritten, and a section already in the archive is not appended again, so a crash at any point loses nothing and duplicates nothing. The tests run six processes appending 25 entries each and check every entry lands exactly once.
 
-## Benchmark
+## Temporal benchmark
+
+The question this benchmark is built to answer, and able to answer "no": do explicit time and provenance semantics cut stale answers more than better retrieval does?
+
+`bench/temporal/generate.py` builds a deterministic corpus (seed 2026) of project notes plus quarterly logs, with ten kinds of question: a single update, several sequential updates, two contradictory values on the same day (one `{explicit, user}`, one `{inferred, agent}`), look-alike distractor facts, facts that never change, "right now" questions, "what was it on date T" questions (a third of them back-dated with `from`), provenance questions, adversarial updates whose wording shares nothing with the key ("Priya took over from Sam on Orion"), and paraphrased questions. A 30% held-out split, stratified by category, was frozen in `bench/temporal/split.json` before any system ran. Two fixes were made while looking only at dev failures (fact picking by key overlap, and not matching the as-of date as words); the held-out set was run once after that. The full output is in [bench/temporal/results.md](bench/temporal/results.md), and the analysis and caveats are in [bench/temporal/README.md](bench/temporal/README.md).
+
+Held-out split, 1,000-case corpus (300 held-out questions, 1,203 files, 9,013 chunks):
+
+| system | recall@1 | recall@5 | current-state acc | stale-answer rate | as-of acc | provenance acc | median ms |
+|---|---|---|---|---|---|---|---|
+| bm25-raw | 0.123 | 0.847 | 0.105 | 0.825 | 0.310 | 0.000 | 0.33 |
+| bm25 (stemmed) | 0.123 | 0.853 | 0.105 | 0.825 | 0.310 | 0.000 | 0.36 |
+| plainmem search (top hit) | 0.690 | 0.833 | 0.759 | 0.158 | 0.095 | 1.000 | 6.52 |
+| plainmem explain | 0.793 | 0.900 | 0.763 | 0.158 | 1.000 | 1.000 | 7.58 |
+
+What worked. Lifecycle semantics did nearly all of the work on stale answers: 0.825 to 0.158. The one retrieval improvement measured here, stemming, moved recall@5 by 0.006 and the stale rate by nothing. At n=1,000, every held-out single-update, multi-update, "right now", distractor, stable, contradictory, as-of and provenance question was answered correctly by `explain` (at n=100 and n=500 one as-of and one distractor question failed; see the bench notes). The contradictory, provenance and back-dated as-of cases are only answerable with the tags, so those wins exist by construction.
+
+What did not. Every remaining stale answer is an adversarial update (36 of 36 held-out adversarial questions): with no shared key words, plainmem can't link the update to the fact, and in 24 of the 36 the update wasn't even retrieved. Paraphrased questions scored 0 of 18, 6 of them retrieval misses. The `supersedes` tag fixes the adversarial case when someone writes it, but nothing infers it. Answers are about 20 times slower than bare BM25 (7.6 ms against 0.36 ms median), which doesn't matter at this size.
+
+The pre-agreed rule for what to build next: if recall@5 is below 0.9, build hybrid retrieval; otherwise fix lifecycle reasoning. Applied on dev (decisions are tuning, so they use dev), recall@5 was 0.870, so hybrid retrieval was built (`--mode hybrid`). Held-out recall@5 came out at exactly 0.900. The hybrid row could not be run: `sentence-transformers` is not installed in the environment used here, and no model was downloaded for this. The claim is therefore tested against lexical retrieval only, not against embeddings. Reproduce, including the hybrid row once the extra is installed: `pip install -e ".[embeddings]" && python bench/temporal/run.py`.
+
+## Retrieval benchmark
 
 `python bench/run.py` generates a synthetic corpus and labelled queries, then scores six systems. Everything below is the actual output of that run on an Apple Silicon laptop, CPU only.
 
@@ -183,7 +297,9 @@ Reproduce: `pip install -e ".[dev,embeddings]" && python bench/run.py` (drop `em
 - The benchmark is synthetic and self-labelled, as described above. Real notes are messier, and the paraphrase templates are only as varied as one author made them.
 - The core has no semantic understanding. It matches words and word stems. Use the embedding numbers above to decide whether that is enough for you.
 - Supersession is pattern based. It only sees `key: value` lines and a handful of "X is now Y" verbs, only compares values as normalised strings, and it can be fooled: "Dana is out today" and "Dana is back" become a conflict about Dana. Keys that differ by a word ("lead" vs "owner") are not linked. A same-day disagreement is flagged but not resolved.
-- `explain` and `diff` read the same extracted facts, so they inherit those limits. A timeline "from" date is the date the value was recorded or last verified (a front matter `verified:` date, for instance), not when it became true. A fact with no recoverable date is shown with `?` in `explain` and skipped by `diff` (counted in `undated_skipped`). `explain` follows one key: when a key is a same-day list, it reports the line the search ranked first and does not merge the values. `explain` only answers from keys that share a word with the question, so a paraphrase that shares none returns `no_fact`.
+- Metadata tags have to be written. Nothing infers authority, source, validity dates or a `supersedes` link from prose, and an update worded without the key's words is missed (see the adversarial row above).
+- Hybrid retrieval is implemented and unit tested but has no benchmark numbers yet.
+- `explain` and `diff` read the same extracted facts, so they inherit those limits. A timeline "from" date is the date the value was recorded or last verified (a front matter `verified:` date, for instance), not when it became true. A fact with no recoverable date is shown with `?` in `explain` and skipped by `diff` (counted in `undated_skipped`). `explain` follows one key: when a key is a same-day list, it reports the line the search ranked first and does not merge the values. `explain` only answers from keys that share a word with the question, so a paraphrase that shares none returns `no_fact` or, when only the entity name matches, a different fact about the same entity.
 - The volatile detector is a list of regular expressions. It will miss volatile facts phrased some other way and occasionally flag a budget or a quoted price that is historical. Tag facts explicitly with `[volatile]` or `[verified: date]` when it matters.
 - Dates come from what you write. A note with no tag, no dated heading and no front matter falls back to file mtime, which a `git clone` resets.
 - The index is one JSON file loaded into memory. That is fine for tens of thousands of notes, not for millions.
@@ -200,18 +316,20 @@ Agent memory is a busy space. The projects below are the closest ones I found, d
 - [aru-labs/lossless-memory](https://github.com/aru-labs/lossless-memory) never summarises: raw JSONL logs are the source of truth, with timestamped SQLite FTS5 and sqlite-vec indexes that can be rebuilt from them.
 - [yantrikos/yantrikdb-server](https://github.com/yantrikos/yantrikdb-server) is a memory database that consolidates duplicates, detects contradictions and decays relevance over time, available as a Rust library, MCP server or HTTP cluster.
 - [andrew-dev-p/memory-freshness-lab](https://github.com/andrew-dev-p/memory-freshness-lab) is an evaluation harness for stale cross-session memory that scores returned facts against a versioned timeline at an observation time.
+- [plur-ai/plur](https://github.com/plur-ai/plur) (TypeScript, Apache-2.0) is local-first memory for agents, kept as plain YAML under `~/.plur` with an optional SQLite index. Its unit is the "engram", a typed assertion. It retrieves with BM25 plus BGE-small embeddings fused by reciprocal-rank fusion, decays activation ACT-R style, syncs over git and ships an MCP server. Its schema already has `supersedes`/`superseded_by` links, `valid_from`/`valid_until` validity dates with expired engrams left out of recall, provenance records, and an on-demand contradiction scan. I did not find a point-in-time (as-of) recall query, and its README lists contradiction and decay accuracy benchmarks as still in progress (checked 2026-10-03, README and source).
 - [HUST-AI-HYZ/MemoryAgentBench](https://github.com/HUST-AI-HYZ/MemoryAgentBench) is a benchmark for agent memory covering accurate retrieval, test-time learning, long-range understanding and conflict resolution.
 
-What this one does differently is narrow. It is a single stdlib-only Python package you can read in an afternoon, and it treats time as part of every answer: each result carries its age, a FRESH/AGING/STALE status, a re-verify flag for volatile facts, and a pointer to whatever superseded it, and every search returns the fields an agent needs to prove it looked before claiming something isn't there. It does less than most of the projects above (no graph, no consolidation, no embeddings in the core), and the benchmark in this repo is small and self-made. If you need semantic recall, pair the freshness layer with an embedding retriever, as the `embed+layer` row does.
+What this one does differently is narrow. Several of the projects above, PLUR in particular, already model supersession, validity dates and provenance; plainmem's version keeps all of it as a few words at the end of an ordinary Markdown line, answers "what was true on date T" directly, and comes with a held-out benchmark that measures stale answers against BM25. It is a single stdlib-only Python package you can read in an afternoon, and it treats time as part of every answer: each result carries its age, a FRESH/AGING/STALE status, a re-verify flag for volatile facts, and a pointer to whatever superseded it, and every search returns the fields an agent needs to prove it looked before claiming something isn't there. It does less than most of the projects above (no graph, no consolidation, no embeddings in the core), and the benchmark in this repo is small and self-made. If you need semantic recall, pair the freshness layer with an embedding retriever, as the `embed+layer` row does.
 
 ## Development
 
 ```bash
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e ".[dev]" streamlit
-pytest -q            # 185 tests
+pytest -q            # 239 tests
 ruff check . && ruff format --check .
 python bench/run.py --no-embed
+python bench/temporal/run.py
 streamlit run demo/app.py
 ```
 

@@ -27,7 +27,7 @@ pip install "plainmem[mcp]"
 claude mcp add plainmem -- plainmem-mcp --root ~/notes
 ```
 
-The server exposes three tools: `search` (same JSON as the CLI, including `searched_at` and `no_match`), `add` and `stale`. Keep the rules above in `CLAUDE.md` either way; the tool descriptions repeat the important ones, but a written rule in the project file is what the model sees every turn.
+The server exposes five tools: `search` (same JSON as the CLI, including `searched_at` and `no_match`; optional `as_of`), `explain` (current value, superseded values, timeline and provenance; optional `as_of`), `diff` (facts added or updated between two dates), `add` and `stale`. Keep the rules above in `CLAUDE.md` either way; the tool descriptions repeat the important ones, but a written rule in the project file is what the model sees every turn.
 
 ## Codex CLI
 
