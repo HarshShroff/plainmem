@@ -1,4 +1,4 @@
-"""Command line interface: index, search, explain, diff, add, conflicts, stale, stats, rotate."""
+"""Command line interface: index, search, explain, diff, add, candidates, conflicts, stale, stats, rotate."""
 
 from __future__ import annotations
 
@@ -64,6 +64,12 @@ def _parser() -> argparse.ArgumentParser:
     s.add_argument("text", nargs="+")
     s.add_argument("--log", default="log.md")
     s.add_argument("--date", type=_date, default=None)
+    s.add_argument("--supersedes", default=None, metavar="KEY", help="key this entry replaces (written as a tag)")
+
+    s = sub.add_parser("candidates", help="current facts a new note may replace (read only)")
+    s.add_argument("text", nargs="+")
+    s.add_argument("-k", type=int, default=10)
+    s.add_argument("--json", action="store_true")
 
     s = sub.add_parser("conflicts", help="facts asserted with different values, newest first")
     s.add_argument("--json", action="store_true")
@@ -222,8 +228,18 @@ def main(argv: list[str] | None = None) -> int:
                 _print_diff(r)
             return EXIT_OK
         if args.cmd == "add":
-            where = mem.add(" ".join(args.text), when=args.date or args.now, logfile=args.log)
+            where = mem.add(
+                " ".join(args.text), when=args.date or args.now, logfile=args.log, supersedes=args.supersedes
+            )
             print(f"appended to {where}")
+            return EXIT_OK
+        if args.cmd == "candidates":
+            items = mem.candidates_for(" ".join(args.text), k=args.k)
+            if args.json:
+                print(json.dumps(items, ensure_ascii=False, indent=2))
+            else:
+                for c in items:
+                    print(f"{c['key']}: {c['value']}  {c['cite']}  ({c['as_of']})")
             return EXIT_OK
         if args.cmd == "conflicts":
             out = mem.conflicts()

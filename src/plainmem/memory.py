@@ -7,6 +7,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from . import consolidate as cons
 from . import history
 from . import index as idx
 from . import log as logmod
@@ -260,10 +261,64 @@ class Memory:
 
     # --- writes ----------------------------------------------------------
 
-    def add(self, text: str, when: date | datetime | None = None, logfile: str = "log.md") -> str:
+    def add(
+        self,
+        text: str,
+        when: date | datetime | None = None,
+        logfile: str = "log.md",
+        supersedes: str | None = None,
+    ) -> str:
+        """Append a dated entry. ``supersedes`` names the key this entry replaces (written as a tag)."""
+        if supersedes:
+            text = cons.tag_text(text, supersedes)
         path = logmod.append(self.root, text, when=when, logfile=logfile)
         self.index()
         return path.relative_to(self.root).as_posix()
+
+    def candidates_for(self, text: str, k: int = 10, mode: str = "full", refresh: bool = True) -> list[dict[str, Any]]:
+        """Current facts a new note may be about (``consolidate.candidates``). Read only.
+
+        ``mode="hybrid"`` also adds keys from the embedding retriever's top hits.
+        """
+        return [c.to_dict() for c in self._candidates(text, k, mode, refresh)]
+
+    def _candidates(self, text: str, k: int, mode: str, refresh: bool) -> list[cons.Candidate]:
+        return cons.candidates(self.ensure(refresh=refresh), text, k=k, boost=self._boost(text, mode))
+
+    def _boost(self, text: str, mode: str) -> list[int]:
+        if mode != "hybrid":
+            return []
+        eng = self.engine
+        pos = {id(c): i for i, c in enumerate(eng.chunks)}
+        return [pos[id(h.chunk)] for h in self.hybrid().search(text, k=10)]
+
+    def judge(
+        self, text: str, classifier: cons.Classifier, k: int = 10, mode: str = "full", refresh: bool = True
+    ) -> dict[str, Any]:
+        """Candidates, raw and validated verdict for a new note. Writes nothing."""
+        eng = self.ensure(refresh=refresh)
+        return cons.judge(eng, text, classifier, k=k, boost=self._boost(text, mode))
+
+    def consolidate(
+        self,
+        text: str,
+        classifier: cons.Classifier,
+        when: date | datetime | None = None,
+        logfile: str = "log.md",
+        k: int = 10,
+        mode: str = "full",
+    ) -> dict[str, Any]:
+        """Write ``text``, tagged ``{supersedes <key>}`` only when the validated verdict is ``supersedes``.
+
+        ``classifier(new_text, candidates) -> {"relation", "target", "reason"}``; it never writes.
+        The note is always written; any other verdict (including ``insufficient``) writes it untagged.
+        """
+        out = self.judge(text, classifier, k=k, mode=mode)
+        v = out["verdict"]
+        target = v["target"] if v["relation"] == "supersedes" else None
+        out["appended_to"] = self.add(text, when=when, logfile=logfile, supersedes=target)
+        out["wrote_supersedes"] = target
+        return out
 
     def rotate(self, keep_days: int, now: date | None = None, logfile: str = "log.md") -> dict[str, Any]:
         out = logmod.rotate(self.root, keep_days, now=now, logfile=logfile)

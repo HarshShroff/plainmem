@@ -1,4 +1,4 @@
-"""MCP server exposing search, explain, diff, add and stale over stdio.
+"""MCP server exposing search, explain, diff, candidates, add and stale over stdio.
 
 The tool bodies are plain functions (``tool_search`` etc.) so they can be tested
 without the SDK. The MCP Python SDK (``pip install mcp``) is imported only when
@@ -32,9 +32,15 @@ def tool_search(mem: Memory, query: str, k: int = 5, as_of: str | None = None) -
     return mem.search(query, k=max(1, min(int(k), 50)), as_of=_day(as_of)).to_dict()
 
 
-def tool_add(mem: Memory, text: str) -> dict[str, Any]:
-    """Append a dated entry to log.md (append-only, locked)."""
-    return {"appended_to": mem.add(text)}
+def tool_add(mem: Memory, text: str, supersedes: str | None = None) -> dict[str, Any]:
+    """Append a dated entry to log.md (append-only, locked). ``supersedes`` names the key it replaces."""
+    return {"appended_to": mem.add(text, supersedes=supersedes or None), "supersedes": supersedes or None}
+
+
+def tool_candidates(mem: Memory, text: str, k: int = 10) -> dict[str, Any]:
+    """Current facts a note about to be added may replace. Read only."""
+    items = mem.candidates_for(text, k=max(1, min(int(k), 50)))
+    return {"count": len(items), "candidates": items}
 
 
 def tool_stale(mem: Memory) -> dict[str, Any]:
@@ -87,9 +93,19 @@ def build_server(mem: Memory) -> Any:
         title="Add note",
         annotations=ann(read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=False),
     )
-    def add(text: str) -> dict[str, Any]:
-        """Append a dated note to the memory log."""
-        return tool_add(mem, text)
+    def add(text: str, supersedes: str | None = None) -> dict[str, Any]:
+        """Append a dated note to the memory log. If the note replaces a fact whose key it does not repeat,
+        pass that key (as returned by candidates) in supersedes; if unsure, leave it out."""
+        return tool_add(mem, text, supersedes)
+
+    @server.tool(
+        title="Candidate facts for a new note",
+        annotations=ann(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False),
+    )
+    def candidates(text: str, k: int = 10) -> dict[str, Any]:
+        """Before add: list current facts (key, value, citation) the new note may replace. Pass a key from this
+        list as add's supersedes only when the note clearly replaces that value."""
+        return tool_candidates(mem, text, k)
 
     @server.tool(
         title="List stale facts",

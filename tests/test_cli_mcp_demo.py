@@ -156,7 +156,7 @@ def test_mcp_server_registers_tools(notes: Path) -> None:
 
     server = build_server(Memory(notes))
     names = sorted(t.name for t in asyncio.run(server.list_tools()))
-    assert names == ["add", "diff", "explain", "search", "stale"]
+    assert names == ["add", "candidates", "diff", "explain", "search", "stale"]
     for t in asyncio.run(server.list_tools()):
         assert t.annotations is not None and t.title, t.name
     content = asyncio.run(server.call_tool("search", {"query": "zebra"}))
