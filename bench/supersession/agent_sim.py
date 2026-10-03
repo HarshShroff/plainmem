@@ -32,7 +32,8 @@ Now make the `add` call. Reply with only a JSON object: {{"supersedes": "<key>"}
 
 
 def build_prompt(note: str, candidates: list[dict[str, Any]]) -> str:
-    shown = [{k: c[k] for k in ("key", "value", "cite", "as_of")} for c in candidates]
+    # sorted by key, so the prompt does not change when scores shift slightly as the log grows
+    shown = [{k: c[k] for k in ("key", "value", "cite", "as_of")} for c in sorted(candidates, key=lambda c: c["key"])]
     tool_output = json.dumps({"count": len(shown), "candidates": shown}, indent=1)
     return PROMPT.format(skill=SKILL.strip(), note=" ".join(note.split()), tool_output=tool_output)
 

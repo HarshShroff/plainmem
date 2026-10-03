@@ -36,7 +36,8 @@ replacement, migration, switch, move). The change must be stated as having happe
 - unrelated: the note is about something else, or only mentions the same entity, person or \
 thing without saying it now holds the fact.
 - insufficient: it might be a change, but the note is tentative, partial, temporary, only planned \
-or only implied.
+or only implied. A note about what someone has been doing, might do, or did once does not say \
+they now hold the fact.
 If unsure between supersedes and anything else, answer insufficient.
 
 target: the exact key from the list for supersedes, refines or contradicts; otherwise null.
@@ -52,7 +53,7 @@ _FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$")
 
 
 def build_prompt(new_text: str, candidates: list[dict[str, Any]]) -> str:
-    facts = "\n".join(f"- {c['key']}: {c['value']}" for c in candidates)
+    facts = "\n".join(f"- {c['key']}: {c['value']}" for c in sorted(candidates, key=lambda c: c["key"]))
     return PROMPT.format(note=" ".join(new_text.split()), facts=facts)
 
 

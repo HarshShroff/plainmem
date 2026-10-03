@@ -227,6 +227,28 @@ Unknown dates are not guessed. A date that only comes from file mtime says when 
 
 `plainmem add` appends a bullet under today's `## YYYY-MM-DD` heading in `log.md`. Writers take an atomic `mkdir` lock (either the directory is created or the call fails, so two processes can't both win), and a lock left behind by a crashed writer is broken after 60 seconds. `plainmem rotate` moves whole dated sections older than N days to `archive/log-YYYY-MM.md`. The archive is written and fsynced before the log is rewritten, and a section already in the archive is not appended again, so a crash at any point loses nothing and duplicates nothing. The tests run six processes appending 25 entries each and check every entry lands exactly once.
 
+### Consolidation (write path, experimental)
+
+An update that doesn't repeat a fact's key ("Priya took over from Sam on Orion") isn't linked to `Orion project lead`, so `explain` keeps answering Sam. The `supersedes` tag fixes that when someone writes it. Consolidation is an optional step on the write path that decides whether to write it. The read path doesn't change: `search` and `explain` make no model calls.
+
+```python
+mem.candidates_for("Priya took over from Sam on Orion.")   # current facts it may replace: key, value, cite
+mem.add("Priya took over from Sam on Orion.", supersedes="Orion project lead")
+mem.consolidate("Priya took over from Sam on Orion.", classifier)
+```
+
+`classifier(new_text, candidates)` returns `{"relation": "supersedes" | "refines" | "contradicts" | "unrelated" | "insufficient", "target": key | None, "reason": str}`. It is only asked for a verdict and never edits a file. plainmem checks the verdict first. The relation must be one of the five. The target must be one of the candidates it was shown and still in effect. A `supersedes` note must also add a word that is in neither the key nor the current value. Only then is the note written with a `{supersedes <key>}` tag. A verdict that fails any check counts as `unrelated`, the note is written untagged, and the failed check is recorded in `.plainmem/consolidation.jsonl`. `insufficient` never writes a tag. The bias is deliberate: a missed link leaves a stale answer that the next explicit note fixes, while a false link hides a true fact.
+
+The key is the identity: there are no memory IDs and no front matter. A coding agent can write the tag itself:
+
+```markdown
+- We switched from PostgreSQL to SQLite for embedded deployment. {explicit, agent, supersedes database choice}
+```
+
+The MCP server has a read-only `candidates` tool, and `add` takes an optional `supersedes`. The skill file tells an agent to call `candidates` before `add`, to pass `supersedes` when the note replaces one of them, and to leave it out when unsure. The CLI has `plainmem candidates TEXT` and `plainmem add --supersedes KEY TEXT`.
+
+`plainmem.consolidate_llm` is a reference classifier that the core never imports. It takes any `complete(prompt) -> str` function and ships a `claude -p` adapter. Its parsing is strict: anything other than one JSON object counts as `unrelated`. Results are in "Supersession experiment" below. The feature is experimental and lives on its own branch.
+
 ## Temporal benchmark
 
 The question this benchmark is built to answer, and able to answer "no": do explicit time and provenance semantics cut stale answers more than better retrieval does?
