@@ -130,3 +130,14 @@ def test_cli_explain_text_and_exit_codes(tmp_path: Path, capsys) -> None:
 def test_mcp_tool_explain(tmp_path: Path) -> None:
     res = tool_explain(_mem(tmp_path, {"orion.md": ORION, "log.md": LOG}), "orion project lead")
     assert res["fact"]["current"]["value"] == "Sam Okafor"
+
+
+def test_explain_prefers_the_key_without_extra_words(tmp_path: Path) -> None:
+    kiln = "---\nentity: Kiln\nupdated: 2025-11-02\n---\n# Kiln\n\n- Vendor: Hollis Freight\n- Team size: 9\n"
+    log = (
+        "# Log\n\n## 2026-08-14\n\n- Kiln backup vendor: Dunmere Systems, Kiln vendor talks went fine,"
+        " Kiln vendor review done.\n"
+    )
+    f = _mem(tmp_path, {"kiln.md": kiln, "log.md": log}).explain("What is Kiln's vendor?", now=NOW)["fact"]
+    assert f["key"].lower() == "kiln vendor"
+    assert f["current"]["value"] == "Hollis Freight"

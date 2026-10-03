@@ -88,21 +88,26 @@ def _entry_dict(e: Entry) -> dict[str, Any]:
 
 
 def _pick_fact(eng: Engine, hits: list[Hit], qset: set[str]) -> tuple[str, int] | None:
-    """The fact whose key shares the most words with the question; ties go to the higher-ranked hit.
+    """The fact whose key shares the most words with the question; ties: fewer extra words, then rank.
 
     Taking the first hit with any shared word picked the wrong fact when that word was only the
     entity name ("Orion release date" for "who is the Orion lead") or only the attribute (another
     project's "project lead").
+
+    Equal overlap goes to the key with fewer words the question does not have, so "What is Kiln's
+    vendor?" picks "Kiln vendor" over "Kiln backup vendor" whichever chunk ranks higher.
     """
     pos = {id(c): i for i, c in enumerate(eng.chunks)}
-    best: tuple[int, int, str, int] | None = None  # (overlap, -rank, key, chunk index)
+    best: tuple[int, int, int, str, int] | None = None  # (overlap, -extra words, -rank, key, chunk index)
     for rank, h in enumerate(hits):
         i = pos[id(h.chunk)]
         for a in eng.assertions[i]:
-            n = len(set(a.key.split()) & qset)
-            if n and (best is None or (n, -rank, -len(a.key)) > (best[0], best[1], -len(best[2]))):
-                best = (n, -rank, a.key, i)
-    return (best[2], best[3]) if best else None
+            kw = set(a.key.split())
+            n = len(kw & qset)
+            cand = (n, -len(kw - qset), -rank, -len(a.key))
+            if n and (best is None or cand > (best[0], best[1], best[2], -len(best[3]))):
+                best = (n, -len(kw - qset), -rank, a.key, i)
+    return (best[3], best[4]) if best else None
 
 
 def timeline(items: list[Entry]) -> list[dict[str, Any]]:
